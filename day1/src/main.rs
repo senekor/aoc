@@ -7,23 +7,15 @@ fn part1(measurements: &ParsedInput) {
         .windows(2)
         .fold(0, |acc, w| if w[0] < w[1] { acc + 1 } else { acc });
 
-    println!("{}", count)
+    println!("{}", count) // 1527
 }
 
 fn part2(measurements: &ParsedInput) {
-    let measurement_windows = measurements.windows(3).collect_vec();
+    let count = measurements
+        .windows(4)
+        .fold(0, |acc, w| if w[0] < w[3] { acc + 1 } else { acc });
 
-    let count = measurement_windows.windows(2).fold(0, |acc, mws| {
-        let prev_sum = mws[0].iter().sum::<i32>();
-        let sum = mws[1].iter().sum();
-        if prev_sum < sum {
-            acc + 1
-        } else {
-            acc
-        }
-    });
-
-    println!("{}", count)
+    println!("{}", count) // 1575
 }
 
 fn main() {
