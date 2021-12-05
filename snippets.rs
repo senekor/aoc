@@ -17,7 +17,6 @@ fn str_to_enum(s: &str) -> MyEnum {
     }
 }
 
-
 #[derive(Clone, Debug)]
 struct ParsedLine {
     enum_val: MyEnum,
