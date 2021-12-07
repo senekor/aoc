@@ -1,0 +1,25 @@
+name: 'Fast-forward merge PR'
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  merge:
+    name: Fast-forward merge PR
+    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '\merge')   
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+          # The branch you want to checkout (usually equal to `branchtomerge`)
+          ref: ${{ github.head_ref }}
+      - name: Fast-forward merge PR
+        uses: MaximeHeckel/github-action-merge-fast-forward@v1.1.0
+        with:
+          # Branch to merge
+          branchtomerge: ${{ github.head_ref }}
+          # Branch that will be updated
+          branch: ${{ github.base_ref }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
