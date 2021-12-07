@@ -1,0 +1,24 @@
+name: 'Fast-forward merge PR'
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  merge:
+    name: Fast-forward merge PR
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '\merge')   
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve PR refs
+        id: refs
+        uses: eficode/resolve-pr-refs@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ steps.refs.outputs.base_ref }}
+      - name: Fast-forward merge PR
+        run: |
+          git fetch
+          git merge --ff-only origin/${{ steps.refs.outputs.head_ref }}
+          git push
