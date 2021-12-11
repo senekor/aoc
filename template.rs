@@ -23,6 +23,14 @@ fn parse(line: &str) -> Line {
 }
 // ------------------------------------------------------- //
 
+fn part1(input: Vec<Line>) {
+    println!("{:?}", "bruh")
+}
+
+fn part2(input: Vec<Line>) {
+    println!("{:?}", "bruh")
+}
+
 fn main() {
     let input = include_str!("../input/input.txt");
     let input = input.lines().map(parse).collect_vec();
@@ -30,12 +38,4 @@ fn main() {
     part1(input.clone());
 
     part2(input.clone());
-}
-
-fn part1(input: Vec<Line>) {
-    println!("{:?}", "bruh")
-}
-
-fn part2(input: Vec<Line>) {
-    println!("{:?}", "bruh")
 }
