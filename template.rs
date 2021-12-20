@@ -3,12 +3,12 @@ use itertools::*;
 #[macro_export]
 macro_rules! parse {
     ( $line:expr, $( $t:ty, $sep:expr ),* ; $lt:ty ) => {{
-        let mut rest = $line;
+        let mut rest = $line.to_string();
         (
             $({
                 let mut iter = rest.split($sep);
                 let elem = iter.next().unwrap().parse::<$t>().unwrap();
-                rest = iter.next().unwrap();
+                rest = iter.join($sep);
                 elem
             },)*
             rest.parse::<$lt>().unwrap(),
