@@ -10,24 +10,25 @@ struct Line {
 
 fn str_to_line(s: &str) -> Line {
     let mut halves = s.split(" -> ");
-    let mut left = halves.next().unwrap().split(",");
-    let mut right = halves.next().unwrap().split(",");
-    return Line {
+    let mut left = halves.next().unwrap().split(',');
+    let mut right = halves.next().unwrap().split(',');
+    Line {
         x1: left.next().unwrap().parse().unwrap(),
         y1: left.next().unwrap().parse().unwrap(),
         x2: right.next().unwrap().parse().unwrap(),
         y2: right.next().unwrap().parse().unwrap(),
-    };
+    }
 }
 
-type Lines = Vec<Line>;
+#[derive(Clone)]
+struct Lines(Vec<Line>);
 
 fn str_to_lines(s: &str) -> Lines {
-    s.lines().map(str_to_line).collect_vec()
+    Lines(s.lines().map(str_to_line).collect_vec())
 }
 
 fn calc_max_coords(lines: &Lines) -> (usize, usize) {
-    lines.into_iter().fold((0, 0), |coords, line| {
+    lines.0.iter().fold((0, 0), |coords, line| {
         let max_x = match true {
             _ if line.x1 > coords.0 && line.x1 > line.x2 => line.x1,
             _ if line.x2 > coords.0 => line.x2,
@@ -43,18 +44,15 @@ fn calc_max_coords(lines: &Lines) -> (usize, usize) {
 }
 
 fn new_grid(lines: &Lines) -> Vec<Vec<i32>> {
-    let (max_x, max_y) = calc_max_coords(&lines);
-    let mut row = Vec::with_capacity(max_y + 1);
-    row.resize(max_y + 1, 0);
-    let mut grid = Vec::with_capacity(max_x + 1);
-    grid.resize(max_y + 1, row);
-    grid
+    let (max_x, max_y) = calc_max_coords(lines);
+    let row = vec![0; max_y + 1];
+    vec![row; max_x + 1]
 }
 
 fn part1(lines: Lines) {
     let mut grid = new_grid(&lines);
 
-    for line in lines {
+    for line in lines.0 {
         let (mut x1, mut y1, x2, y2) = (line.x1, line.y1, line.x2, line.y2);
         if x1 != x2 && y1 != y2 {
             continue;
@@ -93,7 +91,7 @@ fn part1(lines: Lines) {
 fn part2(lines: Lines) {
     let mut grid = new_grid(&lines);
 
-    for line in lines {
+    for line in lines.0 {
         let (mut x1, mut y1, x2, y2) = (line.x1, line.y1, line.x2, line.y2);
         while x1 != x2 || y1 != y2 {
             grid[x1][y1] += 1;
@@ -132,5 +130,5 @@ fn main() {
 
     part1(input.clone());
 
-    part2(input.clone());
+    part2(input);
 }

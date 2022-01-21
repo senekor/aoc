@@ -32,7 +32,7 @@ impl FromStr for Instruction {
     type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let mut iter = s.split(" ");
+        let mut iter = s.split(' ');
         Ok(Instruction {
             dir: iter.next().unwrap().parse().unwrap(),
             num: iter.next().unwrap().parse().unwrap(),
@@ -40,13 +40,13 @@ impl FromStr for Instruction {
     }
 }
 
-type Instructions = Vec<Instruction>;
+struct Instructions(Vec<Instruction>);
 
 fn part1(instructions: &Instructions) {
     let mut depth = 0;
     let mut horiz = 0;
 
-    for instr in instructions {
+    for instr in &instructions.0 {
         match instr.dir {
             Forw => horiz += instr.num,
             Up => depth -= instr.num,
@@ -62,7 +62,7 @@ fn part2(instructions: &Instructions) {
     let mut horiz = 0;
     let mut aim = 0;
 
-    for instr in instructions {
+    for instr in &instructions.0 {
         match instr.dir {
             Forw => {
                 horiz += instr.num;
@@ -79,10 +79,12 @@ fn part2(instructions: &Instructions) {
 fn main() {
     let input = include_str!("../input/input.txt");
 
-    let instructions: Instructions = input
-        .lines()
-        .map(|line| line.parse().unwrap())
-        .collect_vec();
+    let instructions = Instructions(
+        input
+            .lines()
+            .map(|line| line.parse().unwrap())
+            .collect_vec(),
+    );
 
     part1(&instructions);
 

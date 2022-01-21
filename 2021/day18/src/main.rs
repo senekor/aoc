@@ -12,7 +12,7 @@ fn parse_pair(chars: &mut impl Iterator<Item = char>) -> Snail {
     assert_eq!(chars.next(), Some(','));
     let right = parse_snail(chars);
     assert_eq!(chars.next(), Some(']'));
-    return Pair(Box::new(left), Box::new(right));
+    Pair(Box::new(left), Box::new(right))
 }
 
 fn parse_snail(chars: &mut impl Iterator<Item = char>) -> Snail {
@@ -52,7 +52,7 @@ fn did_explode(snail: &mut Snail, depth: i32) -> Option<(Option<i32>, Option<i32
         }
         if let Some((left_expl, right_expl)) = did_explode(l, depth + 1) {
             if let Some(right_expl) = right_expl {
-                if let Some(_) = left_expl {
+                if left_expl.is_some() {
                     *l = Box::new(Regular(0));
                 }
                 add_left(r, right_expl);
@@ -61,7 +61,7 @@ fn did_explode(snail: &mut Snail, depth: i32) -> Option<(Option<i32>, Option<i32
         }
         if let Some((left_expl, right_expl)) = did_explode(r, depth + 1) {
             if let Some(left_expl) = left_expl {
-                if let Some(_) = right_expl {
+                if right_expl.is_some() {
                     *r = Box::new(Regular(0));
                 }
                 add_right(l, left_expl);
@@ -89,7 +89,7 @@ fn split(snail: &mut Snail) -> bool {
 
 fn reduce_snail(snail: &mut Snail) {
     loop {
-        if let Some(_) = did_explode(snail, 1) {
+        if did_explode(snail, 1).is_some() {
             continue;
         }
         if split(snail) {
@@ -102,7 +102,7 @@ fn reduce_snail(snail: &mut Snail) {
 fn snail_sum(left: Snail, right: Snail) -> Snail {
     let mut sum = Pair(Box::new(left), Box::new(right));
     reduce_snail(&mut sum);
-    return sum;
+    sum
 }
 
 fn calc_magnitude(snail: &Snail) -> i32 {
@@ -144,5 +144,5 @@ fn main() {
 
     part1(snails.clone());
 
-    part2(snails.clone());
+    part2(snails);
 }

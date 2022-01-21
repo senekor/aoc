@@ -2,7 +2,7 @@ use std::collections::HashSet;
 
 use itertools::*;
 
-fn is_low_point(input: &Vec<Vec<i32>>, i: usize, j: usize) -> bool {
+fn is_low_point(input: &[Vec<i32>], i: usize, j: usize) -> bool {
     let max_i = input.len() - 1;
     let max_j = input[0].len() - 1;
     let n1 = if i == 0 { i32::MAX } else { input[i - 1][j] };
@@ -20,7 +20,7 @@ fn is_low_point(input: &Vec<Vec<i32>>, i: usize, j: usize) -> bool {
 
     let elem = input[i][j];
 
-    return elem < n1 && elem < n2 && elem < n3 && elem < n4;
+    elem < n1 && elem < n2 && elem < n3 && elem < n4
 }
 
 fn part1(input: Vec<Vec<i32>>) {
@@ -38,7 +38,7 @@ fn part1(input: Vec<Vec<i32>>) {
 }
 
 fn rec_find_basin(
-    input: &Vec<Vec<i32>>,
+    input: &[Vec<i32>],
     i: usize,
     j: usize,
     basin_locs: &mut HashSet<(usize, usize)>,
@@ -64,7 +64,7 @@ fn rec_find_basin(
     };
 }
 
-fn calc_basin_size(input: &Vec<Vec<i32>>, i: usize, j: usize) -> usize {
+fn calc_basin_size(input: &[Vec<i32>], i: usize, j: usize) -> usize {
     let mut basin_locs = HashSet::new();
     basin_locs.insert((i, j));
 
@@ -83,10 +83,10 @@ fn part2(input: Vec<Vec<i32>>) {
             }
         }
     }
-    basins.sort();
+    basins.sort_unstable();
     let res = basins[basins.len() - 3..basins.len()]
-        .into_iter()
-        .fold(1, |acc, n| acc * n);
+        .iter()
+        .product::<usize>();
 
     println!("{:?}", res)
 }
@@ -104,5 +104,5 @@ fn main() {
 
     part1(input.clone());
 
-    part2(input.clone());
+    part2(input);
 }

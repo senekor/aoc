@@ -4,8 +4,7 @@ fn part1(input: &str) {
     let l = input.lines().next().unwrap().len();
     let n = input.lines().count();
 
-    let mut v = Vec::with_capacity(l);
-    v.resize(l, 0);
+    let mut v = vec![0; l];
 
     for line in input.lines() {
         for (i, c) in line.chars().enumerate() {
@@ -26,8 +25,8 @@ fn part1(input: &str) {
     println!("{:?}", gamma * epsilon) // 4174964
 }
 
-fn apply_bit_criteria(diagnostic_report: &Vec<&str>, flipped: bool) -> usize {
-    let mut candidates = diagnostic_report.clone();
+fn apply_bit_criteria(diagnostic_report: &[&str], flipped: bool) -> usize {
+    let mut candidates = Vec::from(diagnostic_report);
     let l = candidates[0].len();
     for i in 0..l {
         let num_ones_at_i = candidates
@@ -49,7 +48,7 @@ fn apply_bit_criteria(diagnostic_report: &Vec<&str>, flipped: bool) -> usize {
             break;
         }
     }
-    return usize::from_str_radix(candidates[0], 2).unwrap();
+    usize::from_str_radix(candidates[0], 2).unwrap()
 }
 
 fn part2(input: &str) {
@@ -63,7 +62,7 @@ fn part2(input: &str) {
 fn main() {
     let input = include_str!("../input/input.txt");
 
-    part1(&input);
+    part1(input);
 
-    part2(&input);
+    part2(input);
 }

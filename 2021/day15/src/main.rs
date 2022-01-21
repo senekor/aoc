@@ -35,7 +35,7 @@ struct Graph {
 }
 
 impl Graph {
-    fn from_grid(grid: &Vec<Vec<u8>>) -> Graph {
+    fn from_grid(grid: &[Vec<u8>]) -> Graph {
         // first node
         let graph = Graph {
             start: Node::new(grid[0][0], [0, 0]),
@@ -56,9 +56,7 @@ impl Graph {
         // remaining lines
         let mut start_of_top_line = graph.start.clone();
         let mut top_node = start_of_top_line.clone();
-        for i in 1..grid.len() {
-            let line = &grid[i];
-
+        for (i, line) in grid.iter().enumerate().skip(1) {
             // first node of line
             {
                 let new_node = Node::new(line[0], [i as u16, 0]);
@@ -78,8 +76,7 @@ impl Graph {
             }
 
             // rest of line
-            for j in 1..line.len() {
-                let risk_level = line[j];
+            for (j, &risk_level) in line.iter().enumerate().skip(1) {
                 let new_node = Node::new(risk_level, [i as u16, j as u16]);
 
                 left_node.borrow_mut().right = Some(new_node.clone());
@@ -178,7 +175,7 @@ fn dykstra(graph: &Graph, end: [u16; 2]) -> usize {
     }
 }
 
-fn part1(grid: &Vec<Vec<u8>>) {
+fn part1(grid: &[Vec<u8>]) {
     let end = [grid.len() as u16 - 1, grid[0].len() as u16 - 1];
     let graph = Graph::from_grid(grid);
     let risk_level = dykstra(&graph, end);
@@ -187,10 +184,10 @@ fn part1(grid: &Vec<Vec<u8>>) {
 
 fn part2(mut grid: Vec<Vec<u8>>) {
     let num_new_cols = grid[0].len() * 4;
-    for i in 0..grid.len() {
+    for line in &mut grid {
         for j in 0..num_new_cols {
-            let next = grid[i][j] % 9 + 1;
-            grid[i].push(next);
+            let next = line[j] % 9 + 1;
+            line.push(next);
         }
     }
 

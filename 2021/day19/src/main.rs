@@ -35,7 +35,7 @@ mod test {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Hash, Clone, Copy)]
+#[derive(Debug, PartialEq, Eq, Hash, Clone, Copy, Default)]
 struct Coordinates {
     x: i32,
     y: i32,
@@ -93,18 +93,12 @@ impl Coordinates {
 impl FromStr for Coordinates {
     type Err = String;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let mut iter = s.split(",").map(|s| s.parse().unwrap());
+        let mut iter = s.split(',').map(|s| s.parse().unwrap());
         Ok(Coordinates {
             x: iter.next().unwrap(),
             y: iter.next().unwrap(),
             z: iter.next().unwrap(),
         })
-    }
-}
-
-impl Default for Coordinates {
-    fn default() -> Self {
-        Coordinates { x: 0, y: 0, z: 0 }
     }
 }
 
@@ -292,7 +286,7 @@ impl FromStr for Scanner {
             id: lines
                 .next()
                 .unwrap()
-                .split(" ")
+                .split(' ')
                 .nth(2)
                 .unwrap()
                 .parse::<i32>()
@@ -304,7 +298,6 @@ impl FromStr for Scanner {
 
 #[derive(Debug)]
 struct LocatedScanner {
-    id: i32,
     location: Coordinates,
     beacons: Vec<Coordinates>,
 }
@@ -322,7 +315,6 @@ impl LocatedScanner {
                             overlap += 1;
                             if overlap == 12 {
                                 return Some(LocatedScanner {
-                                    id: scanner.id,
                                     beacons: scanner.beacons,
                                     location: self.location.add(&rel_dist),
                                 });
@@ -341,19 +333,18 @@ impl LocatedScanner {
                 return Some(located_scanner);
             }
         }
-        return None;
+        None
     }
 }
 
 fn locate_all_scanners(mut scanners: Vec<Scanner>) -> Vec<LocatedScanner> {
     let scanner_zero = scanners.swap_remove(0);
     let mut located_scanners = vec![LocatedScanner {
-        id: scanner_zero.id,
         beacons: scanner_zero.beacons,
         location: Coordinates::default(),
     }];
 
-    while scanners.len() > 0 {
+    while !scanners.is_empty() {
         'outer: for i in 0..scanners.len() {
             for located_scanner in located_scanners.iter() {
                 if let Some(newly_located_scanner) = located_scanner.locate_scanner(&scanners[i]) {
@@ -365,14 +356,14 @@ fn locate_all_scanners(mut scanners: Vec<Scanner>) -> Vec<LocatedScanner> {
         }
     }
 
-    return located_scanners;
+    located_scanners
 }
 
-fn part1(located_scanners: &Vec<LocatedScanner>) {
+fn part1(located_scanners: &[LocatedScanner]) {
     let mut unique_beacons = HashSet::new();
     for located_scanner in located_scanners {
         for beacon in located_scanner.beacons.iter() {
-            let abs_beacon_location = located_scanner.location.add(&beacon);
+            let abs_beacon_location = located_scanner.location.add(beacon);
             unique_beacons.insert(abs_beacon_location);
         }
     }
@@ -380,7 +371,7 @@ fn part1(located_scanners: &Vec<LocatedScanner>) {
     println!("{}", unique_beacons.len());
 }
 
-fn part2(located_scanners: &Vec<LocatedScanner>) {
+fn part2(located_scanners: &[LocatedScanner]) {
     let mut max_manhattan = usize::MIN;
 
     for a in located_scanners {

@@ -11,13 +11,7 @@ fn close_to_score(c: char) -> usize {
 }
 
 fn is_close(c: char) -> bool {
-    match c {
-        ')' => true,
-        ']' => true,
-        '}' => true,
-        '>' => true,
-        _ => false,
-    }
+    matches!(c, ')' | ']' | '}' | '>')
 }
 
 fn close_to_open(c: char) -> char {
@@ -36,7 +30,7 @@ fn part1(input: Vec<String>) {
         let mut stack = Vec::new();
         for c in line.chars() {
             if is_close(c) {
-                if stack.len() == 0 || stack[stack.len() - 1] != close_to_open(c) {
+                if stack.is_empty() || stack[stack.len() - 1] != close_to_open(c) {
                     score += close_to_score(c);
                     break;
                 } else {
@@ -69,7 +63,7 @@ fn part2(input: Vec<String>) {
 
         for c in line.chars() {
             if is_close(c) {
-                if stack.len() == 0 || stack[stack.len() - 1] != close_to_open(c) {
+                if stack.is_empty() || stack[stack.len() - 1] != close_to_open(c) {
                     corrupted = true;
                     break;
                 } else {
@@ -91,7 +85,7 @@ fn part2(input: Vec<String>) {
         }
     }
 
-    scores.sort();
+    scores.sort_unstable();
     println!("{} {}", scores.len(), scores.len() / 2 + 1);
 
     println!("{:?}", scores[scores.len() / 2])
@@ -103,5 +97,5 @@ fn main() {
 
     part1(input.clone());
 
-    part2(input.clone());
+    part2(input);
 }

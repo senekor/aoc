@@ -19,7 +19,7 @@ impl FromStr for Block {
                 == lines
                     .nth(3)
                     .unwrap()
-                    .split(" ")
+                    .split(' ')
                     .nth(2)
                     .unwrap()
                     .parse()
@@ -27,7 +27,7 @@ impl FromStr for Block {
             param2: lines
                 .next()
                 .unwrap()
-                .split(" ")
+                .split(' ')
                 .nth(2)
                 .unwrap()
                 .parse()
@@ -35,7 +35,7 @@ impl FromStr for Block {
             param3: lines
                 .nth(9)
                 .unwrap()
-                .split(" ")
+                .split(' ')
                 .nth(2)
                 .unwrap()
                 .parse()
