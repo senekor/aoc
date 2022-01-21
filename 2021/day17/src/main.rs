@@ -95,7 +95,7 @@ fn projectile_hits_target(projectile: Projectile, target: &Target) -> bool {
             TooFar => return false,
         }
     }
-    return false;
+    false
 }
 
 fn main() {

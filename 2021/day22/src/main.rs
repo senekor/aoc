@@ -85,8 +85,8 @@ impl Cuboid {
 
     fn exec(self, reactor: &mut Reactor) {
         for x in self.x {
-            for y in self.y.clone() {
-                for z in self.z.clone() {
+            for y in self.y {
+                for z in self.z {
                     reactor[(x, y, z)] = self.state;
                 }
             }
@@ -115,7 +115,7 @@ impl Cuboid {
         let x_range = (self.x.end - self.x.start + 1) as usize;
         let y_range = (self.y.end - self.y.start + 1) as usize;
         let z_range = (self.z.end - self.z.start + 1) as usize;
-        return x_range * y_range * z_range;
+        x_range * y_range * z_range
     }
 }
 
@@ -153,8 +153,8 @@ impl Reactor {
             .iter()
             .flat_map(|plane| {
                 plane
-                    .into_iter()
-                    .flat_map(|line| line.into_iter().filter(|&&cell| cell))
+                    .iter()
+                    .flat_map(|line| line.iter().filter(|&&cell| cell))
             })
             .count()
     }
@@ -256,5 +256,5 @@ fn main() {
 
     part1(input.clone()); // 543306
 
-    part2(input.clone());
+    part2(input);
 }

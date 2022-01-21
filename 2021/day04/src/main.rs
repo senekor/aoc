@@ -2,7 +2,9 @@ use itertools::*;
 
 type Input = &'static str;
 
-fn calc_score(board: &mut [[(i32, bool); 5]; 5], last_num: i32) -> i32 {
+type Board = [[(i32, bool); 5]; 5];
+
+fn calc_score(board: &mut Board, last_num: i32) -> i32 {
     let mut unmarked_sum = 0;
     for row in board {
         for cell in row {
@@ -11,10 +13,10 @@ fn calc_score(board: &mut [[(i32, bool); 5]; 5], last_num: i32) -> i32 {
             }
         }
     }
-    return unmarked_sum * last_num;
+    unmarked_sum * last_num
 }
 
-fn calc_maybe_score(board: &mut [[(i32, bool); 5]; 5], last_num: i32) -> Option<i32> {
+fn calc_maybe_score(board: &mut Board, last_num: i32) -> Option<i32> {
     let mut bingo = false;
 
     // rows & cols
@@ -29,9 +31,7 @@ fn calc_maybe_score(board: &mut [[(i32, bool); 5]; 5], last_num: i32) -> Option<
                 count_col += 1;
             }
         }
-        if count_row == 5 {
-            bingo = true;
-        } else if count_col == 5 {
+        if count_row == 5 || count_col == 5 {
             bingo = true;
         }
     }
@@ -40,7 +40,7 @@ fn calc_maybe_score(board: &mut [[(i32, bool); 5]; 5], last_num: i32) -> Option<
         return Some(calc_score(board, last_num));
     }
 
-    return None;
+    None
 }
 
 fn part1(input: Input) {
@@ -48,11 +48,11 @@ fn part1(input: Input) {
         .lines()
         .next()
         .unwrap()
-        .split(",")
+        .split(',')
         .map(|n| n.parse().unwrap())
         .collect_vec();
 
-    let mut boards: Vec<[[(i32, bool); 5]; 5]> = Vec::new();
+    let mut boards: Vec<Board> = Vec::new();
 
     let boards_input = input.split("\n\n").skip(1);
     for board_input in boards_input {
@@ -89,11 +89,11 @@ fn part2(input: Input) {
         .lines()
         .next()
         .unwrap()
-        .split(",")
+        .split(',')
         .map(|n| n.parse().unwrap())
         .collect_vec();
 
-    let mut boards: Vec<([[(i32, bool); 5]; 5], bool)> = Vec::new();
+    let mut boards: Vec<(Board, bool)> = Vec::new();
 
     let boards_input = input.split("\n\n").skip(1);
     for board_input in boards_input {
@@ -135,7 +135,7 @@ fn part2(input: Input) {
 fn main() {
     let input = include_str!("../input/input.txt");
 
-    part1(&input);
+    part1(input);
 
-    part2(&input);
+    part2(input);
 }

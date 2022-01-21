@@ -51,7 +51,7 @@ fn traverse(
             small_visited.remove(n);
         }
     }
-    return sum;
+    sum
 }
 
 fn part1(input: Vec<Line>) {
@@ -105,7 +105,7 @@ fn traverse_2(
             small_visited.remove(n);
         }
     }
-    return sum;
+    sum
 }
 
 fn part2(input: Vec<Line>) {
@@ -133,5 +133,5 @@ fn main() {
 
     part1(input.clone());
 
-    part2(input.clone());
+    part2(input);
 }

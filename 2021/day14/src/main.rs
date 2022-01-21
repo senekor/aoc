@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{hash_map::Entry, HashMap};
 
 use itertools::*;
 
@@ -43,10 +43,10 @@ fn part1(start: String, instructions: HashMap<String, String>) {
     let occurances = current
         .chars()
         .fold(HashMap::<char, usize>::new(), |mut m, c| {
-            if m.contains_key(&c) {
-                m.entry(c).and_modify(|e| *e += 1);
+            if let Entry::Vacant(e) = m.entry(c) {
+                e.insert(0);
             } else {
-                m.insert(c, 0);
+                m.entry(c).and_modify(|e| *e += 1);
             };
             m
         });
@@ -84,22 +84,20 @@ fn part2(start: String, instructions: HashMap<String, String>) {
                 let insert = instructions.get(&tuple).unwrap();
                 let left = tuple[..1].to_string() + insert;
                 let right = insert.to_string() + &tuple[1..];
-                if next.contains_key(&left) {
+                if let Entry::Vacant(e) = next.entry(left.clone()) {
+                    e.insert(count);
+                } else {
                     next.entry(left).and_modify(|e| *e += count);
-                } else {
-                    next.insert(left, count);
                 };
-                if next.contains_key(&right) {
+                if let Entry::Vacant(e) = next.entry(right.clone()) {
+                    e.insert(count);
+                } else {
                     next.entry(right).and_modify(|e| *e += count);
-                } else {
-                    next.insert(right, count);
                 };
+            } else if let Entry::Vacant(e) = next.entry(tuple.clone()) {
+                e.insert(count);
             } else {
-                if next.contains_key(&tuple) {
-                    next.entry(tuple).and_modify(|e| *e += count);
-                } else {
-                    next.insert(tuple, count);
-                };
+                next.entry(tuple).and_modify(|e| *e += count);
             }
         }
         current = next;
@@ -109,10 +107,10 @@ fn part2(start: String, instructions: HashMap<String, String>) {
     let mut occurances = HashMap::new();
     for (tuple, count) in current {
         for c in tuple.chars() {
-            if occurances.contains_key(&c) {
-                occurances.entry(c).and_modify(|e| *e += count);
+            if let Entry::Vacant(e) = occurances.entry(c) {
+                e.insert(count);
             } else {
-                occurances.insert(c, count);
+                occurances.entry(c).and_modify(|e| *e += count);
             };
         }
     }

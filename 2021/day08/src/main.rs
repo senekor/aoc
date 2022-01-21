@@ -6,7 +6,7 @@ fn main() {
 
     part1(input.clone());
 
-    part2(input.clone());
+    part2(input);
 }
 
 fn part1(input: Vec<String>) {
@@ -15,7 +15,7 @@ fn part1(input: Vec<String>) {
     for line in input {
         let os = line.split(" | ").nth(1).unwrap();
 
-        for o in os.split(" ") {
+        for o in os.split(' ') {
             match o.len() {
                 2 | 3 | 4 | 7 => count += 1,
                 _ => {}
@@ -43,7 +43,7 @@ fn part2(input: Vec<String>) {
         // let os = line.split(" | ").nth(1).unwrap();
         let mut bruh = line.split(" | ");
         let yeet = bruh.join(" ");
-        let vec = yeet.split(" ").collect_vec();
+        let vec = yeet.split(' ').collect_vec();
 
         // let mut one = "".to_string();
         let mut four = "".to_string();
@@ -92,7 +92,7 @@ fn part2(input: Vec<String>) {
         let mut num = 0;
         for (i, &o) in vec[10..vec.len()].iter().rev().enumerate() {
             if o.len() == 2 {
-                num += 1 * ten.pow(i as u32);
+                num += ten.pow(i as u32);
             } else if o.len() == 3 {
                 num += 7 * ten.pow(i as u32);
             } else if o.len() == 4 {

@@ -1,28 +1,26 @@
 use itertools::*;
 
-fn paper_dims(dots: &Vec<(usize, usize)>) -> (usize, usize) {
-    let (max_x, max_y) = dots
-        .into_iter()
-        .fold((0, 0), |(max_x, max_y), (x, y)| match () {
-            _ if *x > max_x && *y > max_y => (*x, *y),
-            _ if *x > max_x => (*x, max_y),
-            _ if *y > max_y => (max_x, *y),
-            _ => (max_x, max_y),
-        });
+fn paper_dims(dots: &[(usize, usize)]) -> (usize, usize) {
+    let (max_x, max_y) = dots.iter().fold((0, 0), |(max_x, max_y), (x, y)| match () {
+        _ if *x > max_x && *y > max_y => (*x, *y),
+        _ if *x > max_x => (*x, max_y),
+        _ if *y > max_y => (max_x, *y),
+        _ => (max_x, max_y),
+    });
     (max_x + 1, max_y + 1)
 }
 
 fn fold(mut paper: Vec<Vec<char>>, axis: String, n: usize) -> Vec<Vec<char>> {
-    if axis == "y".to_string() {
-        for i in 0..paper.len() {
+    if axis == *"y" {
+        for row in &mut paper {
             for j in 0..n {
-                if paper[i][j] == '#' {
+                if row[j] == '#' {
                     continue;
                 }
                 let mirror = n + (n - j);
-                paper[i][j] = paper[i][mirror];
+                row[j] = row[mirror];
             }
-            paper[i] = paper[i].clone().into_iter().take(n).collect_vec();
+            *row = row.clone().into_iter().take(n).collect_vec();
         }
     } else {
         for i in 0..n {
@@ -36,7 +34,7 @@ fn fold(mut paper: Vec<Vec<char>>, axis: String, n: usize) -> Vec<Vec<char>> {
         }
         paper = paper.into_iter().take(n).collect_vec();
     };
-    return paper;
+    paper
 }
 
 fn part1(dots: Vec<(usize, usize)>, folds: Vec<(String, usize)>) {
@@ -72,8 +70,8 @@ fn part2(dots: Vec<(usize, usize)>, folds: Vec<(String, usize)>) {
     }
 
     for j in 0..paper[0].len() {
-        for i in 0..paper.len() {
-            print!("{}", paper[i][j]);
+        for row in &paper {
+            print!("{}", row[j]);
         }
         println!()
     }
@@ -87,11 +85,11 @@ fn main() {
         .unwrap()
         .lines()
         .map(|line| {
-            let mut iter = line.split(",");
-            return (
+            let mut iter = line.split(',');
+            (
                 iter.next().unwrap().parse::<usize>().unwrap(),
                 iter.next().unwrap().parse::<usize>().unwrap(),
-            );
+            )
         })
         .collect_vec();
     let folds = input
@@ -100,12 +98,12 @@ fn main() {
         .unwrap()
         .lines()
         .map(|line| {
-            let last = line.split(" ").nth(2).unwrap();
-            let mut iter = last.split("=");
-            return (
+            let last = line.split(' ').nth(2).unwrap();
+            let mut iter = last.split('=');
+            (
                 iter.next().unwrap().to_string(),
                 iter.next().unwrap().parse::<usize>().unwrap(),
-            );
+            )
         })
         .collect_vec();
 

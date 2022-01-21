@@ -1,12 +1,12 @@
 use itertools::*;
 
-type Input = Vec<usize>;
+struct Input(Vec<usize>);
 
 fn part1(input: &Input) {
     let mut fish = vec![0; 9];
 
-    for f in input {
-        fish[*f] += 1;
+    for &f in &input.0 {
+        fish[f] += 1;
     }
 
     for _ in 0..80 {
@@ -22,8 +22,8 @@ fn part1(input: &Input) {
 fn part2(input: &Input) {
     let mut fish: Vec<usize> = vec![0; 9];
 
-    for f in input {
-        fish[*f] += 1;
+    for &f in &input.0 {
+        fish[f] += 1;
     }
 
     for _ in 0..256 {
@@ -41,10 +41,12 @@ fn part2(input: &Input) {
 
 fn main() {
     let input = include_str!("../input/input.txt");
-    let input = input
-        .split(",")
-        .map(|line| line.parse().unwrap())
-        .collect_vec();
+    let input = Input(
+        input
+            .split(',')
+            .map(|line| line.parse().unwrap())
+            .collect_vec(),
+    );
 
     part1(&input);
 
