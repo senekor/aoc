@@ -5,13 +5,13 @@ fn hex_to_bits(hex_str: &str) -> Vec<u8> {
         .chars()
         .flat_map(|c| {
             let hex_num = u8::from_str_radix(c.to_string().as_str(), 16).unwrap();
-            return [
+            [
                 (hex_num >> 3) % 2,
                 (hex_num >> 2) % 2,
                 (hex_num >> 1) % 2,
                 hex_num % 2,
             ]
-            .into_iter();
+            .into_iter()
         })
         .collect_vec()
 }
@@ -19,7 +19,7 @@ fn hex_to_bits(hex_str: &str) -> Vec<u8> {
 fn parse_header(bits: &[u8]) -> (u8, u8, &[u8]) {
     let version = (bits[0] << 2) + (bits[1] << 1) + bits[2];
     let type_id = (bits[3] << 2) + (bits[4] << 1) + bits[5];
-    return (version, type_id, &bits[6..]);
+    (version, type_id, &bits[6..])
 }
 
 #[derive(Debug)]
@@ -41,7 +41,7 @@ fn parse_literal(payload: &[u8]) -> (usize, usize) {
     let mut i = 0;
     let mut literal = 0;
     loop {
-        literal = literal << 4;
+        literal <<= 4;
         literal += ((payload[i + 1] as usize) << 3)
             + ((payload[i + 2] as usize) << 2)
             + ((payload[i + 3] as usize) << 1)
@@ -53,7 +53,7 @@ fn parse_literal(payload: &[u8]) -> (usize, usize) {
 
         i += 5;
     }
-    return (literal, i + 5);
+    (literal, i + 5)
 }
 
 fn parse_children_length(bits: &[u8], len: usize) -> Vec<Packet> {
@@ -64,7 +64,7 @@ fn parse_children_length(bits: &[u8], len: usize) -> Vec<Packet> {
         children.push(child);
         len_parsed += child_len;
     }
-    return children;
+    children
 }
 
 fn parse_children_num(bits: &[u8], num: usize) -> (Vec<Packet>, usize) {
@@ -75,7 +75,7 @@ fn parse_children_num(bits: &[u8], num: usize) -> (Vec<Packet>, usize) {
         children.push(child);
         len_parsed += len;
     }
-    return (children, len_parsed);
+    (children, len_parsed)
 }
 
 fn parse_children(payload: &[u8]) -> (Vec<Packet>, usize) {
@@ -99,7 +99,7 @@ fn parse_children(payload: &[u8]) -> (Vec<Packet>, usize) {
 }
 
 fn parse_packet(bits: &[u8]) -> (Packet, usize) {
-    let (version, type_id, payload) = parse_header(&bits);
+    let (version, type_id, payload) = parse_header(bits);
     if type_id == 4 {
         let (val, len) = parse_literal(payload);
         return (
@@ -112,14 +112,14 @@ fn parse_packet(bits: &[u8]) -> (Packet, usize) {
         );
     }
     let (children, len) = parse_children(payload);
-    return (
+    (
         OpPacket {
             version,
             type_id,
             children,
         },
         len + 6,
-    );
+    )
 }
 
 fn sum_versions(packet: &Packet) -> usize {
@@ -128,13 +128,7 @@ fn sum_versions(packet: &Packet) -> usize {
             version,
             type_id: _,
             children,
-        } => {
-            (*version as usize)
-                + children
-                    .iter()
-                    .map(|child| sum_versions(child))
-                    .sum::<usize>()
-        }
+        } => (*version as usize) + children.iter().map(sum_versions).sum::<usize>(),
         LitPacket {
             version,
             _type_id: _,
@@ -152,14 +146,14 @@ fn part1(input: &str) {
 
 fn execute_op(op: u8, packets: &[Packet]) -> usize {
     match op {
-        0 => packets.into_iter().map(|p| execute(p)).sum(),
+        0 => packets.iter().map(execute).sum(),
         1 => packets
-            .into_iter()
-            .map(|p| execute(p))
+            .iter()
+            .map(execute)
             .reduce(|acc, next| acc * next)
             .unwrap(),
-        2 => packets.into_iter().map(|p| execute(p)).min().unwrap(),
-        3 => packets.into_iter().map(|p| execute(p)).max().unwrap(),
+        2 => packets.iter().map(execute).min().unwrap(),
+        3 => packets.iter().map(execute).max().unwrap(),
         5 => {
             if execute(&packets[0]) > execute(&packets[1]) {
                 1
@@ -210,7 +204,7 @@ fn part2(input: &str) {
 fn main() {
     let input = include_str!("../input/input.txt");
 
-    part1(input.clone());
+    part1(input);
 
-    part2(input.clone());
+    part2(input);
 }

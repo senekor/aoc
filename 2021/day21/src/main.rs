@@ -41,7 +41,7 @@ impl Die {
     fn roll(&mut self) -> i32 {
         self.x = (self.x % 100) + 1;
         self.roll_count += 1;
-        return self.x;
+        self.x
     }
 }
 
@@ -135,11 +135,11 @@ impl QuantumPlayer {
         for (player, _) in res.iter_mut() {
             player.score += player.pos
         }
-        return res;
+        res
     }
 
     fn has_won(&self) -> bool {
-        return self.score >= 21;
+        self.score >= 21
     }
 }
 
@@ -185,7 +185,7 @@ fn get_wins(state: State, known_states: &mut HashMap<State, Wins>) -> Wins {
         }
     }
     known_states.insert(state, wins);
-    return wins;
+    wins
 }
 
 fn part2(player_1: QuantumPlayer, player_2: QuantumPlayer) {

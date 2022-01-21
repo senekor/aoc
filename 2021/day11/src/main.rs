@@ -86,9 +86,9 @@ fn part1(mut input: Vec<Vec<i32>>) {
     for _ in 0..100 {
         // flash
         let mut next = input.clone();
-        for i in 0..10 {
-            for j in 0..10 {
-                if input[i][j] == 9 {
+        for (i, row) in input.iter().enumerate().take(10) {
+            for (j, &cell) in row.iter().enumerate().take(10) {
+                if cell == 9 {
                     flash(&mut next, i, j)
                 }
             }
@@ -96,19 +96,19 @@ fn part1(mut input: Vec<Vec<i32>>) {
         input = next;
 
         // decrement prev flashes
-        for i in 0..10 {
-            for j in 0..10 {
-                if input[i][j] == 9 {
-                    input[i][j] = -1;
+        for row in input.iter_mut().take(10) {
+            for cell in row.iter_mut().take(10) {
+                if *cell == 9 {
+                    *cell = -1;
                     sum += 1;
                 }
             }
         }
 
         // increment by one
-        for i in 0..10 {
-            for j in 0..10 {
-                input[i][j] += 1;
+        for row in input.iter_mut().take(10) {
+            for cell in row.iter_mut().take(10) {
+                *cell += 1;
             }
         }
     }
@@ -123,9 +123,9 @@ fn part2(mut input: Vec<Vec<i32>>) {
 
         // flash
         let mut next = input.clone();
-        for i in 0..10 {
-            for j in 0..10 {
-                if input[i][j] == 9 {
+        for (i, row) in input.iter().enumerate().take(10) {
+            for (j, &cell) in row.iter().enumerate().take(10) {
+                if cell == 9 {
                     flash(&mut next, i, j)
                 }
             }
@@ -134,9 +134,9 @@ fn part2(mut input: Vec<Vec<i32>>) {
 
         // check sync
         let mut sync = true;
-        for i in 0..10 {
-            for j in 0..10 {
-                if input[i][j] != 9 {
+        for row in input.iter().take(10) {
+            for &cell in row.iter().take(10) {
+                if cell != 9 {
                     sync = false;
                     break;
                 }
@@ -148,18 +148,18 @@ fn part2(mut input: Vec<Vec<i32>>) {
         }
 
         // decrement prev flashes
-        for i in 0..10 {
-            for j in 0..10 {
-                if input[i][j] == 9 {
-                    input[i][j] = -1;
+        for row in input.iter_mut().take(10) {
+            for cell in row.iter_mut().take(10) {
+                if *cell == 9 {
+                    *cell = -1;
                 }
             }
         }
 
         // increment by one
-        for i in 0..10 {
-            for j in 0..10 {
-                input[i][j] += 1;
+        for row in input.iter_mut().take(10) {
+            for cell in row.iter_mut().take(10) {
+                *cell += 1;
             }
         }
     }
@@ -172,7 +172,7 @@ fn main() {
         .map(|line| {
             line.split("")
                 .filter_map(|c| {
-                    if c == "" {
+                    if c.is_empty() {
                         None
                     } else {
                         Some(c.parse::<i32>().unwrap())
@@ -184,5 +184,5 @@ fn main() {
 
     part1(input.clone());
 
-    part2(input.clone());
+    part2(input);
 }

@@ -3,8 +3,8 @@ use itertools::*;
 fn pixel_square_to_index(mut pixel_square: Vec<char>) -> usize {
     let mut result = 0;
     pixel_square.reverse();
-    for i in 0..pixel_square.len() {
-        if pixel_square[i] == '#' {
+    for (i, &item) in pixel_square.iter().enumerate() {
+        if item == '#' {
             result += 1 << i;
         }
     }
@@ -56,16 +56,16 @@ impl Image {
                 new_pixels[(i + 1) as usize].push(algo.chars().nth(algo_index).unwrap());
             }
         }
-        return Image {
+        Image {
             pixels: new_pixels,
             infinite: self.get_next_infinite(algo),
-        };
+        }
     }
 
     fn count_light_pixels(&self) -> usize {
         self.pixels
             .iter()
-            .flat_map(|row| row.into_iter())
+            .flat_map(|row| row.iter())
             .filter(|&&c| c == '#')
             .count()
     }
@@ -105,5 +105,5 @@ fn main() {
 
     part1(algo, image.clone());
 
-    part2(algo, image.clone());
+    part2(algo, image);
 }

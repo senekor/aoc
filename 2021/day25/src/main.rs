@@ -45,7 +45,7 @@ impl Display for Seafloor {
         f.write_str(
             self.grid
                 .iter()
-                .flat_map(|row| row.into_iter().chain([&'\n'].into_iter()))
+                .flat_map(|row| row.iter().chain([&'\n'].into_iter()))
                 .collect::<String>()
                 .as_str(),
         )
@@ -120,5 +120,5 @@ fn part1(mut seafloor: Seafloor) {
 fn main() {
     let seafloor: Seafloor = include_str!("../input/input.txt").parse().unwrap();
 
-    part1(seafloor.clone());
+    part1(seafloor);
 }
