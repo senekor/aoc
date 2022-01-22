@@ -2,28 +2,16 @@ use std::{collections::HashMap, hash::Hash};
 
 use itertools::*;
 
-#[macro_export]
-macro_rules! parse {
-    ( $line:expr, $( $t:ty, $sep:expr ),* ; $lt:ty ) => {{
-        let mut rest = $line.to_string();
-        (
-            $({
-                let mut iter = rest.split($sep);
-                let elem = iter.next().unwrap().parse::<$t>().unwrap();
-                rest = iter.join($sep);
-                elem
-            },)*
-            rest.parse::<$lt>().unwrap(),
-        )
-    }};
-}
-
-// ---------- adjust these to customize parsing ---------- //
 type Line = (String, i32);
 fn parse(line: &str) -> Line {
-    parse!(line, String, "position: " ; i32)
+    {
+        let mut iter = line.split("position: ");
+        (
+            iter.next().unwrap().parse::<String>().unwrap(),
+            iter.next().unwrap().parse::<i32>().unwrap(),
+        )
+    }
 }
-// ------------------------------------------------------- //
 
 struct Die {
     x: i32,
