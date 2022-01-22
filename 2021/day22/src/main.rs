@@ -3,28 +3,25 @@ use std::ops::{Index, IndexMut, RangeInclusive};
 
 use itertools::*;
 
-#[macro_export]
-macro_rules! parse {
-    ( $line:expr, $( $t:ty, $sep:expr ),* ; $lt:ty ) => {{
-        let mut rest = $line.to_string();
-        (
-            $({
-                let mut iter = rest.split($sep);
-                let elem = iter.next().unwrap().parse::<$t>().unwrap();
-                rest = iter.join($sep);
-                elem
-            },)*
-            rest.parse::<$lt>().unwrap(),
-        )
-    }};
-}
-
-// ---------- adjust these to customize parsing ---------- //
 type Line = (String, i32, i32, i32, i32, i32, i32);
 fn parse(line: &str) -> Line {
-    parse!(line, String, " x=", i32, "..", i32, ",y=", i32, "..", i32, ",z=", i32, ".." ; i32)
+    {
+        let mut iter = line
+            .split("..")
+            .flat_map(|s| s.split(" x="))
+            .flat_map(|s| s.split(",y="))
+            .flat_map(|s| s.split(",z="));
+        (
+            iter.next().unwrap().parse::<String>().unwrap(),
+            iter.next().unwrap().parse::<i32>().unwrap(),
+            iter.next().unwrap().parse::<i32>().unwrap(),
+            iter.next().unwrap().parse::<i32>().unwrap(),
+            iter.next().unwrap().parse::<i32>().unwrap(),
+            iter.next().unwrap().parse::<i32>().unwrap(),
+            iter.next().unwrap().parse::<i32>().unwrap(),
+        )
+    }
 }
-// ------------------------------------------------------- //
 
 #[derive(Debug, Clone, Copy)]
 struct Range {
