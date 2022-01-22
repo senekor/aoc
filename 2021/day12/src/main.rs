@@ -1,28 +1,16 @@
 use itertools::*;
 use std::collections::{HashMap, HashSet};
 
-#[macro_export]
-macro_rules! parse {
-    ( $line:expr, $( $t:ty, $sep:expr ),* ; $lt:ty ) => {{
-        let mut rest = $line;
-        (
-            $({
-                let mut iter = rest.split($sep);
-                let elem = iter.next().unwrap().parse::<$t>().unwrap();
-                rest = iter.next().unwrap();
-                elem
-            },)*
-            rest.parse::<$lt>().unwrap(),
-        )
-    }};
-}
-
-// ---------- adjust these to customize parsing ---------- //
 type Line = (String, String);
 fn parse(line: &str) -> Line {
-    parse!(line, String, "-" ; String)
+    {
+        let mut iter = line.split('-');
+        (
+            iter.next().unwrap().parse::<String>().unwrap(),
+            iter.next().unwrap().parse::<String>().unwrap(),
+        )
+    }
 }
-// ------------------------------------------------------- //
 
 #[derive(Default, Debug)]
 struct Cave {

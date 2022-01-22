@@ -2,28 +2,16 @@ use std::collections::{hash_map::Entry, HashMap};
 
 use itertools::*;
 
-#[macro_export]
-macro_rules! parse {
-    ( $line:expr, $( $t:ty, $sep:expr ),* ; $lt:ty ) => {{
-        let mut rest = $line;
-        (
-            $({
-                let mut iter = rest.split($sep);
-                let elem = iter.next().unwrap().parse::<$t>().unwrap();
-                rest = iter.next().unwrap();
-                elem
-            },)*
-            rest.parse::<$lt>().unwrap(),
-        )
-    }};
-}
-
-// ---------- adjust these to customize parsing ---------- //
 type Line = (String, String);
 fn parse(line: &str) -> Line {
-    parse!(line, String, " -> " ; String)
+    {
+        let mut iter = line.split(" -> ");
+        (
+            iter.next().unwrap().parse::<String>().unwrap(),
+            iter.next().unwrap().parse::<String>().unwrap(),
+        )
+    }
 }
-// ------------------------------------------------------- //
 
 fn part1(start: String, instructions: HashMap<String, String>) {
     let mut current = start;
