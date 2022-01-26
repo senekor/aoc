@@ -43,30 +43,30 @@ fn did_explode(snail: &mut Snail, depth: i32) -> Option<(Option<i32>, Option<i32
     }
     if let Pair(l, r) = snail {
         if depth == 5 {
-            if let Regular(l) = l.as_mut() {
-                if let Regular(r) = r.as_mut() {
-                    return Some((Some(*l), Some(*r)));
+            if let Regular(left) = l.as_mut() {
+                if let Regular(right) = r.as_mut() {
+                    return Some((Some(*left), Some(*right)));
                 }
             }
             panic!("at depth 5, only regular numbers must remain");
         }
-        if let Some((left_expl, right_expl)) = did_explode(l, depth + 1) {
-            if let Some(right_expl) = right_expl {
-                if left_expl.is_some() {
+        if let Some((maybe_left_expl, maybe_right_expl)) = did_explode(l, depth + 1) {
+            if let Some(right_expl) = maybe_right_expl {
+                if maybe_left_expl.is_some() {
                     *l = Box::new(Regular(0));
                 }
                 add_left(r, right_expl);
             }
-            return Some((left_expl, None));
+            return Some((maybe_left_expl, None));
         }
-        if let Some((left_expl, right_expl)) = did_explode(r, depth + 1) {
-            if let Some(left_expl) = left_expl {
-                if right_expl.is_some() {
+        if let Some((maybe_left_expl, maybe_right_expl)) = did_explode(r, depth + 1) {
+            if let Some(left_expl) = maybe_left_expl {
+                if maybe_right_expl.is_some() {
                     *r = Box::new(Regular(0));
                 }
                 add_right(l, left_expl);
             }
-            return Some((None, right_expl));
+            return Some((None, maybe_right_expl));
         }
         return None;
     }

@@ -1,8 +1,10 @@
 use itertools::*;
 
 fn main() {
-    let input = include_str!("../input/input.txt");
-    let input = input.lines().map(str::to_string).collect_vec();
+    let input = include_str!("../input/input.txt")
+        .lines()
+        .map(str::to_string)
+        .collect_vec();
 
     part1(input.clone());
 

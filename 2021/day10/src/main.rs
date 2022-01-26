@@ -92,8 +92,10 @@ fn part2(input: Vec<String>) {
 }
 
 fn main() {
-    let input = include_str!("../input/input.txt");
-    let input = input.lines().map(|line| line.to_owned()).collect_vec();
+    let input = include_str!("../input/input.txt")
+        .lines()
+        .map(|line| line.to_owned())
+        .collect_vec();
 
     part1(input.clone());
 

@@ -12,8 +12,8 @@ struct Target {
 }
 
 impl Target {
-    fn new(s: &str) -> Target {
-        let nums = s
+    fn new(target: &str) -> Target {
+        let nums = target
             .trim_start_matches("target area: x=")
             .split(", y=")
             .flat_map(|x| x.split(".."))

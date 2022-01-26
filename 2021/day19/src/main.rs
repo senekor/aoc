@@ -92,8 +92,8 @@ impl Coordinates {
 
 impl FromStr for Coordinates {
     type Err = String;
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let mut iter = s.split(',').map(|s| s.parse().unwrap());
+    fn from_str(coordinates: &str) -> Result<Self, Self::Err> {
+        let mut iter = coordinates.split(',').map(|s| s.parse().unwrap());
         Ok(Coordinates {
             x: iter.next().unwrap(),
             y: iter.next().unwrap(),
