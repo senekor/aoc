@@ -92,8 +92,7 @@ fn part2(input: Vec<Vec<i32>>) {
 }
 
 fn main() {
-    let input = include_str!("../input/input.txt");
-    let input = input
+    let input = include_str!("../input/input.txt")
         .lines()
         .map(|line| {
             line.chars()

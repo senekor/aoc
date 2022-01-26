@@ -122,10 +122,10 @@ fn main() {
     let mut bruh = input.split("\n\n");
     let start = bruh.next().unwrap().to_string();
 
-    let instructions = bruh.next().unwrap().lines().map(parse).collect_vec();
+    let instruction_list = bruh.next().unwrap().lines().map(parse).collect_vec();
     let instructions = {
         let mut m = HashMap::new();
-        for instr in instructions {
+        for instr in instruction_list {
             m.insert(instr.0, instr.1);
         }
         m

@@ -30,8 +30,8 @@ struct Range {
 }
 
 impl Range {
-    fn new(start: i32, end: i32) -> Range {
-        let (start, end) = (min(start, end), max(start, end));
+    fn new(left: i32, right: i32) -> Range {
+        let (start, end) = (min(left, right), max(left, right));
         Range { start, end }
     }
 

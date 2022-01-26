@@ -75,11 +75,11 @@ fn traverse_2(
             continue;
         }
         let mut set_joker = false;
-        let mut joker = joker;
+        let mut mut_joker = joker;
         if n.chars().next().unwrap().is_lowercase() {
             if small_visited.contains(n) {
-                if joker {
-                    joker = false;
+                if mut_joker {
+                    mut_joker = false;
                     set_joker = true;
                 } else {
                     continue;
@@ -88,7 +88,7 @@ fn traverse_2(
                 small_visited.insert(n.to_string());
             }
         }
-        sum += traverse_2(caves, small_visited, n.to_string(), joker);
+        sum += traverse_2(caves, small_visited, n.to_string(), mut_joker);
         if small_visited.contains(n) && !set_joker {
             small_visited.remove(n);
         }
@@ -116,8 +116,10 @@ fn part2(input: Vec<Line>) {
 }
 
 fn main() {
-    let input = include_str!("../input/input.txt");
-    let input = input.lines().map(parse).collect_vec();
+    let input = include_str!("../input/input.txt")
+        .lines()
+        .map(parse)
+        .collect_vec();
 
     part1(input.clone());
 

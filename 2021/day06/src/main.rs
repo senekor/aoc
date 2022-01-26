@@ -40,9 +40,8 @@ fn part2(input: &Input) {
 }
 
 fn main() {
-    let input = include_str!("../input/input.txt");
     let input = Input(
-        input
+        include_str!("../input/input.txt")
             .split(',')
             .map(|line| line.parse().unwrap())
             .collect_vec(),

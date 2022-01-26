@@ -91,7 +91,7 @@ fn main() {
     let input = include_str!("../input/input.txt");
     let mut iter = input.split("\n\n");
     let algo = iter.next().unwrap();
-    let image = iter
+    let pixels = iter
         .next()
         .unwrap()
         .lines()
@@ -99,7 +99,7 @@ fn main() {
         .collect_vec();
 
     let image = Image {
-        pixels: image,
+        pixels,
         infinite: '.',
     };
 

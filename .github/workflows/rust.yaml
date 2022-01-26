@@ -59,4 +59,9 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: clippy
-          args: -- -D warnings
+          args: >
+            --
+            -W clippy::shadow_reuse
+            -W clippy::shadow_same
+            -W clippy::shadow_unrelated
+            -D warnings

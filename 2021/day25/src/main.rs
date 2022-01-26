@@ -69,7 +69,7 @@ impl Seafloor {
 }
 
 fn part1(mut seafloor: Seafloor) {
-    for i in 1.. {
+    for k in 1.. {
         let mut nothing_moved = true;
 
         let mut next_state = Seafloor::new(seafloor.num_rows(), seafloor.num_cols());
@@ -110,7 +110,7 @@ fn part1(mut seafloor: Seafloor) {
         }
 
         if nothing_moved {
-            println!("seacucumbers stop moving after {} steps", i);
+            println!("seacucumbers stop moving after {} steps", k);
             break;
         }
 

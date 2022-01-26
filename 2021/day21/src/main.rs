@@ -161,12 +161,14 @@ fn get_wins(state: State, known_states: &mut HashMap<State, Wins>) -> Wins {
             continue;
         }
         for (player_2, num_p_2) in new_players_two.iter() {
-            let player_2 = *player_2;
             if player_2.has_won() {
                 wins.player_2 += num_p_2;
                 continue;
             }
-            let sub_state = State { player_1, player_2 };
+            let sub_state = State {
+                player_1,
+                player_2: *player_2,
+            };
             let sub_wins = get_wins(sub_state, known_states);
             wins.player_1 += sub_wins.player_1 * num_p_1 * num_p_2;
             wins.player_2 += sub_wins.player_2 * num_p_1 * num_p_2;
@@ -184,16 +186,18 @@ fn part2(player_1: QuantumPlayer, player_2: QuantumPlayer) {
 }
 
 fn main() {
-    let input = include_str!("../input/input.txt");
-    let input = input.lines().map(parse).collect_vec();
+    let input = include_str!("../input/input.txt")
+        .lines()
+        .map(parse)
+        .collect_vec();
 
     let player_1 = Player::new(input[0].1);
     let player_2 = Player::new(input[1].1);
 
     part1(player_1, player_2);
 
-    let player_1 = QuantumPlayer::new(input[0].1);
-    let player_2 = QuantumPlayer::new(input[1].1);
+    let q_player_1 = QuantumPlayer::new(input[0].1);
+    let q_player_2 = QuantumPlayer::new(input[1].1);
 
-    part2(player_1, player_2);
+    part2(q_player_1, q_player_2);
 }

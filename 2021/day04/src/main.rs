@@ -58,8 +58,7 @@ fn part1(input: Input) {
     for board_input in boards_input {
         let mut new_board = [[(0, false); 5]; 5];
         for (i, row) in board_input.lines().enumerate() {
-            let row = row.trim().to_string();
-            for (j, cell) in row.split_ascii_whitespace().enumerate() {
+            for (j, cell) in row.trim().split_ascii_whitespace().enumerate() {
                 new_board[i][j].0 = cell.parse().unwrap();
             }
         }
@@ -99,8 +98,7 @@ fn part2(input: Input) {
     for board_input in boards_input {
         let mut new_board = [[(0, false); 5]; 5];
         for (i, row) in board_input.lines().enumerate() {
-            let row = row.trim().to_string();
-            for (j, cell) in row.split_ascii_whitespace().enumerate() {
+            for (j, cell) in row.trim().split_ascii_whitespace().enumerate() {
                 new_board[i][j].0 = cell.parse().unwrap();
             }
         }

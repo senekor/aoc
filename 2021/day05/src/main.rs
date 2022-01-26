@@ -125,8 +125,7 @@ fn part2(lines: Lines) {
 }
 
 fn main() {
-    let input = include_str!("../input/input.txt");
-    let input = str_to_lines(input);
+    let input = str_to_lines(include_str!("../input/input.txt"));
 
     part1(input.clone());
 

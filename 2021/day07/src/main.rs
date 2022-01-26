@@ -71,8 +71,7 @@ fn part2(crabs: Vec<i32>) {
 }
 
 fn main() {
-    let input = include_str!("../input/input.txt");
-    let input = input
+    let input = include_str!("../input/input.txt")
         .split(',')
         .map(|line| line.parse::<i32>().unwrap())
         .collect_vec();
