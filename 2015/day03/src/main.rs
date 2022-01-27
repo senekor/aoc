@@ -28,24 +28,23 @@ fn get_internal_coord(a: i32) -> usize {
 
 fn part1(input: &str) {
     let (mut x, mut y) = (0, 0);
-    let mut visited_houses: Vec<Vec<bool>> = Vec::new();
-    visited_houses.push(Vec::new());
+    let mut visited_houses: Vec<Vec<bool>> = vec![vec![]];
     visited_houses[0].push(true);
     let mut count = 1;
     for direction in input.chars() {
         let new_coord = get_new_position(x, y, direction);
         x = new_coord.x;
         y = new_coord.y;
-        let x: usize = get_internal_coord(x);
-        let y: usize = get_internal_coord(y);
-        if x >= visited_houses.len() {
-            visited_houses.resize(x + 1, Vec::new())
+        let x_int: usize = get_internal_coord(x);
+        let y_int: usize = get_internal_coord(y);
+        if x_int >= visited_houses.len() {
+            visited_houses.resize(x_int + 1, Vec::new())
         };
-        if y >= visited_houses[x].len() {
-            visited_houses[x].resize(y + 1, false)
+        if y_int >= visited_houses[x_int].len() {
+            visited_houses[x_int].resize(y_int + 1, false)
         };
-        if !visited_houses[x][y] {
-            visited_houses[x][y] = true;
+        if !visited_houses[x_int][y_int] {
+            visited_houses[x_int][y_int] = true;
             count += 1;
         }
     }
@@ -53,16 +52,16 @@ fn part1(input: &str) {
 }
 
 fn deliver_present(x: i32, y: i32, visited_houses: &mut Vec<Vec<bool>>) -> bool {
-    let x: usize = get_internal_coord(x);
-    let y: usize = get_internal_coord(y);
-    if x >= visited_houses.len() {
-        visited_houses.resize(x + 1, Vec::new())
+    let x_usize: usize = get_internal_coord(x);
+    let y_usize: usize = get_internal_coord(y);
+    if x_usize >= visited_houses.len() {
+        visited_houses.resize(x_usize + 1, Vec::new())
     };
-    if y >= visited_houses[x].len() {
-        visited_houses[x].resize(y + 1, false)
+    if y_usize >= visited_houses[x_usize].len() {
+        visited_houses[x_usize].resize(y_usize + 1, false)
     };
-    if !visited_houses[x][y] {
-        visited_houses[x][y] = true;
+    if !visited_houses[x_usize][y_usize] {
+        visited_houses[x_usize][y_usize] = true;
         true
     } else {
         false
@@ -77,8 +76,7 @@ enum Santa {
 fn part2(input: &str) {
     let (mut x_bio, mut y_bio) = (0, 0);
     let (mut x_robo, mut y_robo) = (0, 0);
-    let mut visited_houses: Vec<Vec<bool>> = Vec::new();
-    visited_houses.push(Vec::new());
+    let mut visited_houses: Vec<Vec<bool>> = vec![vec![]];
     visited_houses[0].push(true);
     let mut count = 1;
     let mut santa = Santa::BioSanta;
@@ -110,20 +108,19 @@ fn part2(input: &str) {
 fn part2_manual_iteration(input: &str) {
     let (mut x_bio, mut y_bio) = (0, 0);
     let (mut x_robo, mut y_robo) = (0, 0);
-    let mut visited_houses: Vec<Vec<bool>> = Vec::new();
-    visited_houses.push(Vec::new());
+    let mut visited_houses: Vec<Vec<bool>> = vec![vec![]];
     visited_houses[0].push(true);
     let mut count = 1;
     let mut directions = input.chars();
     while let Some(bio_direction) = directions.next() {
-        let new_coord = get_new_position(x_bio, y_bio, bio_direction);
+        let mut new_coord = get_new_position(x_bio, y_bio, bio_direction);
         x_bio = new_coord.x;
         y_bio = new_coord.y;
         if deliver_present(x_bio, y_bio, &mut visited_houses) {
             count += 1;
         }
         let robo_direction = directions.next().unwrap();
-        let new_coord = get_new_position(x_robo, y_robo, robo_direction);
+        new_coord = get_new_position(x_robo, y_robo, robo_direction);
         x_robo = new_coord.x;
         y_robo = new_coord.y;
         if deliver_present(x_robo, y_robo, &mut visited_houses) {
@@ -136,12 +133,11 @@ fn part2_manual_iteration(input: &str) {
 fn part2_byte_idx(input: &str) {
     let (mut x_bio, mut y_bio) = (0, 0);
     let (mut x_robo, mut y_robo) = (0, 0);
-    let mut visited_houses: Vec<Vec<bool>> = Vec::new();
-    visited_houses.push(Vec::new());
+    let mut visited_houses: Vec<Vec<bool>> = vec![vec![]];
     visited_houses[0].push(true);
     let mut count = 1;
-    let mut directions = input.char_indices();
-    while let Some((byte_idx, direction)) = directions.next() {
+    let directions = input.char_indices();
+    for (byte_idx, direction) in directions {
         let new_coord = if byte_idx % 2 == 0 {
             let new_coord = get_new_position(x_bio, y_bio, direction);
             x_bio = new_coord.x;

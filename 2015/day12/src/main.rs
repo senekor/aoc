@@ -18,7 +18,7 @@ impl Summable for Object {
 
 impl Summable for Vec<JsonValue> {
     fn sum_all(&self) -> i64 {
-        self.into_iter().fold(0, |acc, jv| acc + sum(jv))
+        self.iter().fold(0, |acc, jv| acc + sum(jv))
     }
 }
 
@@ -58,7 +58,7 @@ impl Summable2 for Object {
 
 impl Summable2 for Vec<JsonValue> {
     fn sum_all2(&self) -> i64 {
-        self.into_iter().fold(0, |acc, jv| acc + sum2(jv))
+        self.iter().fold(0, |acc, jv| acc + sum2(jv))
     }
 }
 

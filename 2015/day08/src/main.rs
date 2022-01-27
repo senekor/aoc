@@ -1,9 +1,9 @@
 fn part1(input: &str) {
-    let num_lines = input.split("\n").count();
+    let num_lines = input.split('\n').count();
     let num_code_chars = input.len() - num_lines + 1;
 
     let mut num_memory_chars = 0;
-    for line in input.split("\n") {
+    for line in input.split('\n') {
         let mut chars = line.chars();
         while let Some(c) = chars.next() {
             match c {
@@ -25,11 +25,11 @@ fn part1(input: &str) {
 }
 
 fn part2(input: &str) {
-    let num_lines = input.split("\n").count();
+    let num_lines = input.split('\n').count();
     let num_code_chars = input.len() - num_lines + 1;
 
     let mut num_new_chars = 0;
-    for line in input.split("\n") {
+    for line in input.split('\n') {
         num_new_chars += 2; // enclosing ""
         for c in line.chars() {
             match c {

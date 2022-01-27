@@ -36,7 +36,7 @@ impl FromStr for Sue {
                 p => panic!("unknown property '{}'", p),
             }
         }
-        return Ok(sue);
+        Ok(sue)
     }
 }
 

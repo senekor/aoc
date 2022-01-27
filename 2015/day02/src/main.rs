@@ -1,11 +1,10 @@
 use std::cmp;
 use std::str::FromStr;
-use std::string::String;
 
-fn part1(input: &String) {
+fn part1(input: &str) {
     let mut total_size = 0;
-    for line in input.split("\n") {
-        let mut dims = line.split("x");
+    for line in input.split('\n') {
+        let mut dims = line.split('x');
         let l = i32::from_str(dims.next().unwrap()).unwrap_or(0);
         let w = i32::from_str(dims.next().unwrap()).unwrap_or(0);
         let h = i32::from_str(dims.next().unwrap()).unwrap_or(0);
@@ -16,15 +15,15 @@ fn part1(input: &String) {
     println!("total wrapping paper required: {}", total_size);
 }
 
-fn part2(input: &String) {
+fn part2(input: &str) {
     let mut total_size = 0;
-    for line in input.split("\n") {
-        let mut dims = line.split("x");
+    for line in input.split('\n') {
+        let mut dims = line.split('x');
         let l = i32::from_str(dims.next().unwrap()).unwrap_or(0);
         let w = i32::from_str(dims.next().unwrap()).unwrap_or(0);
         let h = i32::from_str(dims.next().unwrap()).unwrap_or(0);
         let mut dim_slice = [l, w, h];
-        dim_slice.sort();
+        dim_slice.sort_unstable();
         let circumf = 2 * (dim_slice[0] + dim_slice[1]);
         let volume = dim_slice[0] * dim_slice[1] * dim_slice[2];
         total_size += circumf + volume;
@@ -33,8 +32,7 @@ fn part2(input: &String) {
 }
 
 fn main() {
-    let input = include_str!("../input/input.txt");
-    let input = input.to_string();
+    let input = include_str!("../input/input.txt").to_string();
 
     part1(&input);
 

@@ -8,7 +8,7 @@ fn part1(input: &str) {
     let res = (1..containers.len())
         .map(|i| containers.iter().combinations(i))
         .flatten()
-        .filter(|combination| combination.iter().map(|j| *j).sum::<i32>() == VOLUME)
+        .filter(|combination| combination.iter().copied().sum::<i32>() == VOLUME)
         .count();
 
     println!("number of possible combinations: {}", res);
@@ -20,7 +20,7 @@ fn part2(input: &str) {
     let res = (1..containers.len())
         .map(|i| containers.iter().combinations(i))
         .flatten()
-        .filter(|combination| combination.iter().map(|j| *j).sum::<i32>() == VOLUME)
+        .filter(|combination| combination.iter().copied().sum::<i32>() == VOLUME)
         .map(|combination| combination.len())
         .fold((containers.len(), 0), |acc, len| match () {
             _ if len < acc.0 => (len, 1),

@@ -13,7 +13,7 @@ impl Grid {
         if four_corners {
             grid.turn_corners_on();
         }
-        return grid;
+        grid
     }
     fn count_neighbors(&self, i: usize, j: usize) -> usize {
         [
@@ -32,10 +32,10 @@ impl Grid {
     }
     fn animate(&mut self) {
         let mut next = Grid::new(self.0.len() - 2, false).0;
-        for i in 1..self.0.len() - 1 {
-            for j in 1..self.0.len() - 1 {
+        for (i, row) in next.iter_mut().enumerate().take(self.0.len() - 1).skip(1) {
+            for (j, cell) in row.iter_mut().enumerate().take(self.0.len() - 1).skip(1) {
                 let n = self.count_neighbors(i, j);
-                next[i][j] = n == 3 || (self.0[i][j] && n == 2);
+                *cell = n == 3 || (self.0[i][j] && n == 2);
             }
         }
         self.0 = next;
@@ -46,7 +46,7 @@ impl Grid {
     fn count_lights(&self) -> usize {
         self.0
             .iter()
-            .map(|row| row.into_iter())
+            .map(|row| row.iter())
             .flatten()
             .filter(|b| **b)
             .count()
@@ -71,13 +71,10 @@ impl FromStr for Grid {
         let mut grid = Grid::new(size, false);
         for (i, line) in s.lines().enumerate() {
             for (j, c) in line.chars().enumerate() {
-                grid.0[i + 1][j + 1] = match c {
-                    '#' => true,
-                    _ => false,
-                }
+                grid.0[i + 1][j + 1] = matches!(c, '#')
             }
         }
-        return Ok(grid);
+        Ok(grid)
     }
 }
 

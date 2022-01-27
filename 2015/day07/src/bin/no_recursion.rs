@@ -30,7 +30,7 @@ fn to_operand(token: &str) -> Operand {
 }
 
 fn parse_instr(line: &str) -> Instr {
-    let mut tokens = line.split(" ");
+    let mut tokens = line.split(' ');
 
     let first = tokens.next().unwrap();
     let second = tokens.next().unwrap();
@@ -93,23 +93,17 @@ fn to_dep<'a>(operand: &'a Operand) -> Option<&'a str> {
 
 fn get_deps<'a>(instr: &'a Instr<'a>) -> Vec<&'a str> {
     let (a, b) = match &instr.op {
-        Operation::Cons(a) => (to_dep(&a), None),
-        Operation::Not(a) => (to_dep(&a), None),
-        Operation::And(a, b) => (to_dep(&a), to_dep(&b)),
-        Operation::Or(a, b) => (to_dep(&a), to_dep(&b)),
-        Operation::Lshf(a, b) => (to_dep(&a), to_dep(&b)),
-        Operation::Rshf(a, b) => (to_dep(&a), to_dep(&b)),
+        Operation::Cons(a) => (to_dep(a), None),
+        Operation::Not(a) => (to_dep(a), None),
+        Operation::And(a, b) => (to_dep(a), to_dep(b)),
+        Operation::Or(a, b) => (to_dep(a), to_dep(b)),
+        Operation::Lshf(a, b) => (to_dep(a), to_dep(b)),
+        Operation::Rshf(a, b) => (to_dep(a), to_dep(b)),
     };
     let mut v = Vec::new();
-    match a {
-        Some(a) => v.push(a),
-        None => {}
-    };
-    match b {
-        Some(b) => v.push(b),
-        None => {}
-    };
-    return v;
+    if let Some(some_a) = a { v.push(some_a) };
+    if let Some(some_b) = b { v.push(some_b) };
+    v
 }
 
 fn sort_guide(guide: &mut Vec<Instr>) {
@@ -119,15 +113,13 @@ fn sort_guide(guide: &mut Vec<Instr>) {
             let instr = guide[k];
             let mut all_deps_present = true;
             for dep in get_deps(&instr) {
-                if let None = known_deps.get(dep) {
+                if known_deps.get(dep).is_none() {
                     all_deps_present = false
                 }
             }
             if all_deps_present {
                 known_deps.insert(instr.dest);
-                let old = guide[i];
-                guide[i] = guide[k];
-                guide[k] = old;
+                guide.swap(i, k);
                 break;
             }
         }
@@ -143,28 +135,28 @@ fn to_sig<'a>(circ: &HashMap<&'a str, u16>, operand: &'a Operand) -> u16 {
 
 fn eval_op<'a>(circ: &HashMap<&'a str, u16>, op: &Operation<'a>) -> u16 {
     match op {
-        Operation::Cons(a) => to_sig(circ, &a),
-        Operation::Not(a) => !to_sig(circ, &a),
-        Operation::And(a, b) => to_sig(circ, &a) & to_sig(circ, &b),
-        Operation::Or(a, b) => to_sig(circ, &a) | to_sig(circ, &b),
-        Operation::Lshf(a, b) => to_sig(circ, &a) << to_sig(circ, &b),
-        Operation::Rshf(a, b) => to_sig(circ, &a) >> to_sig(circ, &b),
+        Operation::Cons(a) => to_sig(circ, a),
+        Operation::Not(a) => !to_sig(circ, a),
+        Operation::And(a, b) => to_sig(circ, a) & to_sig(circ, b),
+        Operation::Or(a, b) => to_sig(circ, a) | to_sig(circ, b),
+        Operation::Lshf(a, b) => to_sig(circ, a) << to_sig(circ, b),
+        Operation::Rshf(a, b) => to_sig(circ, a) >> to_sig(circ, b),
     }
 }
 
-fn build_circuit<'a>(guide: &Vec<Instr<'a>>) -> HashMap<&'a str, u16> {
+fn build_circuit<'a>(guide: &[Instr<'a>]) -> HashMap<&'a str, u16> {
     let mut circuit = HashMap::with_capacity(guide.len());
     for instr in guide {
         let signal = eval_op(&circuit, &instr.op);
         circuit.insert(instr.dest, signal);
     }
-    return circuit;
+    circuit
 }
 
 fn part1(input: &str) {
-    let num_instructions = input.split("\n").count();
+    let num_instructions = input.split('\n').count();
     let mut guide: Vec<Instr> = Vec::with_capacity(num_instructions);
-    for line in input.split("\n") {
+    for line in input.split('\n') {
         let instr = parse_instr(line);
         guide.push(instr);
     }
@@ -175,7 +167,7 @@ fn part1(input: &str) {
     println!("signal to wire 'a': {}", wires.get("a").unwrap());
 }
 
-fn build_circuit_2<'a>(guide: &Vec<Instr<'a>>) -> HashMap<&'a str, u16> {
+fn build_circuit_2<'a>(guide: &[Instr<'a>]) -> HashMap<&'a str, u16> {
     let mut circuit = HashMap::with_capacity(guide.len());
     for instr in guide {
         let signal = eval_op(&circuit, &instr.op);
@@ -183,23 +175,23 @@ fn build_circuit_2<'a>(guide: &Vec<Instr<'a>>) -> HashMap<&'a str, u16> {
     }
     let sig_a = *circuit.get("a").unwrap();
     circuit = HashMap::with_capacity(guide.len());
-    let mut new_guide = guide.clone();
-    for i in 0..new_guide.len() {
-        if new_guide[i].dest == "b" {
-            new_guide[i].op = Operation::Cons(Operand::Sig(sig_a));
+    let mut new_guide = guide.to_owned();
+    for item in &mut new_guide {
+        if item.dest == "b" {
+            item.op = Operation::Cons(Operand::Sig(sig_a));
         }
     }
     for instr in new_guide {
         let signal = eval_op(&circuit, &instr.op);
         circuit.insert(instr.dest, signal);
     }
-    return circuit;
+    circuit
 }
 
 fn part2(input: &str) {
-    let num_instructions = input.split("\n").count();
+    let num_instructions = input.split('\n').count();
     let mut guide: Vec<Instr> = Vec::with_capacity(num_instructions);
-    for line in input.split("\n") {
+    for line in input.split('\n') {
         let instr = parse_instr(line);
         guide.push(instr);
     }
