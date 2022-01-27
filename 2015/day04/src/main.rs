@@ -11,7 +11,7 @@ fn collision(input: &str, prefix: &str) {
 }
 
 fn main() {
-    let input = "bgvyzdsv";
+    let input = include_str!("../input/input.txt");
     collision(input, "00000");
     collision(input, "000000");
 }

@@ -685,7 +685,7 @@ fn look_and_say(input: &str, n: i32) {
 fn main() {
     pt::generate_periodic_table();
 
-    let input = "1113122113";
+    let input = include_str!("../input/input.txt");
 
     look_and_say(input, 40);
 
