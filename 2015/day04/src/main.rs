@@ -1,4 +1,4 @@
-use md5;
+
 
 fn collision(input: &str, prefix: &str) {
     for i in 0.. {

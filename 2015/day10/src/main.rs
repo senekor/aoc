@@ -1,14 +1,15 @@
 use num::BigUint;
 
 mod pt {
+    #[allow(unused)]
     pub fn generate_periodic_table() {
-        let input = include_str!("../input/periodic_table.txt");
-        let mut lines = input.split("\n");
-        let elements: Vec<&str> = lines.next().unwrap().split(" ").collect();
+        let periodic_table = include_str!("../input/periodic_table.txt");
+        let mut lines = periodic_table.split('\n');
+        let elements: Vec<&str> = lines.next().unwrap().split(' ').collect();
         lines.next();
         let strings: Vec<&str> = lines.collect();
-        let input = include_str!("../input/to_next.txt");
-        let nexts: Vec<&str> = input.split("\n").collect();
+        let to_next = include_str!("../input/to_next.txt");
+        let nexts: Vec<&str> = to_next.split('\n').collect();
         let mut constants = String::from("");
         let mut str_to_nr_match_stmt = String::from("");
         let mut nr_to_len_match_stmt = String::from("");
@@ -617,9 +618,7 @@ fn parse_elems(only_elements: &str) -> Vec<BigUint> {
     let l = b.len();
     let mut splits: Vec<usize> = Vec::new();
     for i in 0..b.len() {
-        if b[i] == b'2' && rules::single_rule(b, l, i) {
-            splits.push(i + 1);
-        } else if b[i] != b'2' && rules::double_rule(b, l, i) {
+        if b[i] == b'2' && rules::single_rule(b, l, i) || b[i] != b'2' && rules::double_rule(b, l, i) {
             splits.push(i + 1);
         }
     }
@@ -632,27 +631,27 @@ fn parse_elems(only_elements: &str) -> Vec<BigUint> {
     arr.resize(94, BigUint::new(Vec::new()));
 
     // first split
-    arr[pt::str_to_nr(only_elements.get(0..splits[0]).unwrap())] += 1 as u32;
+    arr[pt::str_to_nr(only_elements.get(0..splits[0]).unwrap())] += 1_u32;
 
     for i in 0..(splits.len() - 1) {
         let s = only_elements.get(splits[i]..splits[i + 1]).unwrap();
-        arr[pt::str_to_nr(s)] += 1 as u32;
+        arr[pt::str_to_nr(s)] += 1_u32;
     }
     // last split
-    arr[pt::str_to_nr(only_elements.get(splits[splits.len() - 1]..).unwrap())] += 1 as u32;
+    arr[pt::str_to_nr(only_elements.get(splits[splits.len() - 1]..).unwrap())] += 1_u32;
 
-    return arr;
+    arr
 }
 
 fn smart_look_and_say(elems: Vec<BigUint>) -> Vec<BigUint> {
     let mut new_elems = Vec::new();
     new_elems.resize(94, BigUint::new(Vec::new()));
-    for i in 0..elems.len() {
+    for (i, elem) in elems.iter().enumerate() {
         for next_elem in pt::nr_to_next(i) {
-            new_elems[*next_elem] += &elems[i];
+            new_elems[*next_elem] += elem;
         }
     }
-    return new_elems;
+    new_elems
 }
 
 fn repeat_smart_las(elems: Vec<BigUint>, num_reps: i32) -> Vec<BigUint> {
@@ -660,15 +659,15 @@ fn repeat_smart_las(elems: Vec<BigUint>, num_reps: i32) -> Vec<BigUint> {
     for _ in 0..num_reps {
         new_elems = smart_look_and_say(new_elems);
     }
-    return new_elems;
+    new_elems
 }
 
-fn calc_len(elems: &Vec<BigUint>) -> BigUint {
+fn calc_len(elems: &[BigUint]) -> BigUint {
     let mut count = BigUint::new(Vec::new());
-    for i in 0..elems.len() {
-        count += &elems[i] * pt::nr_to_len(i);
+    for (i, elem) in elems.iter().enumerate() {
+        count += elem * pt::nr_to_len(i);
     }
-    return count;
+    count
 }
 
 fn look_and_say(input: &str, n: i32) {
@@ -676,14 +675,13 @@ fn look_and_say(input: &str, n: i32) {
     for _ in 0..24 {
         only_elements = look_and_say_once(only_elements)
     }
-    let elems = parse_elems(&only_elements);
-    let elems = repeat_smart_las(elems, n - 24);
+    let elems = repeat_smart_las(parse_elems(&only_elements), n - 24);
     let length = calc_len(&elems);
     println!("length of sequence after {} runs: {}", n, length);
 }
 
 fn main() {
-    pt::generate_periodic_table();
+    // pt::generate_periodic_table();
 
     let input = include_str!("../input/input.txt");
 

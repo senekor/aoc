@@ -34,7 +34,7 @@ fn to_operand(token: &str) -> Operand {
 }
 
 fn parse_instr(line: &str) -> Instr {
-    let mut tokens = line.split(" ");
+    let mut tokens = line.split(' ');
 
     let first = tokens.next().unwrap();
     let second = tokens.next().unwrap();
@@ -118,9 +118,9 @@ fn eval_wire<'a>(guide: &Guide<'a>, wires: &mut HashMap<&'a str, u16>, wire: &'a
 }
 
 fn part1(input: &str) {
-    let num_instructions = input.split("\n").count();
+    let num_instructions = input.split('\n').count();
     let mut guide = HashMap::with_capacity(num_instructions);
-    for line in input.split("\n") {
+    for line in input.split('\n') {
         let instr = parse_instr(line);
         guide.insert(instr.dest, instr.op);
     }
@@ -131,16 +131,16 @@ fn part1(input: &str) {
 }
 
 fn part2(input: &str) {
-    let num_instructions = input.split("\n").count();
+    let num_instructions = input.split('\n').count();
     let mut guide = HashMap::with_capacity(num_instructions);
-    for line in input.split("\n") {
+    for line in input.split('\n') {
         let instr = parse_instr(line);
         guide.insert(instr.dest, instr.op);
     }
 
     let mut wires = HashMap::with_capacity(num_instructions);
     let a_val = eval_wire(&guide, &mut wires, "a");
-    let mut wires = HashMap::with_capacity(num_instructions);
+    wires = HashMap::with_capacity(num_instructions);
     wires.insert("b", a_val);
     let a = eval_wire(&guide, &mut wires, "a");
     println!("signal to wire 'a': {}", a);

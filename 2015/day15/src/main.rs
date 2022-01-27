@@ -15,7 +15,7 @@ fn next_value(split: &mut str::Split<&str>) -> i32 {
     split
         .next()
         .unwrap()
-        .split(" ")
+        .split(' ')
         .nth(1)
         .unwrap()
         .parse()
@@ -40,9 +40,9 @@ impl FromStr for Ingredient {
     }
 }
 
-fn score(v: &Vec<(i32, Ingredient)>, dbg: bool) -> i32 {
+fn score(v: &[(i32, Ingredient)], dbg: bool) -> i32 {
     let multipl_ingredients = v
-        .into_iter()
+        .iter()
         .map(|(count, ingredient)| Ingredient {
             name: ingredient.name.clone(),
             capacity: count * ingredient.capacity,
@@ -88,7 +88,7 @@ fn score(v: &Vec<(i32, Ingredient)>, dbg: bool) -> i32 {
         dbg!(non_neg_ingredient);
         dbg!(res);
     }
-    return res;
+    res
 }
 
 struct MyIterator {
@@ -121,7 +121,7 @@ impl MyIterator {
 impl Iterator for MyIterator {
     type Item = Vec<i32>;
     fn next(&mut self) -> Option<Self::Item> {
-        if let None = self.rec_iter {
+        if self.rec_iter.is_none() {
             if self.counter > self.teaspoons {
                 return None;
             };
@@ -146,7 +146,7 @@ impl Iterator for MyIterator {
             }
         };
         smol.push(self.counter);
-        return Some(smol);
+        Some(smol)
     }
 }
 
@@ -155,7 +155,7 @@ fn test_score() {
     assert_eq!(
         62842880,
         score(
-            &vec![
+            &[
                 (
                     44,
                     Ingredient {
@@ -184,7 +184,7 @@ fn test_score() {
     )
 }
 
-fn calc_calories(v: &Vec<(i32, Ingredient)>) -> i32 {
+fn calc_calories(v: &[(i32, Ingredient)]) -> i32 {
     v.iter().map(|(count, ing)| count * ing.calories).sum()
 }
 

@@ -68,7 +68,7 @@ fn has_two_pairs(password: &str) -> bool {
             return false;
         }
     }
-    return false;
+    false
 }
 
 #[test]
@@ -82,11 +82,7 @@ fn test_has_two_pairs() {
 }
 
 fn is_valid(password: &str) -> bool {
-    if has_ambig_chars(password) {
-        return false;
-    } else if !has_three_straight(password) {
-        return false;
-    } else if !has_two_pairs(password) {
+    if has_ambig_chars(password) || !has_three_straight(password) || !has_two_pairs(password) {
         return false;
     }
     true
@@ -124,13 +120,13 @@ fn part1(input: &str) -> String {
         inc(&mut password);
     }
     println!("next valid password: {}", &password);
-    return password;
+    password
 }
 
 fn main() {
     let input = include_str!("../input/input.txt");
 
-    let next = part1(&input);
+    let next = part1(input);
 
     part1(&next);
 }

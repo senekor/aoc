@@ -2,8 +2,8 @@ use itertools::Itertools;
 use std::collections::HashMap;
 
 fn parse_line(line: &str) -> (&str, i32, &str) {
-    let line = &line[..line.len() - 1]; // drop period
-    let mut words = line.split(" ");
+    let line_no_period = &line[..line.len() - 1]; // drop period
+    let mut words = line_no_period.split(' ');
     let p1 = words.next().unwrap();
     let sign = words.nth(1).unwrap();
     let happy: i32 = words.next().unwrap().parse().unwrap();
@@ -19,7 +19,7 @@ fn parse_table(table: &'static str) -> HashMap<&'static str, HashMap<&str, i32>>
 
     for line in table.lines() {
         let (p1, h, p2) = parse_line(line);
-        let e = map.entry(p1).or_insert(HashMap::new());
+        let e = map.entry(p1).or_insert_with(HashMap::new);
         e.insert(p2, h);
     }
 

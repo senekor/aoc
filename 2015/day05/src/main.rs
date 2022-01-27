@@ -1,10 +1,10 @@
 fn is_nice_string(line: &str) -> bool {
     // rule 1: at least three vowels
-    let num_values = line.matches("a").count()
-        + line.matches("e").count()
-        + line.matches("i").count()
-        + line.matches("o").count()
-        + line.matches("u").count();
+    let num_values = line.matches('a').count()
+        + line.matches('e').count()
+        + line.matches('i').count()
+        + line.matches('o').count()
+        + line.matches('u').count();
     if num_values < 3 {
         return false;
     };
@@ -27,12 +27,12 @@ fn is_nice_string(line: &str) -> bool {
         return false;
     };
 
-    return true;
+    true
 }
 
 fn part1(input: &str) {
     let mut num_nice_lines = 0;
-    for line in input.split("\n") {
+    for line in input.split('\n') {
         if is_nice_string(line) {
             num_nice_lines += 1;
         }
@@ -67,12 +67,12 @@ fn is_nice_string_2(line: &str) -> bool {
         return false;
     };
 
-    return true;
+    true
 }
 
 fn part2(input: &str) {
     let mut num_nice_lines = 0;
-    for line in input.split("\n") {
+    for line in input.split('\n') {
         if is_nice_string_2(line) {
             num_nice_lines += 1;
         }
