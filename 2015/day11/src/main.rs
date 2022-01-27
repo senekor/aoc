@@ -128,7 +128,7 @@ fn part1(input: &str) -> String {
 }
 
 fn main() {
-    let input = "hepxcrrq";
+    let input = include_str!("../input/input.txt");
 
     let next = part1(&input);
 
