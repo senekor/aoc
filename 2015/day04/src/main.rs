@@ -1,5 +1,3 @@
-
-
 fn collision(input: &str, prefix: &str) {
     for i in 0.. {
         let hash = format!("{:x}", md5::compute(format!("{}{}", input, i)));

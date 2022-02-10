@@ -89,7 +89,11 @@ fn part2(input: &str) {
     positions_and_points.resize(fleet.len(), (0, 0));
     for current_time in 0..RACE_TIME {
         // calculate new positions
-        for (reindeer_idx, pos_and_point) in positions_and_points.iter_mut().enumerate().take(fleet.len()) {
+        for (reindeer_idx, pos_and_point) in positions_and_points
+            .iter_mut()
+            .enumerate()
+            .take(fleet.len())
+        {
             let reindeer = &fleet.0[reindeer_idx];
             let cycle_time = reindeer.fly_time + reindeer.rest_time;
             let time_of_current_cycle = current_time % cycle_time;

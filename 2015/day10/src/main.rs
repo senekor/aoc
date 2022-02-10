@@ -618,7 +618,9 @@ fn parse_elems(only_elements: &str) -> Vec<BigUint> {
     let l = b.len();
     let mut splits: Vec<usize> = Vec::new();
     for i in 0..b.len() {
-        if b[i] == b'2' && rules::single_rule(b, l, i) || b[i] != b'2' && rules::double_rule(b, l, i) {
+        if b[i] == b'2' && rules::single_rule(b, l, i)
+            || b[i] != b'2' && rules::double_rule(b, l, i)
+        {
             splits.push(i + 1);
         }
     }
