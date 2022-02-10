@@ -1,7 +1,7 @@
-use std::time::Instant;
-use std::fs;
 use std::cmp;
+use std::fs;
 use std::string::String;
+use std::time::Instant;
 
 fn count_both(input: &str) -> (usize, usize, usize) {
     let mut left_count = 0;
@@ -12,8 +12,8 @@ fn count_both(input: &str) -> (usize, usize, usize) {
         } else {
             right_count += 1
         }
-    };
-    (left_count, right_count, left_count-right_count)
+    }
+    (left_count, right_count, left_count - right_count)
 }
 
 fn count_once(input: &str) -> (usize, usize, usize) {
@@ -23,8 +23,8 @@ fn count_once(input: &str) -> (usize, usize, usize) {
             left_count += 1
         }
     }
-    let right_count = input.len()-left_count;
-    (left_count, right_count, left_count-right_count)
+    let right_count = input.len() - left_count;
+    (left_count, right_count, left_count - right_count)
 }
 
 const MASK: u8 = 0b0000_0001;
@@ -34,8 +34,8 @@ fn bitwise(input: &str) -> (usize, usize, usize) {
     for byte in input.bytes() {
         right_count += (byte & MASK) as usize;
     }
-    let left_count = input.len()-right_count;
-    (left_count, right_count, left_count-right_count)
+    let left_count = input.len() - right_count;
+    (left_count, right_count, left_count - right_count)
 }
 
 fn part1(input: &str) {
@@ -52,7 +52,10 @@ fn part1(input: &str) {
     let count_once_duration = before_count_once.elapsed();
 
     println!("count once:");
-    println!("left: {}, right: {}, floor: {}", up_once, down_once, floor_once);
+    println!(
+        "left: {}, right: {}, floor: {}",
+        up_once, down_once, floor_once
+    );
     println!("time elapsed in ns: {}", count_once_duration.as_micros());
 
     let before_bitwise = Instant::now();
@@ -74,10 +77,10 @@ fn part2(input: &str) {
             floor -= 1
         }
         if floor < 0 {
-            println!("{}", i+1);
+            println!("{}", i + 1);
             return;
         }
-    };
+    }
 }
 
 fn get_bucket_idx(bucket_size: i32, floor: i32) -> usize {
@@ -115,7 +118,7 @@ fn graph(input: &str) {
             }
         }
         floors.push(current_floor)
-    };
+    }
     let floor_range = cmp::max(max_floor, -min_floor) * 2;
     let bucket_size = floor_range / 100 + 1;
 
@@ -128,8 +131,12 @@ fn graph(input: &str) {
         output += line.as_str();
     }
     match fs::write("output/output.txt", output) {
-        Ok(_) => { println!("ok") }
-        Err(x) => { println!("err: {}", x) }
+        Ok(_) => {
+            println!("ok")
+        }
+        Err(x) => {
+            println!("err: {}", x)
+        }
     }
 }
 

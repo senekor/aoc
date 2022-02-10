@@ -101,8 +101,12 @@ fn get_deps<'a>(instr: &'a Instr<'a>) -> Vec<&'a str> {
         Operation::Rshf(a, b) => (to_dep(a), to_dep(b)),
     };
     let mut v = Vec::new();
-    if let Some(some_a) = a { v.push(some_a) };
-    if let Some(some_b) = b { v.push(some_b) };
+    if let Some(some_a) = a {
+        v.push(some_a)
+    };
+    if let Some(some_b) = b {
+        v.push(some_b)
+    };
     v
 }
 

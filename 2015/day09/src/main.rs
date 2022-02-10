@@ -33,7 +33,8 @@ fn constr_graph(input: &str) -> Graph {
 fn except_start<'a>(locations: Vec<&'a str>, start: &str) -> Vec<&'a str> {
     locations
         .iter()
-        .filter(|loc| **loc != start).copied()
+        .filter(|loc| **loc != start)
+        .copied()
         .collect()
 }
 
