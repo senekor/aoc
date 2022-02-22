@@ -8,7 +8,7 @@ pub enum Turn {
 
 pub struct Instruction {
     turn: Turn,
-    distance: i32,
+    distance: u32,
 }
 
 impl std::str::FromStr for Instruction {
@@ -30,7 +30,7 @@ impl Instruction {
         self.turn
     }
 
-    pub fn get_distance(&self) -> i32 {
+    pub fn get_distance(&self) -> u32 {
         self.distance
     }
 }
