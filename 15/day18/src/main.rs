@@ -46,8 +46,7 @@ impl Grid {
     fn count_lights(&self) -> usize {
         self.0
             .iter()
-            .map(|row| row.iter())
-            .flatten()
+            .flat_map(|row| row.iter())
             .filter(|b| **b)
             .count()
     }

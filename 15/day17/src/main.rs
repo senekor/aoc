@@ -6,8 +6,7 @@ fn part1(input: &str) {
     let containers: Vec<i32> = input.lines().map(|l| l.parse::<i32>().unwrap()).collect();
 
     let res = (1..containers.len())
-        .map(|i| containers.iter().combinations(i))
-        .flatten()
+        .flat_map(|i| containers.iter().combinations(i))
         .filter(|combination| combination.iter().copied().sum::<i32>() == VOLUME)
         .count();
 
@@ -18,8 +17,7 @@ fn part2(input: &str) {
     let containers: Vec<i32> = input.lines().map(|l| l.parse::<i32>().unwrap()).collect();
 
     let res = (1..containers.len())
-        .map(|i| containers.iter().combinations(i))
-        .flatten()
+        .flat_map(|i| containers.iter().combinations(i))
         .filter(|combination| combination.iter().copied().sum::<i32>() == VOLUME)
         .map(|combination| combination.len())
         .fold((containers.len(), 0), |acc, len| match () {
