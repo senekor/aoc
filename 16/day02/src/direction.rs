@@ -14,7 +14,7 @@ impl std::str::FromStr for Direction {
             "R" => Ok(Right),
             "U" => Ok(Up),
             "D" => Ok(Down),
-            _ => panic!("unexpected direction: '{}'", s),
+            _ => Err(format!("unexpected direction: '{}'", s)),
         }
     }
 }
