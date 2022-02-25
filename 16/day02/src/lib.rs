@@ -1,17 +1,23 @@
 mod direction;
-mod finger_pos;
-use finger_pos::FingerPosition;
+mod keypad;
 
-pub fn part1(input: &str) -> u32 {
+fn find_bathroom_code(input: &str, keypad_model: keypad::Model) -> u32 {
     let mut res = 0;
-    let mut finger_pos = FingerPosition::default();
+    let mut keypad = keypad::new(keypad_model);
     for line in input.lines() {
-        for substr in line.split("").filter(|s| !s.is_empty()) {
-            let direction = substr.parse().unwrap();
-            finger_pos.change_pos(direction);
-        }
-        res *= 10;
-        res += finger_pos.get_pos() as u32;
+        line.split("")
+            .filter_map(|s| s.parse().ok())
+            .for_each(|direction| keypad.change_pos(direction));
+        res *= keypad.get_base();
+        res += keypad.get_pos() as u32;
     }
     res
+}
+
+pub fn part1(input: &str) -> u32 {
+    find_bathroom_code(input, keypad::Model::Normal)
+}
+
+pub fn part2(input: &str) -> u32 {
+    find_bathroom_code(input, keypad::Model::Fancy)
 }
