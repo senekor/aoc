@@ -1,23 +1,15 @@
 name: rust
 on: [push]
 jobs:
-  check:
-    name: Check
+  fmt_clippy_test:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
-      - uses: actions-rs/cargo@v1
-        with:
-          command: check
+    strategy:
+      matrix:
+        year:
+          - 15
+          - 16
+          - 21
 
-  test:
-    name: Test Suite
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -25,43 +17,15 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
-      - uses: actions-rs/cargo@v1
-        with:
-          command: test
+          components: rustfmt, clippy
+      - run: cd ${{ matrix.year }} && cargo fmt --all -- --check
+      - run: > 
+          cd ${{ matrix.year }} &&
+          cargo clippy --all
+          --
+          -D warnings
+          -W clippy::shadow_reuse
+          -W clippy::shadow_same
+          -W clippy::shadow_unrelated
+      - run: cd ${{ matrix.year }} && cargo test
 
-  fmt:
-    name: Rustfmt
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
-      - run: rustup component add rustfmt
-      - uses: actions-rs/cargo@v1
-        with:
-          command: fmt
-          args: --all -- --check
-
-  clippy:
-    name: Clippy
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
-      - run: rustup component add clippy
-      - uses: actions-rs/cargo@v1
-        with:
-          command: clippy
-          args: >
-            --
-            -W clippy::shadow_reuse
-            -W clippy::shadow_same
-            -W clippy::shadow_unrelated
-            -D warnings
