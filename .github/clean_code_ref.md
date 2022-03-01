@@ -6,11 +6,26 @@ There is no hard rule here, structuring modules well requires some experience. S
 - As good starting point is to identify the few largest custom concepts / data types in you program and make a module for each one. Smaller types go into the module of the larger type they are most related to.
 
 # API documentation
-The public API of a library should always be well documented. For this purpose, put the following annotation at the very top of the file `lib.rs`: 
+The public API of a library should always be well documented. For this purpose, put the following annotation in the file `lib.rs`:
 ```
 #![deny(missing_docs)]
 ```
-With this, your program won't even compile if you forget to add documentation to any part of your library that is exposed to the public.
+With this, your program won't even compile if you forget to add documentation to any part of your library that is exposed to the public. In most cases, you will need to add general documentation for the entire crate as well as for each public function. The crate is annotated with `//!` comments and functions are annotated with `///` comments. An example for `lib.rs`:
+```
+//! This is documentation
+//! for the entire crate.
+//! Is uses double slashes and a bang.
+
+#![deny(missing_docs)]
+
+/// This is documentation for the public function foo.
+/// It uses triple slashes.
+pub fn foo() {}
+
+// The function bar is private and doesn't need to be documented.
+// Regular double slash comments can be used.
+fn bar() {}
+```
 
 # Naming conventions
 - function names:
