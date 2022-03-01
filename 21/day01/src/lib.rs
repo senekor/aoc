@@ -1,3 +1,7 @@
+fn parse_i32(s: &str) -> i32 {
+    s.parse::<i32>().unwrap()
+}
+
 pub fn lib_main() {
     let i = include_str!("input.txt");
     let mut s = i.split('\n');
@@ -5,7 +9,7 @@ pub fn lib_main() {
     let mut y = s.next().unwrap();
     let mut c = 0;
     loop {
-        if x.parse::<i32>().unwrap() < y.parse::<i32>().unwrap() {
+        if parse_i32(x) < parse_i32(y) {
             c += 1;
         }
         x = y;
@@ -23,8 +27,8 @@ pub fn lib_main() {
     let mut zz = s.next().unwrap();
     c = 0;
     loop {
-        if x.parse::<i32>().unwrap() + y.parse::<i32>().unwrap() + z.parse::<i32>().unwrap()
-            < y.parse::<i32>().unwrap() + z.parse::<i32>().unwrap() + zz.parse::<i32>().unwrap()
+        if parse_i32(x) + parse_i32(y) + parse_i32(z)
+            < parse_i32(y) + parse_i32(z) + parse_i32(zz)
         {
             c += 1;
         }
