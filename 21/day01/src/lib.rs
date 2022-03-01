@@ -7,41 +7,48 @@ fn compare_sums(a: &str, b: &str, c: &str, x: &str, y: &str, z: &str) -> bool {
 }
 
 pub fn lib_main() {
-    let i = include_str!("input.txt");
-    let mut s = i.split('\n');
-    let mut x = s.next().unwrap();
-    let mut y = s.next().unwrap();
-    let mut c = 0;
+    let input = include_str!("input.txt");
+    let mut input_split_on_lines = input.split('\n');
+    let mut first_measurement = input_split_on_lines.next().unwrap();
+    let mut second_measurement = input_split_on_lines.next().unwrap();
+    let mut count = 0;
     loop {
-        if parse_i32(x) < parse_i32(y) {
-            c += 1;
+        if parse_i32(first_measurement) < parse_i32(second_measurement) {
+            count += 1;
         }
-        x = y;
-        let n = s.next();
-        match n {
+        first_measurement = second_measurement;
+        let next_measurement = input_split_on_lines.next();
+        match next_measurement {
             None => break,
-            Some(some_n) => y = some_n,
+            Some(some_next_measurement) => second_measurement = some_next_measurement,
         }
     }
-    println!("{}", c);
-    s = i.split('\n');
-    x = s.next().unwrap();
-    y = s.next().unwrap();
-    let mut z = s.next().unwrap();
-    let mut zz = s.next().unwrap();
-    c = 0;
+    println!("{}", count);
+    input_split_on_lines = input.split('\n');
+    first_measurement = input_split_on_lines.next().unwrap();
+    second_measurement = input_split_on_lines.next().unwrap();
+    let mut third_measurement = input_split_on_lines.next().unwrap();
+    let mut forth_measurement = input_split_on_lines.next().unwrap();
+    count = 0;
     loop {
-        if compare_sums(x, y, z, y, z, zz) {
-            c += 1;
+        if compare_sums(
+            first_measurement,
+            second_measurement,
+            third_measurement,
+            second_measurement,
+            third_measurement,
+            forth_measurement,
+        ) {
+            count += 1;
         }
-        x = y;
-        y = z;
-        z = zz;
-        let n = s.next();
+        first_measurement = second_measurement;
+        second_measurement = third_measurement;
+        third_measurement = forth_measurement;
+        let n = input_split_on_lines.next();
         match n {
             None => break,
-            Some(some_n) => zz = some_n,
+            Some(some_next_measurement) => forth_measurement = some_next_measurement,
         }
     }
-    println!("{}", c)
+    println!("{}", count)
 }
