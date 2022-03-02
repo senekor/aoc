@@ -6,8 +6,7 @@ fn compare_sums(a: &str, b: &str, c: &str, x: &str, y: &str, z: &str) -> bool {
     parse_i32(a) + parse_i32(b) + parse_i32(c) < parse_i32(x) + parse_i32(y) + parse_i32(z)
 }
 
-pub fn lib_main() {
-    let input = include_str!("input.txt");
+pub fn lib_main(input: &str) -> (i32, i32) {
     let mut input_split_on_lines = input.split('\n');
     let mut first_measurement = input_split_on_lines.next().unwrap();
     let mut second_measurement = input_split_on_lines.next().unwrap();
@@ -23,13 +22,12 @@ pub fn lib_main() {
             Some(some_next_measurement) => second_measurement = some_next_measurement,
         }
     }
-    println!("{}", count);
     input_split_on_lines = input.split('\n');
     first_measurement = input_split_on_lines.next().unwrap();
     second_measurement = input_split_on_lines.next().unwrap();
     let mut third_measurement = input_split_on_lines.next().unwrap();
     let mut forth_measurement = input_split_on_lines.next().unwrap();
-    count = 0;
+    let mut count_part2 = 0;
     loop {
         if compare_sums(
             first_measurement,
@@ -39,7 +37,7 @@ pub fn lib_main() {
             third_measurement,
             forth_measurement,
         ) {
-            count += 1;
+            count_part2 += 1;
         }
         first_measurement = second_measurement;
         second_measurement = third_measurement;
@@ -50,5 +48,5 @@ pub fn lib_main() {
             Some(some_next_measurement) => forth_measurement = some_next_measurement,
         }
     }
-    println!("{}", count)
+    (count, count_part2)
 }
