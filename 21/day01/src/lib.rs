@@ -2,8 +2,8 @@ fn parse_i32(s: &str) -> i32 {
     s.parse::<i32>().unwrap()
 }
 
-fn compare_sums(a: &str, b: &str, c: &str, x: &str, y: &str, z: &str) -> bool {
-    parse_i32(a) + parse_i32(b) + parse_i32(c) < parse_i32(x) + parse_i32(y) + parse_i32(z)
+fn add_three(a: &str, b: &str, c: &str) -> i32 {
+    parse_i32(a) + parse_i32(b) + parse_i32(c)
 }
 
 pub fn lib_main(input: &str) -> (i32, i32) {
@@ -29,14 +29,9 @@ pub fn lib_main(input: &str) -> (i32, i32) {
     let mut forth_measurement = input_split_on_lines.next().unwrap();
     let mut count_part2 = 0;
     loop {
-        if compare_sums(
-            first_measurement,
-            second_measurement,
-            third_measurement,
-            second_measurement,
-            third_measurement,
-            forth_measurement,
-        ) {
+        if add_three(first_measurement, second_measurement, third_measurement)
+            < add_three(second_measurement, third_measurement, forth_measurement)
+        {
             count_part2 += 1;
         }
         first_measurement = second_measurement;
