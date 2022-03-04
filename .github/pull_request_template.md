@@ -7,7 +7,6 @@
 
 ### Project structure
 - [ ] Is the project split into a library and a binary?
-- [ ] Are there integration tests in the `tests` directory?
 - [ ] Is the library's [module structure appropriate](https://github.com/remlse/aoc/blob/main/.github/clean_code_ref.md#module-structure)?
 - [ ] Is the library's [API sufficiently documented](https://github.com/remlse/aoc/blob/main/.github/clean_code_ref.md#api-documentation)?
   - [ ] Is `#![deny(missing_docs)]` present?
@@ -22,6 +21,7 @@
 - [ ] Are [abstraction layers](https://github.com/remlse/aoc/blob/main/.github/clean_code_ref.md#abstraction-layers) cleanly separated?
 
 ### Test coverage
+- [ ] Are there integration tests in the `tests` directory?
 - [ ] Are there enough integration tests?
   - [ ] sample input (if applicable)
   - [ ] regular input
