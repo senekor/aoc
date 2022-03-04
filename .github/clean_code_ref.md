@@ -32,9 +32,12 @@ fn bar() {}
   - are _verbs_
   - convey whether the function is a _query_ or a _command_
   - contain no redundant information that is already contained in the function signature (parameter types & names, return type)
+- custom types:
+  - are used _liberally_ to make function signatures and variable declarations more intuitive.
 - variable names:
   - are _nouns_
-  - clearly convey what value the variable contains
+  - clearly convey what _value_ the variable contains
+  - does _NOT_ contain information about the _type_ of the value
   - important: If the value of a variable changes during the execution of the program (the variable is mutable), does the variable's name _always_ match its content?
 
 # Function size
