@@ -9,9 +9,7 @@ fn add_three(a: &str, b: &str, c: &str) -> i32 {
     parse_i32(a) + parse_i32(b) + parse_i32(c)
 }
 
-/// lib_main takes the input of the puzzle and returns the solutions for
-/// both part 1 and 2 as a tuple.
-pub fn lib_main(input: &str) -> (i32, i32) {
+fn part1(input: &str) -> i32 {
     let mut input_split_on_lines = input.split('\n');
     let mut first_measurement = input_split_on_lines.next().unwrap();
     let mut second_measurement = input_split_on_lines.next().unwrap();
@@ -27,17 +25,21 @@ pub fn lib_main(input: &str) -> (i32, i32) {
             Some(some_next_measurement) => second_measurement = some_next_measurement,
         }
     }
-    input_split_on_lines = input.split('\n');
-    first_measurement = input_split_on_lines.next().unwrap();
-    second_measurement = input_split_on_lines.next().unwrap();
+    count
+}
+
+fn part2(input: &str) -> i32 {
+    let mut input_split_on_lines = input.split('\n');
+    let mut first_measurement = input_split_on_lines.next().unwrap();
+    let mut second_measurement = input_split_on_lines.next().unwrap();
     let mut third_measurement = input_split_on_lines.next().unwrap();
     let mut forth_measurement = input_split_on_lines.next().unwrap();
-    let mut count_part2 = 0;
+    let mut count = 0;
     loop {
         if add_three(first_measurement, second_measurement, third_measurement)
             < add_three(second_measurement, third_measurement, forth_measurement)
         {
-            count_part2 += 1;
+            count += 1;
         }
         first_measurement = second_measurement;
         second_measurement = third_measurement;
@@ -48,5 +50,11 @@ pub fn lib_main(input: &str) -> (i32, i32) {
             Some(some_next_measurement) => forth_measurement = some_next_measurement,
         }
     }
-    (count, count_part2)
+    count
+}
+
+/// lib_main takes the input of the puzzle and returns the solutions for
+/// both part 1 and 2 as a tuple.
+pub fn lib_main(input: &str) -> (i32, i32) {
+    (part1(input), part2(input))
 }
