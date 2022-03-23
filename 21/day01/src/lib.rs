@@ -1,3 +1,6 @@
+#![deny(missing_docs)]
+//! This crate provides a solution for the advent of code puzzle: 2021, day 1.
+
 fn parse_i32(s: &str) -> i32 {
     s.parse::<i32>().unwrap()
 }
@@ -6,6 +9,8 @@ fn add_three(a: &str, b: &str, c: &str) -> i32 {
     parse_i32(a) + parse_i32(b) + parse_i32(c)
 }
 
+/// lib_main takes the input of the puzzle and returns the solutions for
+/// both part 1 and 2 as a tuple.
 pub fn lib_main(input: &str) -> (i32, i32) {
     let mut input_split_on_lines = input.split('\n');
     let mut first_measurement = input_split_on_lines.next().unwrap();
