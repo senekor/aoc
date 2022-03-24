@@ -85,3 +85,110 @@ impl Probes {
 pub fn part1(input: i32) -> i32 {
     Probes::new().find_min_dist(input)
 }
+
+struct SpiralGrid {
+    nums: Vec<i32>,
+    mem: (usize, usize, usize),
+    side_len: i32,
+}
+
+impl SpiralGrid {
+    fn new() -> SpiralGrid {
+        SpiralGrid {
+            nums: vec![1, 1, 2, 4, 5, 10, 11, 23, 25],
+            mem: (1, 8, 0),
+            side_len: 2,
+        }
+    }
+
+    fn add_first_of_layer(&mut self) {
+        self.side_len += 2;
+        self.mem.1 = self.nums.len() - 1;
+        self.nums
+            .push(self.nums[self.mem.0] + self.nums[self.mem.1]);
+    }
+
+    fn add_middle_of_side(&mut self) {
+        self.mem = (self.mem.0 + 1, self.mem.0, self.mem.1);
+        self.nums.push(
+            self.nums[self.mem.0]
+                + self.nums[self.mem.1]
+                + self.nums[self.mem.2]
+                + self.nums.last().unwrap(),
+        );
+    }
+
+    fn add_2nd_to_last_of_side(&mut self) {
+        self.nums
+            .push(self.nums[self.mem.0] + self.nums[self.mem.1] + self.nums.last().unwrap());
+    }
+
+    fn add_last_of_side(&mut self) {
+        self.nums
+            .push(self.nums[self.mem.0] + self.nums.last().unwrap());
+    }
+
+    fn add_first_side(&mut self) {
+        self.add_first_of_layer();
+        for _ in 1..self.side_len - 2 {
+            self.add_middle_of_side();
+        }
+        self.add_2nd_to_last_of_side();
+        self.add_last_of_side();
+    }
+
+    fn add_first_of_side(&mut self) {
+        self.mem = (self.mem.0 + 1, self.mem.0, self.nums.len() - 2);
+        self.nums.push(
+            self.nums[self.mem.0]
+                + self.nums[self.mem.1]
+                + self.nums[self.mem.2]
+                + self.nums.last().unwrap(),
+        );
+    }
+
+    fn add_middle_side(&mut self) {
+        self.add_first_of_side();
+        for _ in 1..self.side_len - 2 {
+            self.add_middle_of_side();
+        }
+        self.add_2nd_to_last_of_side();
+        self.add_last_of_side();
+    }
+
+    fn add_2nd_to_last_of_layer(&mut self) {
+        self.add_middle_of_side()
+    }
+
+    fn add_last_of_layer(&mut self) {
+        self.add_2nd_to_last_of_side();
+    }
+
+    fn add_last_side(&mut self) {
+        self.add_first_of_side();
+        for _ in 1..self.side_len - 2 {
+            self.add_middle_of_side();
+        }
+        self.add_2nd_to_last_of_layer();
+        self.add_last_of_layer();
+    }
+
+    fn add_layer(&mut self) {
+        self.add_first_side();
+        self.add_middle_side();
+        self.add_middle_side();
+        self.add_last_side();
+    }
+}
+
+pub fn part2(input: i32) -> i32 {
+    let mut grid = SpiralGrid::new();
+    while *grid.nums.last().unwrap() < input {
+        grid.add_layer();
+    }
+    let mut res = grid.nums.pop().unwrap();
+    while *grid.nums.last().unwrap() > input {
+        res = grid.nums.pop().unwrap();
+    }
+    res
+}
