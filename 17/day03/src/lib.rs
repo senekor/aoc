@@ -1,0 +1,87 @@
+struct Probe {
+    len: i32,
+    pos: i32,
+    incr: i32,
+}
+
+impl Probe {
+    fn left() -> Probe {
+        Probe {
+            len: 0,
+            pos: 1,
+            incr: 5,
+        }
+    }
+    fn right() -> Probe {
+        Probe {
+            len: 0,
+            pos: 1,
+            incr: 1,
+        }
+    }
+    fn up() -> Probe {
+        Probe {
+            len: 0,
+            pos: 1,
+            incr: 3,
+        }
+    }
+    fn down() -> Probe {
+        Probe {
+            len: 0,
+            pos: 1,
+            incr: 7,
+        }
+    }
+
+    fn extend(&mut self) {
+        self.len += 1;
+        self.pos += self.incr;
+        self.incr += 8;
+    }
+
+    fn approach(&mut self, target: i32) {
+        let mut next_pos = self.pos + self.incr;
+        while next_pos < target {
+            self.extend();
+            next_pos = self.pos + self.incr;
+        }
+        let current_dist = (self.pos - target).abs();
+        let next_dist = (next_pos - target).abs();
+        if next_dist < current_dist {
+            self.extend();
+        }
+    }
+
+    fn get_dist_to(&self, target: i32) -> i32 {
+        (self.pos - target).abs() + self.len
+    }
+}
+
+struct Probes([Probe; 4]);
+
+impl Probes {
+    fn new() -> Probes {
+        Probes([Probe::left(), Probe::right(), Probe::up(), Probe::down()])
+    }
+
+    fn approach(&mut self, target: i32) {
+        self.0[0].approach(target);
+        self.0[1].approach(target);
+        self.0[2].approach(target);
+        self.0[3].approach(target);
+    }
+
+    fn find_min_dist(&mut self, target: i32) -> i32 {
+        self.approach(target);
+        self.0
+            .iter()
+            .map(|probe| probe.get_dist_to(target))
+            .min()
+            .unwrap()
+    }
+}
+
+pub fn part1(input: i32) -> i32 {
+    Probes::new().find_min_dist(input)
+}
