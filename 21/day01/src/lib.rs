@@ -1,53 +1,36 @@
 #![deny(missing_docs)]
 //! This crate provides a solution for the advent of code puzzle: 2021, day 1.
 
-fn parse_i32(s: &str) -> i32 {
-    s.parse::<i32>().unwrap()
+fn add_three(a: i32, b: i32, c: i32) -> i32 {
+    (a) + (b) + (c)
 }
 
-fn add_three(a: &str, b: &str, c: &str) -> i32 {
-    parse_i32(a) + parse_i32(b) + parse_i32(c)
+fn parse_values_to_vector(input: &str) -> Vec<i32> {
+    let mut vector = Vec::new();
+    for unparsed_value in input.split('\n') {
+        let parsed_value = unparsed_value.parse::<i32>().unwrap();
+        vector.push(parsed_value);
+    }
+    vector
 }
 
 fn part1(input: &str) -> i32 {
-    let mut input_split_on_lines = input.split('\n');
-    let mut first_measurement = input_split_on_lines.next().unwrap();
-    let mut second_measurement = input_split_on_lines.next().unwrap();
+    let parsed_values = parse_values_to_vector(input);
     let mut count = 0;
-    loop {
-        if parse_i32(first_measurement) < parse_i32(second_measurement) {
+    for window in parsed_values.windows(2) {
+        if window[0] < window[1] {
             count += 1;
-        }
-        first_measurement = second_measurement;
-        let next_measurement = input_split_on_lines.next();
-        match next_measurement {
-            None => break,
-            Some(some_next_measurement) => second_measurement = some_next_measurement,
         }
     }
     count
 }
 
 fn part2(input: &str) -> i32 {
-    let mut input_split_on_lines = input.split('\n');
-    let mut first_measurement = input_split_on_lines.next().unwrap();
-    let mut second_measurement = input_split_on_lines.next().unwrap();
-    let mut third_measurement = input_split_on_lines.next().unwrap();
-    let mut forth_measurement = input_split_on_lines.next().unwrap();
+    let parsed_values = parse_values_to_vector(input);
     let mut count = 0;
-    loop {
-        if add_three(first_measurement, second_measurement, third_measurement)
-            < add_three(second_measurement, third_measurement, forth_measurement)
-        {
+    for window in parsed_values.windows(4) {
+        if add_three(window[0], window[1], window[2]) < add_three(window[1], window[2], window[3]) {
             count += 1;
-        }
-        first_measurement = second_measurement;
-        second_measurement = third_measurement;
-        third_measurement = forth_measurement;
-        let n = input_split_on_lines.next();
-        match n {
-            None => break,
-            Some(some_next_measurement) => forth_measurement = some_next_measurement,
         }
     }
     count
