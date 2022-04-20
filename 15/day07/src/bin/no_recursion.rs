@@ -110,7 +110,7 @@ fn get_deps<'a>(instr: &'a Instr<'a>) -> Vec<&'a str> {
     v
 }
 
-fn sort_guide(guide: &mut Vec<Instr>) {
+fn sort_guide(guide: &mut [Instr]) {
     let mut known_deps: HashSet<&str> = HashSet::new();
     for i in 0..guide.len() {
         for k in i..guide.len() {
