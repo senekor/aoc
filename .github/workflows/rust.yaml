@@ -6,6 +6,7 @@ jobs:
     strategy:
       matrix:
         year:
+          - utils
           - 15
           - 16
           - 17
