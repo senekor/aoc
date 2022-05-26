@@ -61,7 +61,7 @@ href="https://adventofcode.com/2016/day/25" difficulty="?">.</a
 href="https://adventofcode.com/2017/day/1"  difficulty="e">█</a><a
 href="https://adventofcode.com/2017/day/2"  difficulty="e">█</a><a
 href="https://adventofcode.com/2017/day/3"  difficulty="m">█</a><a
-href="https://adventofcode.com/2017/day/4"  difficulty="?">.</a><a
+href="https://adventofcode.com/2017/day/4"  difficulty="e">█</a><a
 href="https://adventofcode.com/2017/day/5"  difficulty="?">.</a><a
 href="https://adventofcode.com/2017/day/6"  difficulty="?">.</a><a
 href="https://adventofcode.com/2017/day/7"  difficulty="?">.</a><a
