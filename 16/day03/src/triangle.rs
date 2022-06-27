@@ -6,6 +6,12 @@ impl Triangle {
         Triangle(vals)
     }
 
+    pub fn from_tuple(t: (u32, u32, u32)) -> Triangle {
+        let mut vals = vec![t.0, t.1, t.2];
+        vals.sort_unstable();
+        Triangle(vals)
+    }
+
     pub fn is_possible(&self) -> bool {
         (self.0[0] + self.0[1]) > self.0[2]
     }
