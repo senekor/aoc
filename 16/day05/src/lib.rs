@@ -1,3 +1,5 @@
+use std::fmt::Write;
+
 pub fn part1(input: &str) -> String {
     let mut res = String::new();
     let mut i = 0;
@@ -5,13 +7,12 @@ pub fn part1(input: &str) -> String {
         i += 1;
         let hash = md5::compute(format!("{input}{i}"));
         if hash.starts_with(&[0; 2]) && hash[2] <= 0x0f {
-            res += &format!("{:x}", hash[2]);
+            write!(res, "{:x}", hash[2]).expect("failed to write");
             if res.len() >= 8 {
-                break;
+                return res;
             }
         }
     }
-    res
 }
 
 pub fn part2(input: &str) -> String {
