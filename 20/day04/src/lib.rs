@@ -1,36 +1,137 @@
-mod passport_field;
-use passport_field::{
-    BirthYear, CountryID, ExpirationYear, EyeColor, HairColor, Height, IssueYear, OptionalField,
-    PassportID,
-};
+use regex::Regex;
+
+#[derive(Debug, PartialEq, Eq, Clone)]
+pub enum PassportField {
+    Valid,
+    Invalid,
+    Missing,
+}
+pub use PassportField::*;
+
+impl Default for PassportField {
+    fn default() -> Self {
+        Missing
+    }
+}
+
+impl PassportField {
+    pub fn exists(&self) -> bool {
+        *self != Missing
+    }
+    pub fn is_valid(&self) -> bool {
+        *self == Valid
+    }
+}
+
+pub fn parse_birth_year(s: &str) -> PassportField {
+    match s.parse::<usize>() {
+        Ok(y) if s.len() == 4 && 1920 <= y && y <= 2002 => Valid,
+        _ => Invalid,
+    }
+}
+
+#[test]
+fn test_birth_year() {
+    assert_eq!(parse_birth_year("2002"), Valid);
+    assert_eq!(parse_birth_year("2003"), Invalid);
+}
+
+pub fn parse_issue_year(s: &str) -> PassportField {
+    match s.parse::<usize>() {
+        Ok(y) if s.len() == 4 && 2010 <= y && y <= 2020 => Valid,
+        _ => Invalid,
+    }
+}
+
+pub fn parse_expiration_year(s: &str) -> PassportField {
+    match s.parse::<usize>() {
+        Ok(y) if s.len() == 4 && 2020 <= y && y <= 2030 => Valid,
+        _ => Invalid,
+    }
+}
+
+pub fn parse_height(s: &str) -> PassportField {
+    if let Ok(h) = s.get(..s.len() - 2).unwrap_or("0").parse::<usize>() {
+        if (s.ends_with("cm") && 150 <= h && h <= 193) || (s.ends_with("in") && 59 <= h && h <= 76)
+        {
+            return Valid;
+        }
+    }
+    Invalid
+}
+
+#[test]
+fn test_height() {
+    assert_eq!(parse_height("60in"), Valid);
+    assert_eq!(parse_height("190cm"), Valid);
+    assert_eq!(parse_height("190in"), Invalid);
+    assert_eq!(parse_height("190"), Invalid);
+}
+
+lazy_static::lazy_static! {
+    static ref HC_REGEX: Regex = Regex::new(r"^#[0-9a-f]{6}$").unwrap();
+}
+
+pub fn parse_hair_color(s: &str) -> PassportField {
+    match HC_REGEX.is_match(s) {
+        true => Valid,
+        _ => Invalid,
+    }
+}
+
+#[test]
+fn test_hair_color() {
+    assert_eq!(parse_hair_color("#123abc"), Valid);
+    assert_eq!(parse_hair_color("#123abz"), Invalid);
+    assert_eq!(parse_hair_color("123abc"), Invalid);
+}
+
+pub fn parse_eye_color(s: &str) -> PassportField {
+    match s {
+        "amb" | "blu" | "brn" | "gry" | "grn" | "hzl" | "oth" => Valid,
+        _ => Invalid,
+    }
+}
+
+#[test]
+fn test_eye_color() {
+    assert_eq!(parse_eye_color("brn"), Valid);
+    assert_eq!(parse_eye_color("wat"), Invalid);
+}
+
+lazy_static::lazy_static! {
+    static ref PID_REGEX: Regex = Regex::new(r"^[0-9]{9}$").unwrap();
+}
+
+pub fn parse_passport_id(s: &str) -> PassportField {
+    match PID_REGEX.is_match(s) {
+        true => Valid,
+        _ => Invalid,
+    }
+}
+
+#[test]
+fn test_passport_id() {
+    assert_eq!(parse_passport_id("000000001"), Valid);
+    assert_eq!(parse_passport_id("0123456789"), Invalid);
+}
 
 #[derive(Debug, Default)]
-struct Passport {
-    birth_year: Option<BirthYear>,
-    issue_year: Option<IssueYear>,
-    expiration_year: Option<ExpirationYear>,
-    height: Option<Height>,
-    hair_color: Option<HairColor>,
-    eye_color: Option<EyeColor>,
-    passpor_id: Option<PassportID>,
-    coutry_id: Option<CountryID>,
-}
+struct Passport([PassportField; 7]);
 
 impl From<&str> for Passport {
     fn from(s: &str) -> Self {
         let mut res = Self::default();
         for field in s.split_whitespace() {
-            let (name, value) = field.split_once(':').unwrap();
-            match name {
-                "byr" => res.birth_year = Some(BirthYear::from(value)),
-                "iyr" => res.issue_year = Some(IssueYear::from(value)),
-                "eyr" => res.expiration_year = Some(ExpirationYear::from(value)),
-                "hgt" => res.height = Some(Height::from(value)),
-                "hcl" => res.hair_color = Some(HairColor::from(value)),
-                "ecl" => res.eye_color = Some(EyeColor::from(value)),
-                "pid" => res.passpor_id = Some(PassportID::from(value)),
-                "cid" => res.coutry_id = Some(CountryID::from(value)),
-                _ => panic!("unknown field name '{name}'"),
+            match field.split_once(':').unwrap() {
+                ("byr", v) => res.0[0] = parse_birth_year(v),
+                ("iyr", v) => res.0[1] = parse_issue_year(v),
+                ("eyr", v) => res.0[2] = parse_expiration_year(v),
+                ("hgt", v) => res.0[3] = parse_height(v),
+                ("hcl", v) => res.0[4] = parse_hair_color(v),
+                ("ecl", v) => res.0[5] = parse_eye_color(v),
+                ("pid", v) => res.0[6] = parse_passport_id(v),
+                _ => (),
             }
         }
         res
@@ -39,23 +140,11 @@ impl From<&str> for Passport {
 
 impl Passport {
     fn has_all_fields(&self) -> bool {
-        self.birth_year.is_some()
-            && self.issue_year.is_some()
-            && self.expiration_year.is_some()
-            && self.height.is_some()
-            && self.hair_color.is_some()
-            && self.eye_color.is_some()
-            && self.passpor_id.is_some()
+        self.0.iter().all(|pf| pf.exists())
     }
 
     fn is_valid(&self) -> bool {
-        self.birth_year.exists_and_is_valid()
-            && self.issue_year.exists_and_is_valid()
-            && self.expiration_year.exists_and_is_valid()
-            && self.height.exists_and_is_valid()
-            && self.hair_color.exists_and_is_valid()
-            && self.eye_color.exists_and_is_valid()
-            && self.passpor_id.exists_and_is_valid()
+        self.0.iter().all(|pf| pf.is_valid())
     }
 }
 
