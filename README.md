@@ -1,4 +1,5 @@
 # [Advent of Code](https://adventofcode.com)
+
 <pre>
                 1111111111222222
        1234567890123456789012345
@@ -143,7 +144,7 @@ href="https://adventofcode.com/2020/day/1"  difficulty="e">█</a><a
 href="https://adventofcode.com/2020/day/2"  difficulty="e">█</a><a
 href="https://adventofcode.com/2020/day/3"  difficulty="e">█</a><a
 href="https://adventofcode.com/2020/day/4"  difficulty="e">█</a><a
-href="https://adventofcode.com/2020/day/5"  difficulty="?">.</a><a
+href="https://adventofcode.com/2020/day/5"  difficulty="e">█</a><a
 href="https://adventofcode.com/2020/day/6"  difficulty="?">.</a><a
 href="https://adventofcode.com/2020/day/7"  difficulty="?">.</a><a
 href="https://adventofcode.com/2020/day/8"  difficulty="?">.</a><a
