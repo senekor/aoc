@@ -579,7 +579,7 @@ fn look_and_say_once(input: String) -> String {
             count = 1;
         }
     }
-    return format!("{}{}{}", res, count, digit);
+    format!("{res}{count}{digit}")
 }
 
 mod rules {

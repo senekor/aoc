@@ -25,7 +25,7 @@ impl PassportField {
 
 pub fn parse_birth_year(s: &str) -> PassportField {
     match s.parse::<usize>() {
-        Ok(y) if s.len() == 4 && 1920 <= y && y <= 2002 => Valid,
+        Ok(y) if s.len() == 4 && (1920..=2002).contains(&y) => Valid,
         _ => Invalid,
     }
 }
@@ -38,21 +38,22 @@ fn test_birth_year() {
 
 pub fn parse_issue_year(s: &str) -> PassportField {
     match s.parse::<usize>() {
-        Ok(y) if s.len() == 4 && 2010 <= y && y <= 2020 => Valid,
+        Ok(y) if s.len() == 4 && (2010..=2020).contains(&y) => Valid,
         _ => Invalid,
     }
 }
 
 pub fn parse_expiration_year(s: &str) -> PassportField {
     match s.parse::<usize>() {
-        Ok(y) if s.len() == 4 && 2020 <= y && y <= 2030 => Valid,
+        Ok(y) if s.len() == 4 && (2020..=2030).contains(&y) => Valid,
         _ => Invalid,
     }
 }
 
 pub fn parse_height(s: &str) -> PassportField {
     if let Ok(h) = s.get(..s.len() - 2).unwrap_or("0").parse::<usize>() {
-        if (s.ends_with("cm") && 150 <= h && h <= 193) || (s.ends_with("in") && 59 <= h && h <= 76)
+        if (s.ends_with("cm") && (150..=193).contains(&h))
+            || (s.ends_with("in") && (59..=76).contains(&h))
         {
             return Valid;
         }
