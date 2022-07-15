@@ -24,12 +24,5 @@ jobs:
           override: true
           components: rustfmt, clippy
       - run: cd ${{ matrix.year }} && cargo fmt --all -- --check
-      - run: > 
-          cd ${{ matrix.year }} &&
-          cargo clippy --all
-          --
-          -D warnings
-          -W clippy::shadow_reuse
-          -W clippy::shadow_same
-          -W clippy::shadow_unrelated
+      - run: cd ${{ matrix.year }} && cargo clippy --all
       - run: cd ${{ matrix.year }} && cargo test
