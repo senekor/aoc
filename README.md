@@ -27,7 +27,7 @@ href="https://adventofcode.com/2015/day/19" difficulty="?">.</a><a
 href="https://adventofcode.com/2015/day/20" difficulty="?">.</a><a
 href="https://adventofcode.com/2015/day/21" difficulty="?">.</a><a
 href="https://adventofcode.com/2015/day/22" difficulty="?">.</a><a
-href="https://adventofcode.com/2015/day/23" difficulty="?">.</a><a
+href="https://adventofcode.com/2015/day/23" difficulty="e">█</a><a
 href="https://adventofcode.com/2015/day/24" difficulty="?">.</a><a
 href="https://adventofcode.com/2015/day/25" difficulty="?">.</a
 > │
