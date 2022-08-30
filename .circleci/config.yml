@@ -1,0 +1,43 @@
+version: 2.1
+orbs:
+  rust: circleci/rust@1.6.0
+
+jobs:
+  format_lint_test:
+    parameters:
+      cache_version:
+        description: increment this to build a fresh cache
+        type: integer
+        default: 1
+    executor:
+      name: rust/default
+      tag: 1.63.0
+    resource_class: medium
+    steps:
+      - checkout:
+          path: /home/circleci/project
+      - restore_cache:
+          keys:
+            - 'cargo-<< parameters.cache_version >>-{{ checksum "Cargo.lock" }}'
+      - rust/format:
+          with_cache: false
+      - rust/clippy:
+          with_cache: false
+      - run:
+          name: Install nextest
+        # command: which cargo-nextest || curl -LsSf https://get.nexte.st/latest/linux | tar zxf - -C ${CARGO_HOME:-~/.cargo}/bin
+          command: curl -LsSf https://get.nexte.st/latest/linux | tar zxf - -C ${CARGO_HOME:-~/.cargo}/bin
+      - run:
+          name: Run nextest
+          command: cargo nextest run --final-status-level=slow
+      - save_cache:
+          key: 'cargo-<< parameters.cache_version >>-{{ checksum "Cargo.lock" }}'
+          paths:
+            - ~/.cargo
+            - ~/project/target
+
+workflows:
+  format_lint_test:
+    jobs:
+      - format_lint_test:
+          cache_version: 5
