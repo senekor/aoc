@@ -1,5 +1,5 @@
 [package]
-name = "utils"
+name = "aoc_15_11"
 version = "0.1.0"
 edition = "2021"
 
@@ -8,3 +8,6 @@ edition = "2021"
 [dependencies]
 itertools = "*"
 derive_more = "*"
+utils = { path = "../../utils" }
+regex = "1.5.4"
+lazy_static = "1.4.0"

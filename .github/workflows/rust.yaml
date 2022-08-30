@@ -1,28 +1,14 @@
 name: rust
 on: [push]
+
 jobs:
   fmt_clippy_test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        year:
-          - utils
-          - 15
-          - 16
-          - 17
-          - 18
-          - 19
-          - 20
-          - 21
-
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@stable
         with:
-          profile: minimal
-          toolchain: stable
-          override: true
           components: rustfmt, clippy
-      - run: cd ${{ matrix.year }} && cargo fmt --all -- --check
-      - run: cd ${{ matrix.year }} && cargo clippy --all
-      - run: cd ${{ matrix.year }} && cargo test
+      - run: cargo fmt --check
+      - run: cargo clippy
+      - run: cargo test
