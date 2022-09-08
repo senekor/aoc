@@ -40,4 +40,4 @@ workflows:
   format_lint_test:
     jobs:
       - format_lint_test:
-          cache_version: 5
+          cache_version: 6
