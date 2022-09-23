@@ -1,2 +1,11 @@
 [workspace]
-members = ["??/??"]
+members = ["??/??", "utils"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+
+[workspace.dependencies]
+itertools = "0.10"
+derive_more = "0.99"
+utils = { path = "utils" }
