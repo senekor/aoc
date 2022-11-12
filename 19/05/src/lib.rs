@@ -155,19 +155,11 @@ impl Program {
                     }
                 }
                 Instruction::LessThan { src_1, src_2, dest } => {
-                    self.data[dest] = if self.get_val(src_1) < self.get_val(src_2) {
-                        1
-                    } else {
-                        0
-                    };
+                    self.data[dest] = i32::from(self.get_val(src_1) < self.get_val(src_2));
                     self.instr_ptr += 4;
                 }
                 Instruction::Equals { src_1, src_2, dest } => {
-                    self.data[dest] = if self.get_val(src_1) == self.get_val(src_2) {
-                        1
-                    } else {
-                        0
-                    };
+                    self.data[dest] = i32::from(self.get_val(src_1) == self.get_val(src_2));
                     self.instr_ptr += 4;
                 }
                 Instruction::Stop => return output,

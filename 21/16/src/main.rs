@@ -154,27 +154,9 @@ fn execute_op(op: u8, packets: &[Packet]) -> usize {
             .unwrap(),
         2 => packets.iter().map(execute).min().unwrap(),
         3 => packets.iter().map(execute).max().unwrap(),
-        5 => {
-            if execute(&packets[0]) > execute(&packets[1]) {
-                1
-            } else {
-                0
-            }
-        }
-        6 => {
-            if execute(&packets[0]) < execute(&packets[1]) {
-                1
-            } else {
-                0
-            }
-        }
-        7 => {
-            if execute(&packets[0]) == execute(&packets[1]) {
-                1
-            } else {
-                0
-            }
-        }
+        5 => usize::from(execute(&packets[0]) > execute(&packets[1])),
+        6 => usize::from(execute(&packets[0]) < execute(&packets[1])),
+        7 => usize::from(execute(&packets[0]) == execute(&packets[1])),
         x => panic!("did not expect op: {}", x),
     }
 }

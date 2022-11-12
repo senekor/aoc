@@ -82,28 +82,28 @@ fn parse_sues(input: &str) -> Vec<Sue> {
 
 impl Sue {
     fn matches(&self, other: &Sue) -> bool {
-        (self.children == other.children || other.children == None)
-            && (self.cats == other.cats || other.cats == None)
-            && (self.samoyeds == other.samoyeds || other.samoyeds == None)
-            && (self.pomeranians == other.pomeranians || other.pomeranians == None)
-            && (self.akitas == other.akitas || other.akitas == None)
-            && (self.vizslas == other.vizslas || other.vizslas == None)
-            && (self.goldfish == other.goldfish || other.goldfish == None)
-            && (self.trees == other.trees || other.trees == None)
-            && (self.cars == other.cars || other.cars == None)
-            && (self.perfumes == other.perfumes || other.perfumes == None)
+        (self.children == other.children || other.children.is_none())
+            && (self.cats == other.cats || other.cats.is_none())
+            && (self.samoyeds == other.samoyeds || other.samoyeds.is_none())
+            && (self.pomeranians == other.pomeranians || other.pomeranians.is_none())
+            && (self.akitas == other.akitas || other.akitas.is_none())
+            && (self.vizslas == other.vizslas || other.vizslas.is_none())
+            && (self.goldfish == other.goldfish || other.goldfish.is_none())
+            && (self.trees == other.trees || other.trees.is_none())
+            && (self.cars == other.cars || other.cars.is_none())
+            && (self.perfumes == other.perfumes || other.perfumes.is_none())
     }
     fn matches2(&self, other: &Sue) -> bool {
-        (self.children == other.children || other.children == None)
-            && (self.cats < other.cats || other.cats == None)
-            && (self.samoyeds == other.samoyeds || other.samoyeds == None)
-            && (self.pomeranians > other.pomeranians || other.pomeranians == None)
-            && (self.akitas == other.akitas || other.akitas == None)
-            && (self.vizslas == other.vizslas || other.vizslas == None)
-            && (self.goldfish > other.goldfish || other.goldfish == None)
-            && (self.trees < other.trees || other.trees == None)
-            && (self.cars == other.cars || other.cars == None)
-            && (self.perfumes == other.perfumes || other.perfumes == None)
+        (self.children == other.children || other.children.is_none())
+            && (self.cats < other.cats || other.cats.is_none())
+            && (self.samoyeds == other.samoyeds || other.samoyeds.is_none())
+            && (self.pomeranians > other.pomeranians || other.pomeranians.is_none())
+            && (self.akitas == other.akitas || other.akitas.is_none())
+            && (self.vizslas == other.vizslas || other.vizslas.is_none())
+            && (self.goldfish > other.goldfish || other.goldfish.is_none())
+            && (self.trees < other.trees || other.trees.is_none())
+            && (self.cars == other.cars || other.cars.is_none())
+            && (self.perfumes == other.perfumes || other.perfumes.is_none())
     }
 }
 
