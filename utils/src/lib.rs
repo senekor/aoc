@@ -3,5 +3,7 @@
 //! Commonly used utils for aoc puzzles.
 //! Check out each module doc for more information.
 
-mod hash_count;
-pub use hash_count::*;
+pub mod hash_count;
+
+pub mod fail;
+pub mod output;
