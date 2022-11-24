@@ -1,5 +1,5 @@
 [workspace]
-members = ["??/??", "utils"]
+members = ["??/??"]
 
 [workspace.package]
 version = "0.1.0"
@@ -8,4 +8,4 @@ edition = "2021"
 [workspace.dependencies]
 itertools = "0.10"
 derive_more = "0.99"
-utils = { path = "utils" }
+utils = { git = "https://github.com/remlse/aoc-utils.git", package = "aoc_utils" }

@@ -15,712 +15,717 @@ dependencies = [
 name = "aoc_15_01"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_15_02"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_15_03"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_15_04"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
  "md5",
- "utils",
 ]
 
 [[package]]
 name = "aoc_15_05"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_15_06"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_15_07"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_15_08"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_15_09"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_15_10"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
  "num",
- "utils",
 ]
 
 [[package]]
 name = "aoc_15_11"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
  "lazy_static",
  "regex",
- "utils",
 ]
 
 [[package]]
 name = "aoc_15_12"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
  "json",
- "utils",
 ]
 
 [[package]]
 name = "aoc_15_13"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_15_14"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_15_15"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_15_16"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_15_17"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_15_18"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_15_23"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
  "strum",
- "utils",
 ]
 
 [[package]]
 name = "aoc_16_01"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_16_02"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_16_03"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_16_04"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_16_05"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
  "md5",
- "utils",
 ]
 
 [[package]]
 name = "aoc_16_06"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_16_07"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_16_08"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_16_09"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_16_10"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_17_01"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_17_02"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_17_03"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_17_04"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_17_05"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_17_06"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_18_01"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_18_02"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_18_03"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_18_05"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_19_01"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_19_02"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_19_03"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_19_04"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_19_05"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_20_01"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_20_02"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_20_03"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_20_04"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
  "lazy_static",
  "regex",
- "utils",
 ]
 
 [[package]]
 name = "aoc_20_05"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_20_06"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_20_07"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_20_08"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_20_09"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_20_10"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_01"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_02"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_03"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_04"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_05"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_06"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_07"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_08"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_09"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_10"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_11"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_12"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_13"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_14"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_15"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_16"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_17"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_18"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_19"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_20"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_21"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_22"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_24"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
 
 [[package]]
 name = "aoc_21_25"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "derive_more",
  "itertools",
- "utils",
 ]
+
+[[package]]
+name = "aoc_utils"
+version = "0.1.0"
+source = "git+https://github.com/remlse/aoc-utils.git#b758e5760e14fdd7951a673314e0b421b2ec5c4f"
 
 [[package]]
 name = "autocfg"
@@ -962,11 +967,3 @@ name = "unicode-ident"
 version = "1.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dcc811dc4066ac62f84f11307873c4850cb653bfa9b1719cee2bd2204a4bc5dd"
-
-[[package]]
-name = "utils"
-version = "0.1.0"
-dependencies = [
- "derive_more",
- "itertools",
-]
