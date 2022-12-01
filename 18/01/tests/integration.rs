@@ -2,7 +2,7 @@ use aoc_18_01::{part1, part2};
 
 #[test]
 fn test_part1_sample() {
-    let input = include_str!("../input/sample_input.txt");
+    let input = include_str!("../input/sample.txt");
     assert_eq!(part1(input), 3)
 }
 

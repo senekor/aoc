@@ -2,7 +2,7 @@ use aoc_18_02::{part1, part2};
 
 #[test]
 fn test_part1_sample() {
-    let input = include_str!("../input/sample_input.txt");
+    let input = include_str!("../input/sample.txt");
     assert_eq!(part1(input), 12);
 }
 
@@ -14,7 +14,7 @@ fn test_part1() {
 
 #[test]
 fn test_part2_sample() {
-    let input = include_str!("../input/sample_input_2.txt");
+    let input = include_str!("../input/sample_2.txt");
     assert_eq!(part2(input), "fgij");
 }
 

@@ -82,8 +82,8 @@ impl Probes {
     }
 }
 
-pub fn part1(input: i32) -> i32 {
-    Probes::new().find_min_dist(input)
+pub fn part1(input: &str) -> i32 {
+    Probes::new().find_min_dist(input.parse().unwrap())
 }
 
 struct SpiralGrid {
@@ -181,7 +181,8 @@ impl SpiralGrid {
     }
 }
 
-pub fn part2(input: i32) -> i32 {
+pub fn part2(input: &str) -> i32 {
+    let input = input.parse().unwrap();
     let mut grid = SpiralGrid::new();
     while *grid.nums.last().unwrap() < input {
         grid.add_layer();

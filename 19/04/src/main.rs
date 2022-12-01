@@ -1,7 +1,7 @@
 use aoc_19_04::{part1, part2};
 
 fn main() {
-    let input = "193651-649729";
+    let input = include_str!("../input/input.txt");
     println!("{}", part1(input));
     println!("{}", part2(input));
 }
