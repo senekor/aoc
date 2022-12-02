@@ -195,5 +195,32 @@ href="https://adventofcode.com/2021/day/23" difficulty="m">█</a><a
 href="https://adventofcode.com/2021/day/24" difficulty="x">█</a><a
 href="https://adventofcode.com/2021/day/25" difficulty="e">█</a
 > │
+2022 │ <a
+href="https://adventofcode.com/2022/day/1"  difficulty="e">█</a><a
+href="https://adventofcode.com/2022/day/2"  difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/3"  difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/4"  difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/5"  difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/6"  difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/7"  difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/8"  difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/9"  difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/10" difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/11" difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/12" difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/13" difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/14" difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/15" difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/16" difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/17" difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/18" difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/19" difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/20" difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/21" difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/22" difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/23" difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/24" difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/25" difficulty="?">.</a
+> │
      └───────────────────────────┘
 </pre>
