@@ -197,7 +197,7 @@ href="https://adventofcode.com/2021/day/25" difficulty="e">█</a
 > │
 2022 │ <a
 href="https://adventofcode.com/2022/day/1"  difficulty="e">█</a><a
-href="https://adventofcode.com/2022/day/2"  difficulty="?">.</a><a
+href="https://adventofcode.com/2022/day/2"  difficulty="e">█</a><a
 href="https://adventofcode.com/2022/day/3"  difficulty="?">.</a><a
 href="https://adventofcode.com/2022/day/4"  difficulty="?">.</a><a
 href="https://adventofcode.com/2022/day/5"  difficulty="?">.</a><a
