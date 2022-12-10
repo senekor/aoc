@@ -28,7 +28,17 @@ new year day:
         echo 'No session ID found. Add it to ".env" to automatically fetch inputs.'
     }
 
+# run puzzle solution
+[no-cd]
+run:
+    cargo run
+
+# run puzzle solution on sample input
+[no-cd]
+sample-run:
+    cargo run --example sample
+
 # run tests
+[no-cd]
 test:
-    cd {{ invocation_directory() }} && \
-    cargo nextest run  --final-status-level slow
+    cargo nextest run --final-status-level slow
