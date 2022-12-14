@@ -1,13 +1,13 @@
 use aoc_16_07::{part1, part2};
 
+static INPUT: &str = include_str!("../input/input.txt");
+
 #[test]
 fn test_part1() {
-    let input = include_str!("../input/input.txt");
-    assert_eq!(part1(input), 118);
+    assert_eq!(part1(INPUT), 118);
 }
 
 #[test]
-fn test_part2_remo() {
-    let input = include_str!("../input/input.txt");
-    assert_eq!(part2(input), 260);
+fn test_part2() {
+    assert_eq!(part2(INPUT), 260);
 }

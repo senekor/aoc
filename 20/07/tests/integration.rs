@@ -1,25 +1,25 @@
 use aoc_20_07::{part1, part2};
 
+static SAMPLE_1: &str = include_str!("../input/sample_1.txt");
+static SAMPLE_2: &str = include_str!("../input/sample_2.txt");
+static INPUT: &str = include_str!("../input/input.txt");
+
 #[test]
 fn test_part1_sample() {
-    let input = include_str!("../input/sample_1.txt");
-    assert_eq!(part1(input), 4);
+    assert_eq!(part1(SAMPLE_1), 4);
 }
 
 #[test]
 fn test_part1() {
-    let input = include_str!("../input/input.txt");
-    assert_eq!(part1(input), 179);
+    assert_eq!(part1(INPUT), 179);
 }
 
 #[test]
 fn test_part2_sample() {
-    let input = include_str!("../input/sample_2.txt");
-    assert_eq!(part2(input), 126);
+    assert_eq!(part2(SAMPLE_2), 126);
 }
 
 #[test]
 fn test_part2() {
-    let input = include_str!("../input/input.txt");
-    assert_eq!(part2(input), 18925);
+    assert_eq!(part2(INPUT), 18925);
 }

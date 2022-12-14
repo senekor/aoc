@@ -216,7 +216,7 @@ fn part2(input: &str) {
 /// The newer version uses recursion successfully, making the whole
 /// program much more readable and straight-forward.
 fn main() {
-    let input = include_str!("../../input/input.txt");
+    let input = include_str!("../input/input.txt");
 
     part1(input);
     part2(input);

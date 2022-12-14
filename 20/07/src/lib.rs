@@ -1,13 +1,13 @@
 use std::collections::{HashMap, HashSet};
 
 #[derive(Debug, PartialEq, Eq, Hash, Clone, Copy)]
-struct Bag(&'static str);
+struct Bag<'a>(&'a str);
 
 #[derive(Debug)]
-struct BagContent(Vec<(Bag, usize)>);
+struct BagContent<'a>(Vec<(Bag<'a>, usize)>);
 
-impl From<&'static str> for BagContent {
-    fn from(s: &'static str) -> Self {
+impl<'a> From<&'a str> for BagContent<'a> {
+    fn from(s: &'a str) -> Self {
         if s == "no other bags." {
             return BagContent(vec![]);
         }
@@ -24,10 +24,10 @@ impl From<&'static str> for BagContent {
 }
 
 #[derive(Debug)]
-struct BagRules(HashMap<Bag, BagContent>);
+struct BagRules<'a>(HashMap<Bag<'a>, BagContent<'a>>);
 
-impl From<&'static str> for BagRules {
-    fn from(s: &'static str) -> Self {
+impl<'a> From<&'a str> for BagRules<'a> {
+    fn from(s: &'a str) -> Self {
         BagRules(
             s.lines()
                 .map(|line| {
@@ -39,7 +39,7 @@ impl From<&'static str> for BagRules {
     }
 }
 
-pub fn part1(input: &'static str) -> usize {
+pub fn part1(input: &str) -> usize {
     let bag_rules = BagRules::from(input);
 
     let mut reachable = HashSet::new();
@@ -63,8 +63,12 @@ pub fn part1(input: &'static str) -> usize {
     reachable.len() - 1
 }
 
-impl Bag {
-    fn get_content_count(&self, rules: &BagRules, cache: &mut HashMap<Bag, usize>) -> usize {
+impl<'a> Bag<'a> {
+    fn get_content_count(
+        &'a self,
+        rules: &'a BagRules<'a>,
+        cache: &mut HashMap<Bag<'a>, usize>,
+    ) -> usize {
         if let Some(&res) = cache.get(self) {
             return res;
         }
@@ -81,7 +85,7 @@ impl Bag {
     }
 }
 
-pub fn part2(input: &'static str) -> usize {
+pub fn part2(input: &str) -> usize {
     let rules = BagRules::from(input);
     let mut cache = HashMap::new();
     Bag("shiny gold").get_content_count(&rules, &mut cache)

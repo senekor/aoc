@@ -28,15 +28,20 @@ new year day:
         echo 'No session ID found. Add it to ".env" to automatically fetch inputs.'
     }
 
-# run puzzle solution
+# run puzzle solution - specify input: 'just run sample_2'
 [no-cd]
-run:
-    cargo run
+run input="input":
+    @cargo run -q -- {{input}}
 
-# run puzzle solution on sample input
+# run on sample input - specify sample: 'just sample-run 2'
 [no-cd]
-sample-run:
-    cargo run --example sample
+sample-run nr="":
+    #!/usr/bin/env nu
+    if "{{nr}}" == "" {
+        cargo run -q -- sample
+    } else {
+        cargo run -q -- sample_{{nr}}
+    }
 
 # run tests
 [no-cd]

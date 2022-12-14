@@ -1,15 +1,16 @@
 use aoc_18_01::{part1, part2};
 
+static SAMPLE: &str = include_str!("../input/sample.txt");
+static INPUT: &str = include_str!("../input/input.txt");
+
 #[test]
 fn test_part1_sample() {
-    let input = include_str!("../input/sample.txt");
-    assert_eq!(part1(input), 3)
+    assert_eq!(part1(SAMPLE), 3);
 }
 
 #[test]
 fn test_part1() {
-    let input = include_str!("../input/input.txt");
-    assert_eq!(part1(input), 525)
+    assert_eq!(part1(INPUT), 525);
 }
 
 #[test]
@@ -23,6 +24,5 @@ fn test_part2_sample() {
 
 #[test]
 fn test_part2() {
-    let input = include_str!("../input/input.txt");
-    assert_eq!(part2(input), 75749)
+    assert_eq!(part2(INPUT), 75749);
 }

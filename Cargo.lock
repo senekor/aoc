@@ -770,7 +770,10 @@ dependencies = [
 [[package]]
 name = "aoc_utils"
 version = "0.1.0"
-source = "git+https://github.com/remlse/aoc-utils.git#b758e5760e14fdd7951a673314e0b421b2ec5c4f"
+source = "git+https://github.com/remlse/aoc-utils.git#4fd405c0f955be6b4b26b723a2a530aef39b15ec"
+dependencies = [
+ "num",
+]
 
 [[package]]
 name = "autocfg"

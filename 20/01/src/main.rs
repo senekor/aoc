@@ -1,3 +1,3 @@
 fn main() {
-    println!("Hello, world!");
+    utils::main!(aoc_20_01);
 }
