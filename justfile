@@ -15,8 +15,8 @@ new year day:
         --define year={{year}}
         --define day={{day}}
     )
-    
-    if 'SESSION_ID' in (env).name {
+
+    if 'SESSION_ID' in (env).name and $env.SESSION_ID != "REPLACE_ME" {
         (
             fetch
             -H ['Cookie' $'session=($env.SESSION_ID)']
