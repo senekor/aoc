@@ -58,7 +58,7 @@ fn walk(graph: &Graph, start: &str, locs: Vec<&str>, use_max: bool) -> i32 {
 
 pub fn part1(input: &str) -> i32 {
     let graph = constr_graph(input);
-    let locations: Vec<&str> = graph.iter().map(|(loc, _)| *loc).collect();
+    let locations: Vec<&str> = graph.keys().copied().collect();
     let mut min_dist = i32::MAX;
     for start in locations.clone() {
         let rem_locs = except_start(locations.clone(), start);
@@ -69,7 +69,7 @@ pub fn part1(input: &str) -> i32 {
 
 pub fn part2(input: &str) -> i32 {
     let graph = constr_graph(input);
-    let locations: Vec<&str> = graph.iter().map(|(loc, _)| *loc).collect();
+    let locations: Vec<&str> = graph.keys().copied().collect();
     let mut max_dist = i32::MIN;
     for start in locations.clone() {
         let rem_locs = except_start(locations.clone(), start);

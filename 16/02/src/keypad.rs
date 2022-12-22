@@ -22,7 +22,7 @@ use Model::*;
 
 pub fn new(model: Model) -> Box<dyn Keypad> {
     match model {
-        Normal => Box::new(NormalKeypad::default()),
-        Fancy => Box::new(FancyKeypad::default()),
+        Normal => Box::<NormalKeypad>::default(),
+        Fancy => Box::<FancyKeypad>::default(),
     }
 }
