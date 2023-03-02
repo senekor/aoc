@@ -1,7 +1,7 @@
 use std::collections::HashSet;
 
+use hashbag::HashBag;
 use itertools::Itertools;
-use utils::hash_count::HashCount;
 
 #[cfg(test)]
 mod test_is_valid_passphrase {
@@ -70,7 +70,7 @@ mod test_is_strong_passphrase {
 }
 
 fn are_anagrams(a: &str, b: &str) -> bool {
-    a.chars().collect::<HashCount<_>>() == b.chars().collect::<HashCount<_>>()
+    a.chars().collect::<HashBag<_>>() == b.chars().collect::<HashBag<_>>()
 }
 
 fn contains_anagrams(s: &str) -> bool {

@@ -8,5 +8,5 @@ edition.workspace = true
 [dependencies]
 itertools.workspace = true
 derive_more.workspace = true
-# utils.workspace = true
 utils.workspace = true
+hashbag = "0.1.10"
