@@ -73,11 +73,7 @@ fn test_parse_sue() {
 }
 
 fn parse_sues(input: &str) -> Vec<Sue> {
-    input
-        .lines()
-        .into_iter()
-        .map(|s| s.parse().unwrap())
-        .collect()
+    input.lines().map(|s| s.parse().unwrap()).collect()
 }
 
 impl Sue {

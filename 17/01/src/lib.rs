@@ -16,7 +16,6 @@ pub fn part2(input: &str) -> usize {
     let half_len = chars.len() / 2;
 
     (0..half_len)
-        .into_iter()
         .filter_map(|i| {
             if chars[i] == chars[i + half_len] {
                 Some(chars[i].to_string().parse::<usize>().unwrap())

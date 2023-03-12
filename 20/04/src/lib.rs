@@ -1,18 +1,13 @@
 use regex::Regex;
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone, Default)]
 pub enum PassportField {
     Valid,
     Invalid,
+    #[default]
     Missing,
 }
 pub use PassportField::*;
-
-impl Default for PassportField {
-    fn default() -> Self {
-        Missing
-    }
-}
 
 impl PassportField {
     pub fn exists(&self) -> bool {

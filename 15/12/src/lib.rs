@@ -10,9 +10,7 @@ trait Summable {
 
 impl Summable for Object {
     fn sum_all(&self) -> i64 {
-        self.iter()
-            .into_iter()
-            .fold(0, |acc, (_, jv)| acc + sum(jv))
+        self.iter().fold(0, |acc, (_, jv)| acc + sum(jv))
     }
 }
 
@@ -50,9 +48,7 @@ trait Summable2 {
 
 impl Summable2 for Object {
     fn sum_all2(&self) -> i64 {
-        self.iter()
-            .into_iter()
-            .fold(0, |acc, (_, jv)| acc + sum2(jv))
+        self.iter().fold(0, |acc, (_, jv)| acc + sum2(jv))
     }
 }
 
@@ -63,7 +59,7 @@ impl Summable2 for Vec<JsonValue> {
 }
 
 fn has_red(object: &Object) -> bool {
-    object.iter().into_iter().any(|(_, jv)| match jv {
+    object.iter().any(|(_, jv)| match jv {
         Short(s) => s.as_str() == "red",
         String(s) => s.as_str() == "red",
         _ => false,
