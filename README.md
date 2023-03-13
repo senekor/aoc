@@ -1,7 +1,5 @@
 # [Advent of Code](https://adventofcode.com)
 
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/remlse/aoc/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/remlse/aoc/tree/main)
-
 <pre>
                 1111111111222222
        1234567890123456789012345
