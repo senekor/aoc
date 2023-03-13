@@ -1,4 +1,6 @@
+#[derive(Default)]
 enum Direction {
+    #[default]
     North,
     East,
     South,
@@ -7,12 +9,6 @@ enum Direction {
 use std::collections::HashSet;
 
 use Direction::*;
-
-impl Default for Direction {
-    fn default() -> Self {
-        Direction::North
-    }
-}
 
 #[derive(Default, Hash, PartialEq, Eq, Clone, Copy)]
 struct Location {
