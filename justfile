@@ -5,28 +5,22 @@ set dotenv-load
 
 # scaffold a new puzzle
 new year day:
-    #!/usr/bin/env nu
-    (
-        cargo generate aoc
-        --git "https://github.com/remlse/cargo-templates"
-        --branch main
-        --init
-        --name whatever
-        --define year={{year}}
+    #!/bin/bash
+    cargo generate aoc \
+        --git "https://github.com/remlse/cargo-templates" \
+        --branch main \
+        --init \
+        --name whatever \
+        --define year={{year}} \
         --define day={{day}}
-    )
 
-    if 'SESSION_ID' in (env).name and $env.SESSION_ID != "REPLACE_ME" {
-        (
-            fetch
-            -H ['Cookie' $'session=($env.SESSION_ID)']
-            $'https://adventofcode.com/20{{year}}/day/({{day}} | into int)/input'
-
-        ) | str trim --right | save {{year}}/{{day}}/input/input.txt
-
-    } else {
-        echo 'No session ID found. Add it to ".env" to automatically fetch inputs.'
-    }
+    if [ "$SESSION_ID" != "REPLACE_ME" ] ; then
+        curl --header "Cookie: session=$SESSION_ID" \
+            "https://adventofcode.com/20{{year}}/day/$(printf %i {{day}})/input" \
+            > {{year}}/{{day}}/input/input.txt
+    else
+        echo "No session ID found. Add it to '.env' to automatically fetch inputs."
+    fi
 
 # run puzzle solution - specify input: 'just run sample_2'
 [no-cd]
@@ -36,12 +30,12 @@ run input="input":
 # run on sample input - specify sample: 'just sample-run 2'
 [no-cd]
 sample-run nr="":
-    #!/usr/bin/env nu
-    if "{{nr}}" == "" {
+    #!/bin/bash
+    if [ "{{nr}}" == "" ] ; then
         cargo run -q -- sample
-    } else {
+    else
         cargo run -q -- sample_{{nr}}
-    }
+    fi
 
 # run tests
 [no-cd]
