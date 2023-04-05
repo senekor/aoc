@@ -4,6 +4,7 @@ use aoc_22_09::{part1, part2};
 use utils::fail::Fail;
 
 static SAMPLE: &str = include_str!("../input/sample.txt");
+static SAMPLE_2: &str = include_str!("../input/sample_2.txt");
 static INPUT: &str = include_str!("../input/input.txt");
 
 #[test]
@@ -18,10 +19,15 @@ fn test_part1() {
 
 #[test]
 fn test_part2_sample() {
-    assert_eq!(part2(SAMPLE), Fail);
+    assert_eq!(part2(SAMPLE), 1);
+}
+
+#[test]
+fn test_part2_sample_2() {
+    assert_eq!(part2(SAMPLE_2), 36);
 }
 
 #[test]
 fn test_part2() {
-    assert_eq!(part2(INPUT), Fail);
+    assert_eq!(part2(INPUT), 2678);
 }
