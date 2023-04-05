@@ -806,6 +806,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "aoc_22_09"
+version = "0.1.0"
+dependencies = [
+ "aoc_utils",
+ "derive_more",
+ "itertools",
+]
+
+[[package]]
 name = "aoc_utils"
 version = "0.1.0"
 source = "git+https://github.com/remlse/aoc-utils.git#6abf30f896a5ca1cd384f5c86cc529e6ded58a13"
