@@ -1,20 +1,16 @@
-use std::vec::Vec;
+use nalgebra as na;
 
-struct Coordinates {
-    x: i32,
-    y: i32,
-}
+type Point = na::Point2<i32>;
+type Vector = na::Vector2<i32>;
+type InternalPoint = na::Point2<usize>;
 
-fn get_new_position(x: i32, y: i32, direction: char) -> Coordinates {
+fn get_new_position(point: Point, direction: char) -> Point {
     match direction {
-        '^' => Coordinates { x, y: y + 1 },
-        '>' => Coordinates { x: x + 1, y },
-        'v' => Coordinates { x, y: y - 1 },
-        '<' => Coordinates { x: x - 1, y },
-        _ => {
-            dbg!("invalid input!");
-            Coordinates { x: 0, y: 0 }
-        }
+        '^' => point + Vector::new(0, 1),
+        '>' => point + Vector::new(1, 0),
+        'v' => point + Vector::new(0, -1),
+        '<' => point + Vector::new(-1, 0),
+        d => panic!("invalid direction: {d}"),
     }
 }
 
@@ -26,17 +22,19 @@ fn get_internal_coord(a: i32) -> usize {
     }
 }
 
+fn get_internal_point(point: Point) -> InternalPoint {
+    InternalPoint::new(get_internal_coord(point.x), get_internal_coord(point.y))
+}
+
 pub fn part1(input: &str) -> usize {
-    let (mut x, mut y) = (0, 0);
+    let mut position = Point::new(0, 0);
     let mut visited_houses: Vec<Vec<bool>> = vec![vec![]];
     visited_houses[0].push(true);
     let mut count = 1;
     for direction in input.chars() {
-        let new_coord = get_new_position(x, y, direction);
-        x = new_coord.x;
-        y = new_coord.y;
-        let x_int: usize = get_internal_coord(x);
-        let y_int: usize = get_internal_coord(y);
+        position = get_new_position(position, direction);
+        let internal_pos = get_internal_point(position);
+        let (x_int, y_int) = (internal_pos.x, internal_pos.y);
         if x_int >= visited_houses.len() {
             visited_houses.resize(x_int + 1, Vec::new())
         };
@@ -51,17 +49,17 @@ pub fn part1(input: &str) -> usize {
     count
 }
 
-fn deliver_present(x: i32, y: i32, visited_houses: &mut Vec<Vec<bool>>) -> bool {
-    let x_usize: usize = get_internal_coord(x);
-    let y_usize: usize = get_internal_coord(y);
-    if x_usize >= visited_houses.len() {
-        visited_houses.resize(x_usize + 1, Vec::new())
+fn deliver_present(position: Point, visited_houses: &mut Vec<Vec<bool>>) -> bool {
+    let internal_pos = get_internal_point(position);
+    let (x_int, y_int) = (internal_pos.x, internal_pos.y);
+    if x_int >= visited_houses.len() {
+        visited_houses.resize(x_int + 1, Vec::new())
     };
-    if y_usize >= visited_houses[x_usize].len() {
-        visited_houses[x_usize].resize(y_usize + 1, false)
+    if y_int >= visited_houses[x_int].len() {
+        visited_houses[x_int].resize(y_int + 1, false)
     };
-    if !visited_houses[x_usize][y_usize] {
-        visited_houses[x_usize][y_usize] = true;
+    if !visited_houses[x_int][y_int] {
+        visited_houses[x_int][y_int] = true;
         true
     } else {
         false
@@ -74,8 +72,8 @@ enum Santa {
 }
 
 pub fn part2(input: &str) -> usize {
-    let (mut x_bio, mut y_bio) = (0, 0);
-    let (mut x_robo, mut y_robo) = (0, 0);
+    let mut pos_bio = Point::new(0, 0);
+    let mut pos_robo = Point::new(0, 0);
     let mut visited_houses: Vec<Vec<bool>> = vec![vec![]];
     visited_houses[0].push(true);
     let mut count = 1;
@@ -83,19 +81,15 @@ pub fn part2(input: &str) -> usize {
     for direction in input.chars() {
         match &mut santa {
             Santa::BioSanta => {
-                let new_coord = get_new_position(x_bio, y_bio, direction);
-                x_bio = new_coord.x;
-                y_bio = new_coord.y;
-                if deliver_present(x_bio, y_bio, &mut visited_houses) {
+                pos_bio = get_new_position(pos_bio, direction);
+                if deliver_present(pos_bio, &mut visited_houses) {
                     count += 1;
                 }
                 santa = Santa::RoboSanta;
             }
             Santa::RoboSanta => {
-                let new_coord = get_new_position(x_robo, y_robo, direction);
-                x_robo = new_coord.x;
-                y_robo = new_coord.y;
-                if deliver_present(x_robo, y_robo, &mut visited_houses) {
+                pos_robo = get_new_position(pos_robo, direction);
+                if deliver_present(pos_robo, &mut visited_houses) {
                     count += 1;
                 }
                 santa = Santa::BioSanta;
