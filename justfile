@@ -16,7 +16,7 @@ new year day:
 
     if [ "$SESSION_ID" != "REPLACE_ME" ] ; then
         curl --header "Cookie: session=$SESSION_ID" \
-            "https://adventofcode.com/20{{year}}/day/$(printf %i {{day}})/input" \
+            "https://adventofcode.com/20{{year}}/day/$(echo {{day}} | sd '^0' '')/input" \
             > {{year}}/{{day}}/input/input.txt
     else
         echo "No session ID found. Add it to '.env' to automatically fetch inputs."
