@@ -70,6 +70,29 @@ pub fn part1(input: &str) -> i32 {
     sig_str_sum
 }
 
-pub fn part2(input: &str) -> usize {
-    0
+fn display_screen(screen: [[bool; 40]; 6]) -> String {
+    screen
+        .into_iter()
+        .map(|row| {
+            std::iter::once('\n')
+                .chain(row.into_iter().map(|pixel| if pixel { '#' } else { '.' }))
+                .collect::<String>()
+        })
+        .collect::<String>()
+}
+
+pub fn part2(input: &str) -> String {
+    let mut screen = [[false; 40]; 6];
+    let mut cpu = Cpu::with_debugger(|cycle: usize, x: i32| {
+        let row = (cycle / 40) % 6;
+        let col = (cycle - 1) % 40;
+        let pos = col as i32;
+        if x - 1 <= pos && x + 1 >= pos {
+            screen[row][col] = true;
+        }
+    });
+    for instr in input.lines().map(Instruction::from) {
+        cpu.exec(instr);
+    }
+    display_screen(screen)
 }
