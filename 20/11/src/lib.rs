@@ -30,29 +30,21 @@ pub fn part1(input: &str) -> usize {
         .count()
 }
 
-type Seats<'a> = &'a [Vec<(char, Vec<(usize, usize)>)>];
+type Seats<'a> = &'a [Vec<(u8, Vec<(usize, usize)>)>];
 
 fn check_direction(
-    y_axis: i32,
-    x_axis: i32,
-    i: usize,
-    j: usize,
+    y_axis: isize,
+    x_axis: isize,
+    mut i: usize,
+    mut j: usize,
     seats: Seats,
 ) -> Option<(usize, usize)> {
-    let mut i = i as i32;
-    let mut j = j as i32;
     loop {
-        i += y_axis;
-        j += x_axis;
-        if i < 0 || i == seats.len() as i32 || j < 0 || j == seats[0].len() as i32 {
-            return None;
+        i = i.checked_add_signed(y_axis)?;
+        j = j.checked_add_signed(x_axis)?;
+        if seats.get(i)?.get(j)?.0 != b'.' {
+            return Some((i, j));
         }
-        let i = i as usize;
-        let j = j as usize;
-        if seats[i][j].0 == '.' {
-            continue;
-        }
-        return Some((i, j));
     }
 }
 
@@ -72,60 +64,43 @@ fn get_visible(seats: Seats, i: usize, j: usize) -> impl Iterator<Item = (usize,
 }
 
 fn visible_people(i: usize, j: usize, seats: Seats) -> usize {
-    let mut sum = 0;
-    for &(ii, jj) in &seats[i][j].1 {
-        if seats[ii][jj].0 == '#' {
-            sum += 1;
-        }
-    }
-    sum
-}
-
-fn will_be_filled2(i: usize, j: usize, seats: Seats) -> bool {
-    visible_people(i, j, seats) == 0
-}
-
-fn will_be_vacated2(i: usize, j: usize, seats: Seats) -> bool {
-    visible_people(i, j, seats) >= 5
+    seats[i][j]
+        .1
+        .iter()
+        .filter(|&&(ii, jj)| seats[ii][jj].0 == b'#')
+        .count()
 }
 
 pub fn part2(input: &str) -> usize {
     let mut seats: Vec<Vec<_>> = input
         .lines()
-        .map(|row| row.chars().map(|c| (c, vec![])).collect())
+        .map(|row| row.bytes().map(|b| (b, Vec::with_capacity(8))).collect())
         .collect();
-
     for i in 0..seats.len() {
         for j in 0..seats[0].len() {
             let iter = get_visible(&seats, i, j);
-            seats[i][j].1.extend(iter)
+            seats[i][j].1.extend(iter);
         }
     }
-    loop {
-        let mut changed = false;
-        let mut new_seats: Vec<Vec<_>> = seats.clone();
-        for i in 0..seats.len() {
-            for j in 0..seats[0].len() {
-                if seats[i][j].0 == 'L' && will_be_filled2(i, j, &seats) {
-                    new_seats[i][j].0 = '#';
-                    changed = true
-                } else if seats[i][j].0 == '#' && will_be_vacated2(i, j, &seats) {
-                    new_seats[i][j].0 = 'L';
-                    changed = true
-                }
-            }
+    let mut new_seats = seats.clone();
+    let mut changed = true;
+
+    while changed {
+        changed = false;
+        for (i, j) in (0..seats.len()).flat_map(|i| (0..seats[0].len()).map(move |j| (i, j))) {
+            let visible = visible_people(i, j, &seats);
+            new_seats[i][j].0 = match () {
+                _ if seats[i][j].0 == b'L' && visible == 0 => b'#',
+                _ if seats[i][j].0 == b'#' && visible >= 5 => b'L',
+                _ => seats[i][j].0,
+            };
+            changed = changed || new_seats[i][j].0 != seats[i][j].0;
         }
-        if !changed {
-            let mut sum = 0;
-            for row in seats {
-                for space in row {
-                    if space.0 == '#' {
-                        sum += 1;
-                    }
-                }
-            }
-            return sum;
-        }
-        seats = new_seats
+        std::mem::swap(&mut seats, &mut new_seats)
     }
+    seats
+        .into_iter()
+        .flat_map(|row| row.into_iter())
+        .filter(|space| space.0 == b'#')
+        .count()
 }
