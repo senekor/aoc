@@ -152,7 +152,7 @@ href="https://adventofcode.com/2020/day/9"  difficulty="e">█</a><a
 href="https://adventofcode.com/2020/day/10" difficulty="m">█</a> <a
 href="https://adventofcode.com/2020/day/11" difficulty="m">█</a><a
 href="https://adventofcode.com/2020/day/12" difficulty="e">█</a><a
-href="https://adventofcode.com/2020/day/13" difficulty="?">.</a><a
+href="https://adventofcode.com/2020/day/13" difficulty="m">█</a><a
 href="https://adventofcode.com/2020/day/14" difficulty="?">.</a><a
 href="https://adventofcode.com/2020/day/15" difficulty="?">.</a> <a
 href="https://adventofcode.com/2020/day/16" difficulty="?">.</a><a
