@@ -336,6 +336,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "aoc_17_07"
+version = "0.1.0"
+dependencies = [
+ "aoc_utils",
+ "derive_more",
+ "itertools",
+]
+
+[[package]]
 name = "aoc_18_01"
 version = "0.1.0"
 dependencies = [
