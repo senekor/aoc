@@ -14,12 +14,12 @@ new year day:
         --define year={{year}} \
         --define day={{day}}
 
-    if [ "$SESSION_ID" != "REPLACE_ME" ] ; then
-        curl --header "Cookie: session=$SESSION_ID" \
+    if [ -f dev/session_id ] ; then
+        curl --header "Cookie: session=$(cat dev/session_id)" \
             "https://adventofcode.com/20{{year}}/day/$(echo {{day}} | sd '^0' '')/input" \
             > {{year}}/{{day}}/input/input.txt
     else
-        echo "No session ID found. Add it to '.env' to automatically fetch inputs."
+        echo "No session ID found. Add it to a file 'dev/session_id' to automatically fetch inputs."
     fi
 
 # run puzzle solution - specify input: 'just run sample_2'
@@ -37,7 +37,9 @@ sample-run nr="":
         cargo run -q -- sample_{{nr}}
     fi
 
+set positional-arguments
+
 # run tests
 [no-cd]
-test:
-    cargo nextest run --final-status-level slow
+test *args='':
+    cargo nextest --config-file "$(git rev-parse --show-toplevel)/dev/nextest.toml" run --final-status-level slow $@
