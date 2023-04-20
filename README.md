@@ -1,6 +1,6 @@
 # [Advent of Code](https://adventofcode.com)
 
-<!-- genreate_readme_table_marker -->
+<!-- generate_readme_table_marker -->
 <pre>
         1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
      ┌────────────────────────────────────────────────────────────────────────────┐
@@ -222,4 +222,4 @@ href="https://adventofcode.com/2022/day/25">░░</a
 > │
      └────────────────────────────────────────────────────────────────────────────┘
 </pre>
-<!-- genreate_readme_table_marker -->
+<!-- generate_readme_table_marker -->
