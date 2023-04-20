@@ -10,7 +10,7 @@ use nom::{
     IResult,
 };
 
-use crate::{Item, Monkey, MonkeyID, Operation, Test};
+use crate::{Item, Monkey, MonkeyID, Operation};
 
 fn item(input: &str) -> IResult<&str, Item> {
     map(digit1, |digits: &str| digits.parse().unwrap())(input)
@@ -40,24 +40,9 @@ fn operator(input: &str) -> IResult<&str, Operator> {
     alt((plus, star))(input)
 }
 
-#[derive(Debug, Clone, Copy)]
-enum Operand {
-    Old,
-    Num(Item),
-}
-
-impl Operand {
-    fn with(self, old: Item) -> Item {
-        match self {
-            Operand::Old => old,
-            Operand::Num(w) => w,
-        }
-    }
-}
-
-fn operand(input: &str) -> IResult<&str, Operand> {
-    let old = map(tag("old"), |_| Operand::Old);
-    let num = map(digit1, |digits: &str| Operand::Num(digits.parse().unwrap()));
+fn operand(input: &str) -> IResult<&str, Option<Item>> {
+    let old = map(tag("old"), |_| None);
+    let num = map(digit1, |digits: &str| Some(digits.parse().unwrap()));
     alt((old, num))(input)
 }
 
@@ -65,7 +50,7 @@ fn operation(input: &str) -> IResult<&str, Operation> {
     let expression = separated_pair(operand, space0, separated_pair(operator, space0, operand));
     map(
         preceded(tag("Operation: new = "), expression),
-        |(left, (f, right))| Box::new(move |old| f(left.with(old), right.with(old))) as Operation,
+        |(left, (f, right))| (f, left, right),
     )(input)
 }
 
@@ -73,22 +58,18 @@ fn operation(input: &str) -> IResult<&str, Operation> {
 fn test_operation() {
     let (rest, op) = operation("Operation: new = old * 19").unwrap();
     assert_eq!(rest, "");
-    assert_eq!(op(2), 38);
-    assert_eq!(op(3), 57);
+    assert_eq!(op, (std::ops::Mul::mul as Operator, None, Some(19)));
 }
 
-fn divisible(input: &str) -> IResult<&str, Test> {
-    map(preceded(tag("Test: divisible by "), item), |divisor| {
-        Box::new(move |worry: Item| worry % divisor == 0) as Test
-    })(input)
+fn divisible(input: &str) -> IResult<&str, Item> {
+    preceded(tag("Test: divisible by "), item)(input)
 }
 
 #[test]
 fn test_divisible() {
-    let (rest, is_div) = divisible("Test: divisible by 17").unwrap();
+    let (rest, divisible) = divisible("Test: divisible by 17").unwrap();
     assert_eq!(rest, "");
-    assert!(!is_div(2));
-    assert!(is_div(17));
+    assert_eq!(divisible, 17);
 }
 
 fn monkey_id(input: &str) -> IResult<&str, MonkeyID> {
@@ -115,7 +96,7 @@ fn monkey(input: &str) -> IResult<&str, Monkey> {
         Monkey {
             items,
             operation,
-            divisible,
+            divisible_by: divisible,
             receiver_true,
             receiver_false,
         },
@@ -136,8 +117,11 @@ Monkey 4:
     .unwrap();
     assert_eq!(rest, "");
     assert_eq!(monkey.items, vec![55, 52, 67, 70, 69, 94, 90]);
-    assert_eq!((monkey.operation)(4), 16);
-    assert!((monkey.divisible)(17));
+    assert_eq!(
+        monkey.operation,
+        (std::ops::Mul::mul as Operator, None, None)
+    );
+    assert_eq!(monkey.divisible_by, 17);
 }
 
 pub(crate) fn monkeys(input: &str) -> IResult<&str, Vec<Monkey>> {
