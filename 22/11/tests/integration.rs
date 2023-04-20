@@ -18,10 +18,10 @@ fn test_part1() {
 
 #[test]
 fn test_part2_sample() {
-    assert_eq!(part2(SAMPLE), Fail);
+    assert_eq!(part2(SAMPLE), 2713310158);
 }
 
 #[test]
 fn test_part2() {
-    assert_eq!(part2(INPUT), Fail);
+    assert_eq!(part2(INPUT), 14399640002);
 }
