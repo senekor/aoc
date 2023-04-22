@@ -50,4 +50,4 @@ set positional-arguments
 # run tests
 [no-cd]
 test *args='':
-    cargo nextest --config-file "$(git rev-parse --show-toplevel)/dev/nextest.toml" run --final-status-level slow $@
+    @cargo nextest --config-file "$(git rev-parse --show-toplevel)/dev/nextest.toml" run --final-status-level slow $@
