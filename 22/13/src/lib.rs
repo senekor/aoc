@@ -22,8 +22,8 @@ impl Ord for Item {
         match (self, other) {
             (Int(i_1), Int(i_2)) => i_1.cmp(i_2),
             (List(l_1), List(l_2)) => l_1.cmp(l_2),
-            (Int(i), l) => List(vec![Int(*i)]).cmp(l),
-            (l, Int(i)) => l.cmp(&List(vec![Int(*i)])),
+            (Int(i), List(l)) => [Int(*i)].as_slice().cmp(l.as_slice()),
+            (List(l), Int(i)) => l.as_slice().cmp(&[Int(*i)]),
         }
     }
 }
@@ -32,9 +32,8 @@ type Packet = Vec<Item>;
 type PacketPair = [Packet; 2];
 
 pub fn part1(input: &str) -> usize {
-    parse::packets(input)
-        .unwrap()
-        .1
+    let (_, packet_pairs) = parse::packets(input).unwrap();
+    packet_pairs
         .into_iter()
         .enumerate()
         .filter(|(_, [p_1, p_2])| p_1 <= p_2)
