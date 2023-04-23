@@ -1,8 +1,6 @@
 _default:
     @just --list
 
-set dotenv-load
-
 # scaffold a new puzzle
 new year day:
     #!/bin/bash
