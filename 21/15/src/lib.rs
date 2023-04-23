@@ -1,4 +1,4 @@
-use itertools::*;
+use utils::Itertools;
 
 use std::{
     cell::RefCell,

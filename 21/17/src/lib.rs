@@ -1,5 +1,6 @@
-use itertools::*;
 use std::cmp::{max, min};
+
+use utils::Itertools;
 
 use crate::projectile::Projectile;
 

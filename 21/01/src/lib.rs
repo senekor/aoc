@@ -1,4 +1,4 @@
-use itertools::*;
+use utils::Itertools;
 
 struct ParsedInput(Vec<i32>);
 

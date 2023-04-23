@@ -1,6 +1,6 @@
 use std::collections::VecDeque;
 
-use itertools::Itertools;
+use utils::Itertools;
 
 mod parse;
 

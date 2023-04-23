@@ -3,10 +3,5 @@ name = "aoc_22_13"
 version.workspace = true
 edition.workspace = true
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
-itertools.workspace = true
-derive_more.workspace = true
 utils.workspace = true
-nom = "7.1.3"

@@ -1,4 +1,4 @@
-use itertools::*;
+use utils::Itertools;
 
 fn parse_input(input: &str) -> Vec<Vec<i32>> {
     input

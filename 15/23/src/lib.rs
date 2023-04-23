@@ -1,6 +1,5 @@
 use std::ops::{Index, IndexMut};
 
-use derive_more::IsVariant;
 use strum::EnumString;
 
 #[derive(Clone, Copy, EnumString)]
@@ -13,7 +12,7 @@ enum Register {
 
 type Offset = i32;
 
-#[derive(Clone, IsVariant)]
+#[derive(Clone)]
 enum Instruction {
     Half(Register),
     Triple(Register),
@@ -24,8 +23,9 @@ enum Instruction {
 }
 
 impl Instruction {
-    fn is_some_jump(&self) -> bool {
-        self.is_jump() || self.is_jump_if_even() || self.is_jump_if_one()
+    fn is_jump(&self) -> bool {
+        use Instruction::*;
+        matches!(self, Jump(_) | JumpIfEven(_, _) | JumpIfOne(_, _))
     }
 }
 
@@ -79,7 +79,7 @@ impl Computer {
             JumpIfEven(r, o) => self.jmp(o, self[r] % 2 == 0),
             JumpIfOne(r, o) => self.jmp(o, self[r] == 1),
         };
-        if !instr.is_some_jump() {
+        if !instr.is_jump() {
             self.instr_ptr += 1
         }
     }

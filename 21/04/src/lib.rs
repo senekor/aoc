@@ -1,4 +1,4 @@
-use itertools::*;
+use utils::Itertools;
 
 type Board = [[(i32, bool); 5]; 5];
 

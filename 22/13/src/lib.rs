@@ -1,4 +1,4 @@
-use itertools::Itertools;
+use utils::Itertools;
 
 mod parse;
 

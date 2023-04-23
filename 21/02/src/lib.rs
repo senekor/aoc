@@ -1,5 +1,5 @@
-use itertools::*;
 use std::{panic, str::FromStr};
+use utils::Itertools;
 
 #[derive(Clone, Debug)]
 enum Direction {

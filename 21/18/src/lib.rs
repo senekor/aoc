@@ -1,4 +1,4 @@
-use itertools::*;
+use utils::Itertools;
 
 #[derive(Debug, Clone)]
 enum Snail {

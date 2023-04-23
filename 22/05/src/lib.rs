@@ -1,4 +1,4 @@
-use itertools::Itertools;
+use utils::Itertools;
 
 struct Ship {
     crates: Vec<Vec<char>>,

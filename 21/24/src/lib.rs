@@ -1,7 +1,7 @@
 use std::cmp::{max, min};
 use std::str::FromStr;
 
-use itertools::*;
+use utils::Itertools;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 struct Block {
@@ -22,7 +22,7 @@ impl FromStr for Block {
                     .split(' ')
                     .nth(2)
                     .unwrap()
-                    .parse()
+                    .parse::<i32>()
                     .unwrap(),
             param2: lines
                 .next()

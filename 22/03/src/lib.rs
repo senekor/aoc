@@ -1,4 +1,4 @@
-use itertools::Itertools;
+use utils::Itertools;
 
 fn find_mistake(line: &str) -> u8 {
     line.as_bytes()

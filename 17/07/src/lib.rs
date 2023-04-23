@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use itertools::Itertools;
+use utils::Itertools;
 
 struct Program {
     name: String,

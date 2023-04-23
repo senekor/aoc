@@ -1,6 +1,6 @@
 use std::{collections::HashSet, str::FromStr};
 
-use itertools::*;
+use utils::Itertools;
 
 #[cfg(test)]
 mod test {

@@ -4,7 +4,7 @@ use std::{
     str::FromStr,
 };
 
-use itertools::*;
+use utils::Itertools;
 
 #[derive(Debug, PartialEq, Eq, Clone)]
 struct Seafloor {

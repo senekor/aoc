@@ -3,18 +3,6 @@
 version = 3
 
 [[package]]
-name = "ahash"
-version = "0.8.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2c99f64d1e06488f620f932677e24bc6e2897582980441ae90a671415bd7ec2f"
-dependencies = [
- "cfg-if",
- "getrandom",
- "once_cell",
- "version_check",
-]
-
-[[package]]
 name = "aho-corasick"
 version = "0.7.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -24,12 +12,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "anyhow"
+version = "1.0.70"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7de8ce5e0f9f8d88245311066a578d72b7af3e7088f32783804676302df237e4"
+
+[[package]]
 name = "aoc_15_01"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -37,8 +29,6 @@ name = "aoc_15_02"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -46,8 +36,6 @@ name = "aoc_15_03"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
  "nalgebra",
 ]
 
@@ -56,8 +44,6 @@ name = "aoc_15_04"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
  "md5",
 ]
 
@@ -66,8 +52,6 @@ name = "aoc_15_05"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -75,8 +59,6 @@ name = "aoc_15_06"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -84,8 +66,6 @@ name = "aoc_15_07"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -93,8 +73,6 @@ name = "aoc_15_08"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -102,8 +80,6 @@ name = "aoc_15_09"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -111,8 +87,6 @@ name = "aoc_15_10"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
  "num",
 ]
 
@@ -121,8 +95,6 @@ name = "aoc_15_11"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
  "lazy_static",
  "regex",
 ]
@@ -132,8 +104,6 @@ name = "aoc_15_12"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
  "json",
 ]
 
@@ -142,8 +112,6 @@ name = "aoc_15_13"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -151,8 +119,6 @@ name = "aoc_15_14"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -160,8 +126,6 @@ name = "aoc_15_15"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -169,8 +133,6 @@ name = "aoc_15_16"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -178,8 +140,6 @@ name = "aoc_15_17"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -187,8 +147,6 @@ name = "aoc_15_18"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -196,8 +154,6 @@ name = "aoc_15_23"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
  "strum",
 ]
 
@@ -206,8 +162,6 @@ name = "aoc_16_01"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -215,8 +169,6 @@ name = "aoc_16_02"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -224,8 +176,6 @@ name = "aoc_16_03"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -233,8 +183,6 @@ name = "aoc_16_04"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -242,8 +190,6 @@ name = "aoc_16_05"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
  "md5",
 ]
 
@@ -252,8 +198,6 @@ name = "aoc_16_06"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -261,8 +205,6 @@ name = "aoc_16_07"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -270,8 +212,6 @@ name = "aoc_16_08"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -279,8 +219,6 @@ name = "aoc_16_09"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -288,8 +226,6 @@ name = "aoc_16_10"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -297,8 +233,6 @@ name = "aoc_17_01"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -306,8 +240,6 @@ name = "aoc_17_02"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -315,8 +247,6 @@ name = "aoc_17_03"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -324,9 +254,7 @@ name = "aoc_17_04"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
  "hashbag",
- "itertools",
 ]
 
 [[package]]
@@ -334,8 +262,6 @@ name = "aoc_17_05"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -343,8 +269,6 @@ name = "aoc_17_06"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -352,8 +276,6 @@ name = "aoc_17_07"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -361,8 +283,6 @@ name = "aoc_17_08"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -370,8 +290,6 @@ name = "aoc_17_09"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -379,8 +297,6 @@ name = "aoc_17_10"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -388,8 +304,6 @@ name = "aoc_18_01"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -397,8 +311,6 @@ name = "aoc_18_02"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -406,8 +318,6 @@ name = "aoc_18_03"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -415,8 +325,6 @@ name = "aoc_18_04"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
  "time",
 ]
 
@@ -425,8 +333,6 @@ name = "aoc_18_05"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -434,8 +340,6 @@ name = "aoc_19_01"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -443,8 +347,6 @@ name = "aoc_19_02"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -452,8 +354,6 @@ name = "aoc_19_03"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -461,8 +361,6 @@ name = "aoc_19_04"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -470,8 +368,6 @@ name = "aoc_19_05"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -479,8 +375,6 @@ name = "aoc_20_01"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -488,8 +382,6 @@ name = "aoc_20_02"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -497,8 +389,6 @@ name = "aoc_20_03"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -506,8 +396,6 @@ name = "aoc_20_04"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
  "lazy_static",
  "regex",
 ]
@@ -517,8 +405,6 @@ name = "aoc_20_05"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -526,8 +412,6 @@ name = "aoc_20_06"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -535,8 +419,6 @@ name = "aoc_20_07"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -544,8 +426,6 @@ name = "aoc_20_08"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -553,8 +433,6 @@ name = "aoc_20_09"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -562,8 +440,6 @@ name = "aoc_20_10"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -571,8 +447,6 @@ name = "aoc_20_11"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -580,8 +454,6 @@ name = "aoc_20_12"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -589,8 +461,6 @@ name = "aoc_20_13"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -598,8 +468,6 @@ name = "aoc_20_14"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -607,8 +475,6 @@ name = "aoc_20_15"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -616,8 +482,6 @@ name = "aoc_20_16"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -625,8 +489,6 @@ name = "aoc_20_17"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -634,8 +496,6 @@ name = "aoc_20_18"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -643,8 +503,6 @@ name = "aoc_21_01"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -652,8 +510,6 @@ name = "aoc_21_02"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -661,8 +517,6 @@ name = "aoc_21_03"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -670,8 +524,6 @@ name = "aoc_21_04"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -679,8 +531,6 @@ name = "aoc_21_05"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -688,8 +538,6 @@ name = "aoc_21_06"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -697,8 +545,6 @@ name = "aoc_21_07"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -706,8 +552,6 @@ name = "aoc_21_08"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -715,8 +559,6 @@ name = "aoc_21_09"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -724,8 +566,6 @@ name = "aoc_21_10"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -733,8 +573,6 @@ name = "aoc_21_11"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -742,8 +580,6 @@ name = "aoc_21_12"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -751,8 +587,6 @@ name = "aoc_21_13"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -760,8 +594,6 @@ name = "aoc_21_14"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -769,8 +601,6 @@ name = "aoc_21_15"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -778,8 +608,6 @@ name = "aoc_21_16"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -787,8 +615,6 @@ name = "aoc_21_17"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -796,8 +622,6 @@ name = "aoc_21_18"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -805,8 +629,6 @@ name = "aoc_21_19"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -814,8 +636,6 @@ name = "aoc_21_20"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -823,8 +643,6 @@ name = "aoc_21_21"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -832,8 +650,6 @@ name = "aoc_21_22"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -841,8 +657,6 @@ name = "aoc_21_23"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -850,8 +664,6 @@ name = "aoc_21_24"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -859,8 +671,6 @@ name = "aoc_21_25"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -868,8 +678,6 @@ name = "aoc_22_01"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -877,8 +685,6 @@ name = "aoc_22_02"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -886,8 +692,6 @@ name = "aoc_22_03"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -895,8 +699,6 @@ name = "aoc_22_04"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -904,8 +706,6 @@ name = "aoc_22_05"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -913,8 +713,6 @@ name = "aoc_22_06"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -922,8 +720,6 @@ name = "aoc_22_07"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -931,8 +727,6 @@ name = "aoc_22_08"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -940,8 +734,6 @@ name = "aoc_22_09"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -949,8 +741,6 @@ name = "aoc_22_10"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
 ]
 
 [[package]]
@@ -958,9 +748,6 @@ name = "aoc_22_11"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
- "nom",
  "num",
 ]
 
@@ -969,9 +756,6 @@ name = "aoc_22_12"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "graph",
- "itertools",
  "pathfinding",
 ]
 
@@ -980,16 +764,16 @@ name = "aoc_22_13"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
- "derive_more",
- "itertools",
- "nom",
 ]
 
 [[package]]
 name = "aoc_utils"
 version = "0.1.0"
-source = "git+https://github.com/remlse/aoc-utils.git#6abf30f896a5ca1cd384f5c86cc529e6ded58a13"
+source = "git+https://github.com/remlse/aoc_utils#fc7f9230994cb6e58eb734c524c2ec6eb9b1a776"
 dependencies = [
+ "anyhow",
+ "itertools",
+ "nom",
  "num",
 ]
 
@@ -1003,52 +787,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "arrayvec"
-version = "0.7.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8da52d66c7071e2e3fa2a1e5c6d088fec47b593032b254f5e980de8ea54454d6"
-
-[[package]]
-name = "atoi"
-version = "2.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f28d99ec8bfea296261ca1af174f24225171fea9664ba9003cbebee704810528"
-dependencies = [
- "num-traits",
-]
-
-[[package]]
-name = "atomic"
-version = "0.5.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b88d82667eca772c4aa12f0f1348b3ae643424c8876448f3f7bd5787032e234c"
-dependencies = [
- "autocfg",
-]
-
-[[package]]
-name = "atomic_float"
-version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "62af46d040ba9df09edc6528dae9d8e49f5f3e82f55b7d2ec31a733c38dbc49d"
-
-[[package]]
 name = "autocfg"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d468802bab17cbc0cc575e9b053f41e72aa36bfa6b7f55e3529ffa43161b97fa"
-
-[[package]]
-name = "bitflags"
-version = "1.3.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
-
-[[package]]
-name = "byte-slice-cast"
-version = "1.2.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c3ac9f8b63eca6fd385229b3675f6cc0dc5c8a5c8a54a59d4f52ffd670d87b0c"
 
 [[package]]
 name = "bytemuck"
@@ -1057,180 +799,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "17febce684fd15d89027105661fec94afb475cb995fbc59d2865198446ba2eea"
 
 [[package]]
-name = "byteorder"
-version = "1.4.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "14c189c53d098945499cdfa7ecc63567cf3886b3332b312a5b4585d8d3a6a610"
-
-[[package]]
-name = "cfg-if"
-version = "1.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
-
-[[package]]
-name = "convert_case"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6245d59a3e82a7fc217c5828a6692dbc6dfb63a0c8c90495621f7b9d79704a0e"
-
-[[package]]
-name = "crossbeam-channel"
-version = "0.5.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a33c2bf77f2df06183c3aa30d1e96c0695a313d4f9c453cc3762a6db39f99200"
-dependencies = [
- "cfg-if",
- "crossbeam-utils",
-]
-
-[[package]]
-name = "crossbeam-deque"
-version = "0.8.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ce6fd6f855243022dcecf8702fef0c297d4338e226845fe067f6341ad9fa0cef"
-dependencies = [
- "cfg-if",
- "crossbeam-epoch",
- "crossbeam-utils",
-]
-
-[[package]]
-name = "crossbeam-epoch"
-version = "0.9.14"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "46bd5f3f85273295a9d14aedfb86f6aadbff6d8f5295c4a9edb08e819dcf5695"
-dependencies = [
- "autocfg",
- "cfg-if",
- "crossbeam-utils",
- "memoffset",
- "scopeguard",
-]
-
-[[package]]
-name = "crossbeam-utils"
-version = "0.8.15"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3c063cd8cc95f5c377ed0d4b49a4b21f632396ff690e8470c29b3359b346984b"
-dependencies = [
- "cfg-if",
-]
-
-[[package]]
-name = "dashmap"
-version = "5.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "907076dfda823b0b36d2a1bb5f90c96660a5bbcd7729e10727f07858f22c4edc"
-dependencies = [
- "cfg-if",
- "hashbrown",
- "lock_api",
- "once_cell",
- "parking_lot_core",
-]
-
-[[package]]
-name = "delegate"
-version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "082a24a9967533dc5d743c602157637116fc1b52806d694a5a45e6f32567fcdd"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 1.0.105",
-]
-
-[[package]]
-name = "derive_more"
-version = "0.99.17"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4fb810d30a7c1953f91334de7244731fc3f3c10d7fe163338a35b9f640960321"
-dependencies = [
- "convert_case",
- "proc-macro2",
- "quote",
- "rustc_version",
- "syn 1.0.105",
-]
-
-[[package]]
 name = "either"
 version = "1.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "90e5c1c8368803113bf0c9584fc495a58b86dc8a29edbf8fe877d21d9507e797"
 
 [[package]]
-name = "fast-float"
-version = "0.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "95765f67b4b18863968b4a1bd5bb576f732b29a4a28c7cd84c09fa3e2875f33c"
-
-[[package]]
 name = "fixedbitset"
 version = "0.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0ce7134b9999ecaf8bcd65542e436736ef32ddca1b3e06094cb6ec5755203b80"
-
-[[package]]
-name = "fxhash"
-version = "0.2.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c31b6d751ae2c7f11320402d34e41349dd1016f8d5d45e48c4312bc8625af50c"
-dependencies = [
- "byteorder",
-]
-
-[[package]]
-name = "getrandom"
-version = "0.2.9"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c85e1d9ab2eadba7e5040d4e09cbd6d072b76a557ad64e797c2cb9d4da21d7e4"
-dependencies = [
- "cfg-if",
- "libc",
- "wasi",
-]
-
-[[package]]
-name = "graph"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "624b74cfef1d6e08adeac4b5947e8e79351d0a53491b07b9d342701f8e58b68f"
-dependencies = [
- "ahash",
- "atomic_float",
- "graph_builder",
- "log",
- "nanorand",
- "num-format",
- "rayon",
-]
-
-[[package]]
-name = "graph_builder"
-version = "0.3.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3bed82dbbf80a458a59ee9fa11b03e194e1429b36d94da2ac59356b44eb926d7"
-dependencies = [
- "atoi",
- "atomic",
- "byte-slice-cast",
- "dashmap",
- "delegate",
- "fast-float",
- "fxhash",
- "linereader",
- "log",
- "memmap2",
- "num",
- "num-format",
- "num_cpus",
- "page_size",
- "parking_lot",
- "rayon",
- "thiserror",
-]
 
 [[package]]
 name = "hashbag"
@@ -1249,15 +827,6 @@ name = "heck"
 version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2540771e65fc8cb83cd6e8a237f70c319bd5c29f78ed1084ba5d50eeac86f7f9"
-
-[[package]]
-name = "hermit-abi"
-version = "0.2.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ee512640fe35acbfb4bb779db6f0d80704c2cacfa2e39b601ef3e3f47d1ae4c7"
-dependencies = [
- "libc",
-]
 
 [[package]]
 name = "indexmap"
@@ -1288,12 +857,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "itoa"
-version = "1.0.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "453ad9f582a441959e5f0d088b02ce04cfe8d51a8eaf077f12ac6d3e94164ca6"
-
-[[package]]
 name = "json"
 version = "0.12.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1306,44 +869,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 
 [[package]]
-name = "libc"
-version = "0.2.141"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3304a64d199bb964be99741b7a14d26972741915b3649639149b2479bb46f4b5"
-
-[[package]]
-name = "linereader"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d921fea6860357575519aca014c6e22470585accdd543b370c404a8a72d0dd1d"
-dependencies = [
- "memchr",
-]
-
-[[package]]
-name = "lock_api"
-version = "0.4.9"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "435011366fe56583b16cf956f9df0095b405b82d76425bc8981c0e22e60ec4df"
-dependencies = [
- "autocfg",
- "scopeguard",
-]
-
-[[package]]
-name = "log"
-version = "0.4.17"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "abb12e687cfb44aa40f41fc3978ef76448f9b6038cad6aef4259d3c095a2382e"
-dependencies = [
- "cfg-if",
-]
-
-[[package]]
 name = "matrixmultiply"
-version = "0.3.2"
+version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "add85d4dd35074e6fedc608f8c8f513a3548619a9024b751949ef0e8e45a4d84"
+checksum = "bb99c395ae250e1bf9133673f03ca9f97b7e71b705436bf8f089453445d1e9fe"
 dependencies = [
  "rawpointer",
 ]
@@ -1359,24 +888,6 @@ name = "memchr"
 version = "2.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2dffe52ecf27772e601905b7522cb4ef790d2cc203488bbd0e2fe85fcb74566d"
-
-[[package]]
-name = "memmap2"
-version = "0.5.10"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "83faa42c0a078c393f6b29d5db232d8be22776a891f8f56e5284faee4a20b327"
-dependencies = [
- "libc",
-]
-
-[[package]]
-name = "memoffset"
-version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d61c719bcfbcf5d62b3a09efa6088de8c54bc0bfcd3ea7ae39fcc186108b8de1"
-dependencies = [
- "autocfg",
-]
 
 [[package]]
 name = "minimal-lexical"
@@ -1410,12 +921,6 @@ dependencies = [
  "quote",
  "syn 1.0.105",
 ]
-
-[[package]]
-name = "nanorand"
-version = "0.7.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6a51313c5820b0b02bd422f4b44776fbf47961755c74ce64afc73bfad10226c3"
 
 [[package]]
 name = "nom"
@@ -1462,16 +967,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "num-format"
-version = "0.4.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a652d9771a63711fd3c3deb670acfbe5c30a4072e664d7a3bf5a9e1056ac72c3"
-dependencies = [
- "arrayvec",
- "itoa",
-]
-
-[[package]]
 name = "num-integer"
 version = "0.1.45"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1511,55 +1006,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "578ede34cf02f8924ab9447f50c28075b4d3e5b269972345e7e0372b38c6cdcd"
 dependencies = [
  "autocfg",
-]
-
-[[package]]
-name = "num_cpus"
-version = "1.15.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0fac9e2da13b5eb447a6ce3d392f23a29d8694bff781bf03a16cd9ac8697593b"
-dependencies = [
- "hermit-abi",
- "libc",
-]
-
-[[package]]
-name = "once_cell"
-version = "1.17.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b7e5500299e16ebb147ae15a00a942af264cf3688f47923b8fc2cd5858f23ad3"
-
-[[package]]
-name = "page_size"
-version = "0.4.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "eebde548fbbf1ea81a99b128872779c437752fb99f217c45245e1a61dcd9edcd"
-dependencies = [
- "libc",
- "winapi",
-]
-
-[[package]]
-name = "parking_lot"
-version = "0.12.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3742b2c103b9f06bc9fff0a37ff4912935851bee6d36f3c02bcc755bcfec228f"
-dependencies = [
- "lock_api",
- "parking_lot_core",
-]
-
-[[package]]
-name = "parking_lot_core"
-version = "0.9.7"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9069cbb9f99e3a5083476ccb29ceb1de18b9118cafa53e90c9551235de2b9521"
-dependencies = [
- "cfg-if",
- "libc",
- "redox_syscall",
- "smallvec",
- "windows-sys",
 ]
 
 [[package]]
@@ -1607,37 +1053,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "60a357793950651c4ed0f3f52338f53b2f809f32d83a07f72909fa13e4c6c1e3"
 
 [[package]]
-name = "rayon"
-version = "1.7.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1d2df5196e37bcc87abebc0053e20787d73847bb33134a69841207dd0a47f03b"
-dependencies = [
- "either",
- "rayon-core",
-]
-
-[[package]]
-name = "rayon-core"
-version = "1.11.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4b8f95bd6966f5c87776639160a66bd8ab9895d9d4ab01ddba9fc60661aebe8d"
-dependencies = [
- "crossbeam-channel",
- "crossbeam-deque",
- "crossbeam-utils",
- "num_cpus",
-]
-
-[[package]]
-name = "redox_syscall"
-version = "0.2.16"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fb5a58c1855b4b6819d59012155603f0b22ad30cad752600aadfcb695265519a"
-dependencies = [
- "bitflags",
-]
-
-[[package]]
 name = "regex"
 version = "1.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1661,15 +1076,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "08d43f7aa6b08d49f382cde6a7982047c3426db949b1424bc4b7ec9ae12c6ce2"
 
 [[package]]
-name = "rustc_version"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bfa0f585226d2e68097d4f95d113b15b83a82e819ab25717ec0590d9584ef366"
-dependencies = [
- "semver",
-]
-
-[[package]]
 name = "rustversion"
 version = "1.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1685,18 +1091,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "scopeguard"
-version = "1.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d29ab0c6d3fc0ee92fe66e2d99f700eab17a8d57d1c1d3b748380fb20baa78cd"
-
-[[package]]
-name = "semver"
-version = "1.0.14"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e25dfac463d778e353db5be2449d1cce89bd6fd23c9f1ea21310ce6e5a1b29c4"
-
-[[package]]
 name = "serde"
 version = "1.0.159"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1704,9 +1098,9 @@ checksum = "3c04e8343c3daeec41f58990b9d77068df31209f2af111e059e9fe9646693065"
 
 [[package]]
 name = "simba"
-version = "0.8.0"
+version = "0.8.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "50582927ed6f77e4ac020c057f37a268fc6aebc29225050365aacbb9deeeddc4"
+checksum = "061507c94fc6ab4ba1c9a0305018408e312e17c041eb63bef8aa726fa33aceae"
 dependencies = [
  "approx",
  "num-complex",
@@ -1714,12 +1108,6 @@ dependencies = [
  "paste",
  "wide",
 ]
-
-[[package]]
-name = "smallvec"
-version = "1.10.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a507befe795404456341dfab10cef66ead4c041f62b8b11bbb92bffe5d0953e0"
 
 [[package]]
 name = "strum"
@@ -1814,18 +1202,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6ceab39d59e4c9499d4e5a8ee0e2735b891bb7308ac83dfb4e80cad195c9f6f3"
 
 [[package]]
-name = "version_check"
-version = "0.9.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "49874b5167b65d7193b8aba1567f5c7d93d001cafc34600cee003eda787e483f"
-
-[[package]]
-name = "wasi"
-version = "0.11.0+wasi-snapshot-preview1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9c8d87e72b64a3b4db28d11ce29237c246188f4f51057d65a7eab63b7987e423"
-
-[[package]]
 name = "wide"
 version = "0.7.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1834,91 +1210,3 @@ dependencies = [
  "bytemuck",
  "safe_arch",
 ]
-
-[[package]]
-name = "winapi"
-version = "0.3.9"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5c839a674fcd7a98952e593242ea400abe93992746761e38641405d28b00f419"
-dependencies = [
- "winapi-i686-pc-windows-gnu",
- "winapi-x86_64-pc-windows-gnu",
-]
-
-[[package]]
-name = "winapi-i686-pc-windows-gnu"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ac3b87c63620426dd9b991e5ce0329eff545bccbbb34f3be09ff6fb6ab51b7b6"
-
-[[package]]
-name = "winapi-x86_64-pc-windows-gnu"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f"
-
-[[package]]
-name = "windows-sys"
-version = "0.45.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "75283be5efb2831d37ea142365f009c02ec203cd29a3ebecbc093d52315b66d0"
-dependencies = [
- "windows-targets",
-]
-
-[[package]]
-name = "windows-targets"
-version = "0.42.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8e5180c00cd44c9b1c88adb3693291f1cd93605ded80c250a75d472756b4d071"
-dependencies = [
- "windows_aarch64_gnullvm",
- "windows_aarch64_msvc",
- "windows_i686_gnu",
- "windows_i686_msvc",
- "windows_x86_64_gnu",
- "windows_x86_64_gnullvm",
- "windows_x86_64_msvc",
-]
-
-[[package]]
-name = "windows_aarch64_gnullvm"
-version = "0.42.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "597a5118570b68bc08d8d59125332c54f1ba9d9adeedeef5b99b02ba2b0698f8"
-
-[[package]]
-name = "windows_aarch64_msvc"
-version = "0.42.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e08e8864a60f06ef0d0ff4ba04124db8b0fb3be5776a5cd47641e942e58c4d43"
-
-[[package]]
-name = "windows_i686_gnu"
-version = "0.42.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c61d927d8da41da96a81f029489353e68739737d3beca43145c8afec9a31a84f"
-
-[[package]]
-name = "windows_i686_msvc"
-version = "0.42.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "44d840b6ec649f480a41c8d80f9c65108b92d89345dd94027bfe06ac444d1060"
-
-[[package]]
-name = "windows_x86_64_gnu"
-version = "0.42.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8de912b8b8feb55c064867cf047dda097f92d51efad5b491dfb98f6bbb70cb36"
-
-[[package]]
-name = "windows_x86_64_gnullvm"
-version = "0.42.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "26d41b46a36d453748aedef1486d5c7a85db22e56aff34643984ea85514e94a3"
-
-[[package]]
-name = "windows_x86_64_msvc"
-version = "0.42.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9aec5da331524158c6d1a4ac0ab1541149c0b9505fde06423b02f5ef0106b9f0"

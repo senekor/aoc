@@ -1,4 +1,4 @@
-use itertools::*;
+use utils::Itertools;
 
 fn hex_to_bits(hex_str: &str) -> Vec<u8> {
     hex_str

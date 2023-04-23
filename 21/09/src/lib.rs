@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-use itertools::*;
+use utils::Itertools;
 
 fn is_low_point(input: &[Vec<i32>], i: usize, j: usize) -> bool {
     let max_i = input.len() - 1;

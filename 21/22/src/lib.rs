@@ -1,7 +1,9 @@
-use std::cmp::{max, min};
-use std::ops::{Index, IndexMut, RangeInclusive};
+use std::{
+    cmp::{max, min},
+    ops::{Index, IndexMut, RangeInclusive},
+};
 
-use itertools::*;
+use utils::Itertools;
 
 type Line = (String, i32, i32, i32, i32, i32, i32);
 fn parse(line: &str) -> Line {

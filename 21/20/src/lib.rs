@@ -1,4 +1,4 @@
-use itertools::*;
+use utils::Itertools;
 
 fn pixel_square_to_index(mut pixel_square: Vec<char>) -> usize {
     let mut result = 0;

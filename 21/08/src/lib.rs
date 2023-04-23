@@ -1,4 +1,4 @@
-use itertools::*;
+use utils::Itertools;
 
 pub fn part1(input: &str) -> usize {
     let input = input.lines().map(str::to_string).collect_vec();

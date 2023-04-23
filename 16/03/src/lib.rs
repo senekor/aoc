@@ -1,4 +1,4 @@
-use itertools::*;
+use utils::{itertools::izip, Itertools};
 
 mod triangle;
 use triangle::Triangle;

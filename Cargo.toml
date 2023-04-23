@@ -6,7 +6,5 @@ version = "0.1.0"
 edition = "2021"
 
 [workspace.dependencies]
-itertools = "0.10"
-derive_more = "0.99"
-# utils = { path = "../aoc-utils", package = "aoc_utils" }
-utils = { git = "https://github.com/remlse/aoc-utils.git", package = "aoc_utils" }
+# utils = { path = "../aoc_utils", package = "aoc_utils" }
+utils = { git = "https://github.com/remlse/aoc_utils", package = "aoc_utils" }

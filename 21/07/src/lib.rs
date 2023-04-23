@@ -1,4 +1,4 @@
-use itertools::*;
+use utils::Itertools;
 
 fn calc_fuel_consumption(crabs: &[i32], alignment_pos: i32) -> i32 {
     crabs.iter().map(|crab| (crab - alignment_pos).abs()).sum()

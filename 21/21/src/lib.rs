@@ -1,6 +1,6 @@
 use std::{collections::HashMap, hash::Hash};
 
-use itertools::*;
+use utils::Itertools;
 
 type Line = (String, i32);
 fn parse_line(line: &str) -> Line {

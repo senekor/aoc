@@ -1,4 +1,4 @@
-use itertools::*;
+use utils::Itertools;
 
 #[derive(Clone, Debug)]
 struct Line {

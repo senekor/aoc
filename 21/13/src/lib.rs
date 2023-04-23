@@ -1,4 +1,4 @@
-use itertools::*;
+use utils::Itertools;
 
 fn paper_dims(dots: &[(usize, usize)]) -> (usize, usize) {
     let (max_x, max_y) = dots.iter().fold((0, 0), |(max_x, max_y), (x, y)| match () {

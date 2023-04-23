@@ -1,4 +1,4 @@
-use itertools::*;
+use utils::Itertools;
 
 fn close_to_score(c: char) -> usize {
     match c {

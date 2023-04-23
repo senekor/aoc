@@ -9,7 +9,7 @@ new year day:
     set -euo pipefail
 
     cargo generate aoc \
-        --git "https://github.com/remlse/cargo-templates" \
+        --git "https://github.com/remlse/cargo_templates" \
         --branch main \
         --init \
         --name whatever \
@@ -18,7 +18,7 @@ new year day:
 
     if ! which aoc_generate_readme_table &> /dev/null ; then
         echo "Installing the readme table generator, this might take a second..."
-        cargo install -q --git https://github.com/remlse/aoc-utils
+        cargo install -q --git https://github.com/remlse/aoc_utils
     fi
     aoc_generate_readme_table
 

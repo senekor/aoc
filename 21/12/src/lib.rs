@@ -1,5 +1,6 @@
-use itertools::*;
 use std::collections::{HashMap, HashSet};
+
+use utils::Itertools;
 
 type Line = (String, String);
 fn parse(line: &str) -> Line {

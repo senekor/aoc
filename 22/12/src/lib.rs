@@ -1,5 +1,5 @@
-use itertools::Itertools;
 use pathfinding::prelude::*;
+use utils::Itertools;
 
 fn elevation(b: u8) -> u8 {
     match b {
