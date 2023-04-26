@@ -1,0 +1,8 @@
+[package]
+name = "aoc_22_15"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+nalgebra = "0.32.2"
+utils.workspace = true
