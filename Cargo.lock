@@ -767,6 +767,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "aoc_22_14"
+version = "0.1.0"
+dependencies = [
+ "aoc_utils",
+ "nalgebra",
+]
+
+[[package]]
 name = "aoc_utils"
 version = "0.1.0"
 source = "git+https://github.com/remlse/aoc_utils#5fc700323b8b8da4057bce1545c6a0d2a3abb8b5"
