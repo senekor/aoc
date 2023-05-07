@@ -14,34 +14,35 @@ impl From<&str> for Instruction {
     }
 }
 
-struct Cpu<F: FnMut(usize, i32)> {
-    x: i32,
-    cycle: usize,
-    debugger: Option<F>,
+trait CpuObserver {
+    fn notify(&mut self, cycle: usize, x: i32);
 }
 
-impl<F: FnMut(usize, i32)> Default for Cpu<F> {
+struct Cpu<'a> {
+    x: i32,
+    cycle: usize,
+    observers: Vec<&'a mut dyn CpuObserver>,
+}
+
+impl Default for Cpu<'_> {
     fn default() -> Self {
         Self {
             x: 1,
             cycle: 0,
-            debugger: None,
+            observers: Vec::new(),
         }
     }
 }
 
-impl<F: FnMut(usize, i32)> Cpu<F> {
-    fn with_debugger(debugger: F) -> Self {
-        Self {
-            debugger: Some(debugger),
-            ..Default::default()
-        }
+impl<'a> Cpu<'a> {
+    fn register_observer(&mut self, obs: &'a mut dyn CpuObserver) {
+        self.observers.push(obs);
     }
 
     fn tick(&mut self) {
         self.cycle += 1;
-        if let Some(debugger) = self.debugger.as_mut() {
-            debugger(self.cycle, self.x)
+        for observer in self.observers.iter_mut() {
+            observer.notify(self.cycle, self.x);
         }
     }
 
@@ -57,42 +58,81 @@ impl<F: FnMut(usize, i32)> Cpu<F> {
     }
 }
 
-pub fn part1(input: &str) -> i32 {
-    let mut sig_str_sum = 0;
-    let mut cpu = Cpu::with_debugger(|cycle: usize, x: i32| {
+#[derive(Debug, Default)]
+struct SignalStrength {
+    sum: i32,
+}
+
+impl CpuObserver for SignalStrength {
+    fn notify(&mut self, cycle: usize, x: i32) {
         if (cycle + 20) % 40 == 0 {
-            sig_str_sum += cycle as i32 * x;
+            self.sum += cycle as i32 * x;
         }
-    });
+    }
+}
+
+pub fn part1(input: &str) -> i32 {
+    let mut cpu = Cpu::default();
+    let mut signal_strength = SignalStrength::default();
+    cpu.register_observer(&mut signal_strength);
     for instr in input.lines().map(Instruction::from) {
         cpu.exec(instr);
     }
-    sig_str_sum
+    signal_strength.sum
 }
 
-fn display_screen(screen: [[bool; 40]; 6]) -> String {
-    screen
-        .into_iter()
-        .map(|row| {
-            std::iter::once('\n')
-                .chain(row.into_iter().map(|pixel| if pixel { '#' } else { '.' }))
-                .collect::<String>()
-        })
-        .collect::<String>()
+#[derive(Debug)]
+struct Monitor {
+    screen: [[bool; 40]; 6],
+}
+
+impl Default for Monitor {
+    fn default() -> Self {
+        Self {
+            screen: [[false; 40]; 6],
+        }
+    }
+}
+
+struct PixelLoc {
+    row: usize,
+    col: usize,
+}
+
+impl Monitor {
+    fn draw_pixel(&mut self, pixel_loc: PixelLoc, sprite_loc: i32) {
+        if (sprite_loc - 1..=sprite_loc + 1).contains(&(pixel_loc.col as i32)) {
+            self.screen[pixel_loc.row][pixel_loc.col] = true;
+        }
+    }
+
+    fn display_screen(&self) -> String {
+        self.screen
+            .into_iter()
+            .flat_map(|row| {
+                std::iter::once('\n')
+                    .chain(row.into_iter().map(|pixel| if pixel { '#' } else { '.' }))
+            })
+            .collect::<String>()
+    }
+}
+
+impl CpuObserver for Monitor {
+    fn notify(&mut self, cycle: usize, x: i32) {
+        let pixel_loc = PixelLoc {
+            row: (cycle / 40) % 6,
+            col: (cycle - 1) % 40,
+        };
+        self.draw_pixel(pixel_loc, x)
+    }
 }
 
 pub fn part2(input: &str) -> String {
-    let mut screen = [[false; 40]; 6];
-    let mut cpu = Cpu::with_debugger(|cycle: usize, x: i32| {
-        let row = (cycle / 40) % 6;
-        let col = (cycle - 1) % 40;
-        let pos = col as i32;
-        if x - 1 <= pos && x + 1 >= pos {
-            screen[row][col] = true;
-        }
-    });
+    let mut cpu = Cpu::default();
+    let mut monitor = Monitor::default();
+    cpu.register_observer(&mut monitor);
     for instr in input.lines().map(Instruction::from) {
         cpu.exec(instr);
     }
-    display_screen(screen)
+    monitor.display_screen()
 }
