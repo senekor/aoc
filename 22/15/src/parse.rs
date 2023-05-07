@@ -25,8 +25,8 @@ fn point(input: &str) -> IResult<&str, Point> {
 
 #[derive(Debug, PartialEq, Eq)]
 pub(crate) struct SensorReport {
-    sensor: Point,
-    beacon: Point,
+    pub sensor: Point,
+    pub beacon: Point,
 }
 
 fn sensor_report(input: &str) -> IResult<&str, SensorReport> {
