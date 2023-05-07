@@ -223,3 +223,14 @@ href="https://adventofcode.com/2022/day/25">░░</a
      └────────────────────────────────────────────────────────────────────────────┘
 </pre>
 <!-- generate_readme_table_marker -->
+
+---
+
+## Interesting solutions
+
+<table>
+  <tr>
+    <td><a href="./22/10/src/lib.rs">22.10</a></td>
+    <td>object-oriented observer pattern</td>
+  </tr>
+</table>
