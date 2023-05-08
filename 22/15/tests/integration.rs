@@ -1,4 +1,4 @@
-use aoc_22_15::{part1, part2, non_beacons_at_y};
+use aoc_22_15::{non_beacons_at_y, part1, part2, tuning_freq_in};
 
 #[allow(unused)]
 use utils::fail::Fail;
@@ -18,10 +18,10 @@ fn test_part1() {
 
 #[test]
 fn test_part2_sample() {
-    assert_eq!(part2(SAMPLE), Fail);
+    assert_eq!(tuning_freq_in::<20>(SAMPLE), 56000011);
 }
 
 #[test]
 fn test_part2() {
-    assert_eq!(part2(INPUT), Fail);
+    assert_eq!(part2(INPUT), 11558423398893);
 }

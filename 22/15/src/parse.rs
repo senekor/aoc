@@ -7,13 +7,13 @@ use utils::{
         sequence::{pair, preceded, separated_pair},
         IResult,
     },
-    parse::integer::i32,
+    parse::integer::i64,
 };
 
 use crate::Point;
 
-fn coordinate(c: char) -> impl Fn(&str) -> IResult<&str, i32> {
-    move |input: &str| preceded(pair(char(c), char('=')), i32)(input)
+fn coordinate(c: char) -> impl Fn(&str) -> IResult<&str, i64> {
+    move |input: &str| preceded(pair(char(c), char('=')), i64)(input)
 }
 
 fn point(input: &str) -> IResult<&str, Point> {
