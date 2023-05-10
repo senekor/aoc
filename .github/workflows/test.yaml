@@ -12,9 +12,25 @@ jobs:
           version: 0.78
       - name: check difficulty spec
         run: ./dev/check_difficulty.nu
+  what_to_test:
+    name: figure out what to test
+    runs-on: ubuntu-latest
+    outputs:
+      what_to_test: ${{ steps.what_to_test.outputs.what }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hustcer/setup-nu@v3
+        with:
+          version: 0.78
+      - name: what_to_test
+        run: echo "what=$(./dev/what_to_test.nu)" >> "$GITHUB_OUTPUT"
   test:
     name: test
-    needs: check_difficulty_spec
+    needs:
+      - check_difficulty_spec
+      - what_to_test
+    env:
+      WHAT: ${{ needs.what_to_test.outputs.what }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -23,8 +39,8 @@ jobs:
           components: clippy, rustfmt
       - uses: Swatinem/rust-cache@v2
       - name: rustfmt
-        run: cargo fmt --check
+        run: if [[ -n "$WHAT" ]]; then cargo fmt --check $WHAT warnings ; fi
       - name: clippy
-        run: cargo clippy -- -D warnings
+        run: if [[ -n "$WHAT" ]]; then cargo clippy $WHAT -- -D warnings ; fi
       - name: tests
-        run: cargo test
+        run: if [[ -n "$WHAT" ]]; then cargo test $WHAT ; fi
