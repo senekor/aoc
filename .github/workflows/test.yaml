@@ -2,8 +2,19 @@ name: test
 on: [push]
 
 jobs:
+  check_difficulty_spec:
+    name: check difficulty spec
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hustcer/setup-nu@v3
+        with:
+          version: 0.78
+      - name: check difficulty spec
+        run: ./dev/check_difficulty.nu
   test:
     name: test
+    needs: check_difficulty_spec
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
