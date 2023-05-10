@@ -22,7 +22,12 @@ jobs:
       - uses: hustcer/setup-nu@v3
         with:
           version: 0.78
-      - name: what_to_test
+      - name: fetch main branch
+        run: |
+          git fetch origin main
+          git branch --track main origin/main
+      - id: what_to_test
+        name: figure out what to test
         run: echo "what=$(./dev/scripts/what_to_test.nu)" >> "$GITHUB_OUTPUT"
   test:
     name: test
@@ -40,7 +45,7 @@ jobs:
           components: clippy, rustfmt
       - uses: Swatinem/rust-cache@v2
       - name: rustfmt
-        run: cargo fmt --check $WHAT warnings
+        run: cargo fmt --check $WHAT
       - name: clippy
         run: cargo clippy $WHAT -- -D warnings
       - name: tests
