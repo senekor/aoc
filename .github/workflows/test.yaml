@@ -11,7 +11,7 @@ jobs:
         with:
           version: 0.78
       - name: check difficulty spec
-        run: ./dev/check_difficulty.nu
+        run: ./dev/scripts/check_difficulty.nu
   what_to_test:
     name: figure out what to test
     runs-on: ubuntu-latest
@@ -23,7 +23,7 @@ jobs:
         with:
           version: 0.78
       - name: what_to_test
-        run: echo "what=$(./dev/what_to_test.nu)" >> "$GITHUB_OUTPUT"
+        run: echo "what=$(./dev/scripts/what_to_test.nu)" >> "$GITHUB_OUTPUT"
   test:
     name: test
     needs:
