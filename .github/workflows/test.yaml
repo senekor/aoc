@@ -16,7 +16,7 @@ jobs:
     name: figure out what to test
     runs-on: ubuntu-latest
     outputs:
-      what_to_test: ${{ steps.what_to_test.outputs.what }}
+      what: ${{ steps.what_to_test.outputs.what }}
     steps:
       - uses: actions/checkout@v3
       - uses: hustcer/setup-nu@v3
@@ -29,6 +29,7 @@ jobs:
     needs:
       - check_difficulty_spec
       - what_to_test
+    if: needs.what_to_test.outputs.what != ''
     env:
       WHAT: ${{ needs.what_to_test.outputs.what }}
     runs-on: ubuntu-latest
@@ -39,8 +40,8 @@ jobs:
           components: clippy, rustfmt
       - uses: Swatinem/rust-cache@v2
       - name: rustfmt
-        run: if [[ -n "$WHAT" ]]; then cargo fmt --check $WHAT warnings ; fi
+        run: cargo fmt --check $WHAT warnings
       - name: clippy
-        run: if [[ -n "$WHAT" ]]; then cargo clippy $WHAT -- -D warnings ; fi
+        run: cargo clippy $WHAT -- -D warnings
       - name: tests
-        run: if [[ -n "$WHAT" ]]; then cargo test $WHAT ; fi
+        run: cargo test $WHAT
