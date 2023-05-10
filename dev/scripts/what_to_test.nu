@@ -1,6 +1,11 @@
 #!/usr/bin/env nu
 
 def what_to_test [] {
+    if (git branch) !~ main {
+        # CI may not have a local main branch
+        git fetch origin main
+        git branch --track main origin/main
+    }
     let lock_diffstat = (git diff --stat main -- Cargo.lock)
     let diffstat = (git diff --name-status main)
     let puzzles = (
