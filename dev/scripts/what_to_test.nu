@@ -3,8 +3,8 @@
 def what_to_test [] {
     if (git branch) !~ main {
         # CI may not have a local main branch
-        git fetch origin main
-        git branch --track main origin/main
+        git fetch origin main | ignore
+        git branch --track main origin/main | ignore
     }
     let lock_diffstat = (git diff --stat main -- Cargo.lock)
     let diffstat = (git diff --name-status main)
