@@ -1,6 +1,6 @@
 use std::collections::VecDeque;
 
-pub fn part1(input: &str, preamble_size: usize) -> i64 {
+pub fn part1_impl(input: &str, preamble_size: usize) -> i64 {
     let mut preamble = VecDeque::new();
     preamble.reserve(preamble_size);
     for num in input.lines().map(|s| s.parse::<i64>().unwrap()) {
@@ -20,8 +20,12 @@ pub fn part1(input: &str, preamble_size: usize) -> i64 {
     panic!("not found")
 }
 
-pub fn part2(input: &str, preamble_size: usize) -> i64 {
-    let target = part1(input, preamble_size);
+pub fn part1(input: &str) -> i64 {
+    part1_impl(input, 25)
+}
+
+pub fn part2_impl(input: &str, preamble_size: usize) -> i64 {
+    let target = part1_impl(input, preamble_size);
     let nums: Vec<i64> = input.lines().map(|s| s.parse::<i64>().unwrap()).collect();
 
     let (mut i, mut j) = (0, 1);
@@ -43,4 +47,8 @@ pub fn part2(input: &str, preamble_size: usize) -> i64 {
     }
 
     panic!("not found")
+}
+
+pub fn part2(input: &str) -> i64 {
+    part2_impl(input, 25)
 }

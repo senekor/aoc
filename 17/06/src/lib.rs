@@ -69,18 +69,26 @@ where
     }
 }
 
-pub fn part1<const NUM_BANKS: usize>(input: &str) -> usize
+pub fn part1_impl<const NUM_BANKS: usize>(input: &str) -> usize
 where
     Banks<NUM_BANKS>: Default + PartialEq + Eq + Hash,
 {
     ReallocRoutine::<NUM_BANKS>::from(input).find_infinite_loop()
 }
 
-pub fn part2<const NUM_BANKS: usize>(input: &str) -> usize
+pub fn part1(input: &str) -> usize {
+    part1_impl::<16>(input)
+}
+
+pub fn part2_impl<const NUM_BANKS: usize>(input: &str) -> usize
 where
     Banks<NUM_BANKS>: Default + PartialEq + Eq + Hash,
 {
     let mut routine = ReallocRoutine::<NUM_BANKS>::from(input);
     let count = routine.find_infinite_loop();
     count - routine.seen[&routine.current]
+}
+
+pub fn part2(input: &str) -> usize {
+    part2_impl::<16>(input)
 }

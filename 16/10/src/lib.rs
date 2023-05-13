@@ -125,7 +125,7 @@ impl ChipStorage {
     }
 }
 
-pub fn part1(input: &str, v1: usize, v2: usize) -> Bot {
+pub fn part1_impl(input: &str, v1: usize, v2: usize) -> Bot {
     let (instructions, mut storage) = parse_input(input);
 
     storage.execute(instructions);
@@ -137,6 +137,10 @@ pub fn part1(input: &str, v1: usize, v2: usize) -> Bot {
     }
 
     panic!("no matching bot found")
+}
+
+pub fn part1(input: &str) -> usize {
+    part1_impl(input, 61, 17)
 }
 
 pub fn part2(input: &str) -> usize {

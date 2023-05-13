@@ -1,3 +1,1 @@
-fn main() {
-    utils::main!(aoc_15_17);
-}
+utils::main!(aoc_15_17);
