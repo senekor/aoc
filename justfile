@@ -17,11 +17,7 @@ new year day:
         --define year={{year}} \
         --define day={{day}}
 
-    if ! which aoc_generate_readme_table &> /dev/null ; then
-        echo "Installing the readme table generator, this might take a second..."
-        cargo install -q --git https://github.com/remlse/aoc-utils
-    fi
-    aoc_generate_readme_table
+    ./dev/scripts/readme_table.nu
 
     if [ -f dev/session_id ] ; then
         curl --header "Cookie: session=$(cat dev/session_id)" \
