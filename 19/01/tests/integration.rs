@@ -1,13 +1,5 @@
-use aoc_19_01::{part1, part2};
-
-static INPUT: &str = include_str!("../input/input.txt");
-
-#[test]
-fn test_part1() {
-    assert_eq!(part1(INPUT), 3408471);
-}
-
-#[test]
-fn test_part2() {
-    assert_eq!(part2(INPUT), 5109803);
-}
+utils::solution!(
+    aoc_19_01;
+    3408471;
+    5109803;
+);

@@ -1,19 +1,14 @@
-use aoc_16_04::{part1, part2};
+use aoc_16_04::part1;
 
 static SAMPLE: &str = include_str!("../input/sample.txt");
-static INPUT: &str = include_str!("../input/input.txt");
 
 #[test]
 fn test_part1_sample() {
     assert_eq!(part1(SAMPLE), 1514);
 }
 
-#[test]
-fn test_part1() {
-    assert_eq!(part1(INPUT), 361724);
-}
-
-#[test]
-fn test_part2() {
-    assert_eq!(part2(INPUT), 482);
-}
+utils::solution!(
+    aoc_16_04;
+    361724;
+    482;
+);

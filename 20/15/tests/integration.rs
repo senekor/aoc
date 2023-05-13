@@ -1,9 +1,7 @@
-use aoc_20_15::{part1, part2};
+use aoc_20_15::part1;
 
 #[allow(unused)]
 use utils::fail::Fail;
-
-static INPUT: &str = include_str!("../input/input.txt");
 
 #[test]
 fn part1_samples() {
@@ -21,12 +19,8 @@ fn part1_samples() {
     }
 }
 
-#[test]
-fn test_part1() {
-    assert_eq!(part1(INPUT), 595);
-}
-
-#[test]
-fn test_part2() {
-    assert_eq!(part2(INPUT), 1708310);
-}
+utils::solution!(
+    aoc_20_15;
+    595;
+    1708310;
+);
