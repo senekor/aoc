@@ -1,9 +1,6 @@
 _default:
     @just --list
 
-_repo-setup:
-    ln -sf "$(pwd)/dev/scripts/pre-push.nu" .git/hooks/pre-push
-
 # scaffold a new puzzle
 new year day:
     #!/bin/bash

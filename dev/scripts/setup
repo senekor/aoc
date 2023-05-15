@@ -1,0 +1,4 @@
+#!/bin/bash
+set -eo pipefail
+
+ln -sf "$(pwd)/dev/scripts/pre-push.nu" .git/hooks/pre-push
