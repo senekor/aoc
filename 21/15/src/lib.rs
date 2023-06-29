@@ -55,6 +55,7 @@ impl Graph {
 
         // remaining lines
         let mut start_of_top_line = graph.start.clone();
+        #[allow(clippy::redundant_clone)] // false positive as of 1.70
         let mut top_node = start_of_top_line.clone();
         for (i, line) in grid.iter().enumerate().skip(1) {
             // first node of line
