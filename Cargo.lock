@@ -779,7 +779,7 @@ dependencies = [
 [[package]]
 name = "aoc_utils"
 version = "0.1.0"
-source = "git+https://github.com/remlse/aoc-utils#07f7af914568f9f9be319aac3c4ae3bc86cd1d2b"
+source = "git+https://github.com/senekor/aoc-utils#07f7af914568f9f9be319aac3c4ae3bc86cd1d2b"
 dependencies = [
  "itertools",
  "nom",

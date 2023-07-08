@@ -7,7 +7,7 @@ new year day:
     set -euo pipefail
 
     cargo generate aoc \
-        --git "https://github.com/remlse/cargo_templates" \
+        --git "https://github.com/senekor/cargo_templates" \
         --branch main \
         --init \
         --name whatever \

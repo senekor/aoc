@@ -7,4 +7,4 @@ edition = "2021"
 
 [workspace.dependencies]
 # utils = { path = "../aoc-utils", package = "aoc_utils" }
-utils = { git = "https://github.com/remlse/aoc-utils", package = "aoc_utils" }
+utils = { git = "https://github.com/senekor/aoc-utils", package = "aoc_utils" }
