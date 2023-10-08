@@ -7,9 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: hustcer/setup-nu@v3
-        with:
-          version: 0.78
+      - uses: cargo-bins/cargo-binstall@main
+      - name: Install nushell
+        run: cargo binstall -y nu
       - name: check difficulty spec
         run: ./dev/scripts/check_difficulty.nu
   what_to_test:
@@ -19,9 +19,9 @@ jobs:
       what: ${{ steps.what_to_test.outputs.what }}
     steps:
       - uses: actions/checkout@v3
-      - uses: hustcer/setup-nu@v3
-        with:
-          version: 0.78
+      - uses: cargo-bins/cargo-binstall@main
+      - name: Install nushell
+        run: cargo binstall -y nu
       - id: what_to_test
         name: figure out what to test
         run: echo "what=$(./dev/scripts/what_to_test.nu)" >> "$GITHUB_OUTPUT"
