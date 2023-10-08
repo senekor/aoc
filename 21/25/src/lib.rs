@@ -45,7 +45,7 @@ impl Display for Seafloor {
         f.write_str(
             self.grid
                 .iter()
-                .flat_map(|row| row.iter().chain([&'\n'].into_iter()))
+                .flat_map(|row| row.iter().chain([&'\n']))
                 .collect::<String>()
                 .as_str(),
         )

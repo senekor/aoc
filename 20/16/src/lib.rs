@@ -130,7 +130,7 @@ pub fn part2(input: &str) -> i64 {
     }
     possible_names
         .into_iter()
-        .zip(my_ticket.into_iter())
+        .zip(my_ticket)
         .flat_map(|(names, ticket)| names.into_iter().map(move |name| (name, ticket)))
         .filter(|(name, _)| name.starts_with("departure"))
         .fold(1, |acc, (_, ticket)| acc * ticket)

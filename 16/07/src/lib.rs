@@ -78,6 +78,49 @@ impl std::str::FromStr for IPv7 {
     }
 }
 
+impl IPv7 {
+    #[allow(non_snake_case)]
+    fn supports_TLS(&self) -> bool {
+        let mut found_regular_abba = false;
+        for seq in self.0.iter() {
+            if seq.has_abba() {
+                match seq {
+                    Sequence::Supernet(_) => found_regular_abba = true,
+                    Sequence::Hypernet(_) => return false,
+                }
+            }
+        }
+        found_regular_abba
+    }
+
+    #[allow(non_snake_case)]
+    fn supports_SSL(&self) -> bool {
+        let every_aba = self.0.iter().flat_map(|a| a.get_every_aba());
+
+        let every_bab: HashSet<String> = every_aba
+            .map(|aba| format!("{}{}{}", &aba[1..2], &aba[0..1], &aba[1..2]))
+            .collect();
+
+        self.0.iter().any(|seq| seq.has_any_bab(&every_bab))
+    }
+}
+
+pub fn part1(input: &str) -> usize {
+    input
+        .lines()
+        .map(|l| l.parse().unwrap())
+        .filter(IPv7::supports_TLS)
+        .count()
+}
+
+pub fn part2(input: &str) -> usize {
+    input
+        .lines()
+        .map(|l| l.parse().unwrap())
+        .filter(IPv7::supports_SSL)
+        .count()
+}
+
 #[cfg(test)]
 mod test_ipv7 {
     use super::*;
@@ -165,47 +208,4 @@ mod test_ipv7 {
         ])
         .supports_SSL())
     }
-}
-
-impl IPv7 {
-    #[allow(non_snake_case)]
-    fn supports_TLS(&self) -> bool {
-        let mut found_regular_abba = false;
-        for seq in self.0.iter() {
-            if seq.has_abba() {
-                match seq {
-                    Sequence::Supernet(_) => found_regular_abba = true,
-                    Sequence::Hypernet(_) => return false,
-                }
-            }
-        }
-        found_regular_abba
-    }
-
-    #[allow(non_snake_case)]
-    fn supports_SSL(&self) -> bool {
-        let every_aba = self.0.iter().flat_map(|a| a.get_every_aba());
-
-        let every_bab: HashSet<String> = every_aba
-            .map(|aba| format!("{}{}{}", &aba[1..2], &aba[0..1], &aba[1..2]))
-            .collect();
-
-        self.0.iter().any(|seq| seq.has_any_bab(&every_bab))
-    }
-}
-
-pub fn part1(input: &str) -> usize {
-    input
-        .lines()
-        .map(|l| l.parse().unwrap())
-        .filter(IPv7::supports_TLS)
-        .count()
-}
-
-pub fn part2(input: &str) -> usize {
-    input
-        .lines()
-        .map(|l| l.parse().unwrap())
-        .filter(IPv7::supports_SSL)
-        .count()
 }

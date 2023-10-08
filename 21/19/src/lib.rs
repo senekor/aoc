@@ -2,39 +2,6 @@ use std::{collections::HashSet, str::FromStr};
 
 use utils::Itertools;
 
-#[cfg(test)]
-mod test {
-    use std::vec;
-
-    use crate::{Coordinates, Scanner};
-
-    #[test]
-    fn test_rotations() {
-        let scanner = Scanner {
-            id: 0,
-            beacons: vec![Coordinates { x: 1, y: 2, z: 3 }],
-        };
-        let rotations = scanner.rotations();
-        // one
-        assert_eq!(rotations[0].beacons[0], Coordinates { x: 1, y: 2, z: 3 });
-        assert_eq!(rotations[1].beacons[0], Coordinates { x: -2, y: 1, z: 3 });
-        assert_eq!(rotations[2].beacons[0], Coordinates { x: -1, y: -2, z: 3 });
-        assert_eq!(rotations[3].beacons[0], Coordinates { x: 2, y: -1, z: 3 });
-        // two
-        assert_eq!(rotations[4].beacons[0], Coordinates { x: 3, y: 2, z: -1 });
-        assert_eq!(rotations[5].beacons[0], Coordinates { x: -2, y: 3, z: -1 });
-        assert_eq!(
-            rotations[6].beacons[0],
-            Coordinates {
-                x: -3,
-                y: -2,
-                z: -1
-            }
-        );
-        assert_eq!(rotations[7].beacons[0], Coordinates { x: 2, y: -3, z: -1 });
-    }
-}
-
 #[derive(Debug, PartialEq, Eq, Hash, Clone, Copy, Default)]
 struct Coordinates {
     x: i32,
@@ -395,4 +362,37 @@ pub fn part2(input: &str) -> usize {
     }
 
     max_manhattan
+}
+
+#[cfg(test)]
+mod test {
+    use std::vec;
+
+    use crate::{Coordinates, Scanner};
+
+    #[test]
+    fn test_rotations() {
+        let scanner = Scanner {
+            id: 0,
+            beacons: vec![Coordinates { x: 1, y: 2, z: 3 }],
+        };
+        let rotations = scanner.rotations();
+        // one
+        assert_eq!(rotations[0].beacons[0], Coordinates { x: 1, y: 2, z: 3 });
+        assert_eq!(rotations[1].beacons[0], Coordinates { x: -2, y: 1, z: 3 });
+        assert_eq!(rotations[2].beacons[0], Coordinates { x: -1, y: -2, z: 3 });
+        assert_eq!(rotations[3].beacons[0], Coordinates { x: 2, y: -1, z: 3 });
+        // two
+        assert_eq!(rotations[4].beacons[0], Coordinates { x: 3, y: 2, z: -1 });
+        assert_eq!(rotations[5].beacons[0], Coordinates { x: -2, y: 3, z: -1 });
+        assert_eq!(
+            rotations[6].beacons[0],
+            Coordinates {
+                x: -3,
+                y: -2,
+                z: -1
+            }
+        );
+        assert_eq!(rotations[7].beacons[0], Coordinates { x: 2, y: -3, z: -1 });
+    }
 }

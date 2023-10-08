@@ -39,6 +39,27 @@ pub fn part1(input: &str) -> usize {
         .count()
 }
 
+fn are_anagrams(a: &str, b: &str) -> bool {
+    a.chars().collect::<HashBag<_>>() == b.chars().collect::<HashBag<_>>()
+}
+
+fn contains_anagrams(s: &str) -> bool {
+    s.split_ascii_whitespace()
+        .combinations(2)
+        .any(|comb| are_anagrams(comb[0], comb[1]))
+}
+
+fn is_strong_passphrase(s: &str) -> bool {
+    is_valid_passphrase(s) && !contains_anagrams(s)
+}
+
+pub fn part2(input: &str) -> usize {
+    input
+        .lines()
+        .filter(|line| is_strong_passphrase(line))
+        .count()
+}
+
 #[cfg(test)]
 mod test_is_strong_passphrase {
     use super::*;
@@ -67,25 +88,4 @@ mod test_is_strong_passphrase {
     fn e() {
         assert!(!is_strong_passphrase("oiii ioii iioi iiio"))
     }
-}
-
-fn are_anagrams(a: &str, b: &str) -> bool {
-    a.chars().collect::<HashBag<_>>() == b.chars().collect::<HashBag<_>>()
-}
-
-fn contains_anagrams(s: &str) -> bool {
-    s.split_ascii_whitespace()
-        .combinations(2)
-        .any(|comb| are_anagrams(comb[0], comb[1]))
-}
-
-fn is_strong_passphrase(s: &str) -> bool {
-    is_valid_passphrase(s) && !contains_anagrams(s)
-}
-
-pub fn part2(input: &str) -> usize {
-    input
-        .lines()
-        .filter(|line| is_strong_passphrase(line))
-        .count()
 }

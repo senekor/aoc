@@ -56,9 +56,7 @@ pub fn non_beacons_at_y<const Y: i64>(input: &str) -> usize {
     beacons.sort_unstable();
     beacons.dedup();
     for beacon in beacons {
-        let Ok(idx) = ranges.binary_search_by(|range| {
-            contains_cmp(range, beacon)
-        }) else {
+        let Ok(idx) = ranges.binary_search_by(|range| contains_cmp(range, beacon)) else {
             continue;
         };
         let range_to_split = ranges[idx].clone();

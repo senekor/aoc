@@ -1,23 +1,3 @@
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_mass_to_fuel() {
-        assert_eq!(mass_to_fuel(12), 2);
-        assert_eq!(mass_to_fuel(14), 2);
-        assert_eq!(mass_to_fuel(1969), 654);
-        assert_eq!(mass_to_fuel(100756), 33583);
-    }
-
-    #[test]
-    fn test_mass_to_fuel_rec() {
-        assert_eq!(mass_to_fuel_rec(14), 2);
-        assert_eq!(mass_to_fuel_rec(1969), 966);
-        assert_eq!(mass_to_fuel_rec(100756), 50346);
-    }
-}
-
 fn mass_to_fuel(mass: u32) -> u32 {
     mass / 3 - 2
 }
@@ -43,4 +23,24 @@ pub fn part2(input: &str) -> u32 {
         .lines()
         .map(|line| mass_to_fuel_rec(line.parse().unwrap()))
         .sum()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_mass_to_fuel() {
+        assert_eq!(mass_to_fuel(12), 2);
+        assert_eq!(mass_to_fuel(14), 2);
+        assert_eq!(mass_to_fuel(1969), 654);
+        assert_eq!(mass_to_fuel(100756), 33583);
+    }
+
+    #[test]
+    fn test_mass_to_fuel_rec() {
+        assert_eq!(mass_to_fuel_rec(14), 2);
+        assert_eq!(mass_to_fuel_rec(1969), 966);
+        assert_eq!(mass_to_fuel_rec(100756), 50346);
+    }
 }

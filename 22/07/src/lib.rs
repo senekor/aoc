@@ -113,7 +113,7 @@ impl<'a> From<&'a str> for FileSystem<'a> {
                     }
                 }
                 Command::Ls { directories, files } => {
-                    let mut dir = fs.get_mut(&current_path);
+                    let dir = fs.get_mut(&current_path);
                     dir.subdirectories = directories;
                     dir.files = files;
                 }
