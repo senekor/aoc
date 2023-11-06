@@ -71,10 +71,7 @@ pub fn part1(input: &str) -> i32 {
 }
 
 pub fn part2(input: &str) -> i32 {
-    let mut one_row = Vec::new();
-    one_row.resize(1_000, 0);
-    let mut grid: Grid<i32> = Vec::new();
-    grid.resize(1_000, one_row);
+    let mut grid: Grid<i32> = vec![vec![0; 1_000]; 1_000];
     for line in input.split('\n') {
         match parse_line(line) {
             Command::TurnOn(range) => do_for_range(&mut grid, range, |i| i + 1),
