@@ -168,7 +168,7 @@
 
 > <a href="https://adventofcode.com/2018/day/5" >▓▓</a
 
->  <a href="https://adventofcode.com/2018/day/6" >?</a
+> <a href="https://adventofcode.com/2018/day/6" >▓▓</a
 
 > <a href="https://adventofcode.com/2018/day/7" >▓▓</a
 

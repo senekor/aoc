@@ -1,0 +1,8 @@
+[package]
+name = "aoc_18_06"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+tinyvec = { version = "1.6.0", features = ["std"] }
+utils.workspace = true
