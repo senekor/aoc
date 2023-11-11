@@ -164,7 +164,52 @@ pub fn part1(input: &str) -> usize {
     area_size.into_values().max().unwrap()
 }
 
-pub fn part2(input: &str) -> usize {
+pub fn part2_impl(input: &str, max_dist: usize) -> usize {
     let (_, coordinates) = parse::coordinates(input).unwrap();
-    0
+
+    let max = coordinates
+        .iter()
+        .fold(Coordinate::zero(), |acc, coord| acc.merge_max(coord));
+
+    let mut grid = vec![vec![0_isize; max.x + 1]; max.y + 1];
+
+    // determine first distance (0,0) as starting point
+    grid[0][0] = coordinates
+        .iter()
+        .map(|&Coordinate { x, y }| x + y)
+        .sum::<usize>() as isize;
+
+    // fill first column
+    for y in 1..grid.len() {
+        let x = 0;
+
+        let coords_behind = coordinates.iter().filter(|coord| coord.y < y).count() as isize;
+        let coords_in_front = coordinates.len() as isize - coords_behind;
+
+        grid[y][x] = grid[y - 1][x] + coords_behind - coords_in_front;
+    }
+
+    // fill remaining columns
+    for x in 1..grid[0].len() {
+        let coords_behind = coordinates.iter().filter(|coord| coord.x < x).count() as isize;
+        let coords_in_front = coordinates.len() as isize - coords_behind;
+        let diff = coords_behind - coords_in_front;
+
+        for row in grid.iter_mut() {
+            row[x] = row[x - 1] + diff;
+        }
+    }
+    // for row in grid.iter() {
+    //     println!("{:?}", row);
+    // }
+
+    let max_dist = max_dist as isize;
+    grid.into_iter()
+        .flatten()
+        .filter(|&dist| dist < max_dist)
+        .count()
+}
+
+pub fn part2(input: &str) -> usize {
+    part2_impl(input, 10_000)
 }

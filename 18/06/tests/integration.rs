@@ -1,4 +1,4 @@
-use aoc_18_06::{part1, part2};
+use aoc_18_06::{part1, part2_impl};
 
 #[allow(unused)]
 use utils::fail::Fail;
@@ -12,11 +12,11 @@ fn test_part1_sample() {
 
 #[test]
 fn test_part2_sample() {
-    assert_eq!(part2(SAMPLE), Fail);
+    assert_eq!(part2_impl(SAMPLE, 32), 16);
 }
 
 utils::solution!(
     aoc_18_06;
     3907;
-    TODO;
+    42036;
 );
