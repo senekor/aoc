@@ -1,35 +1,35 @@
-use utils::nom::{
-    branch::alt,
-    bytes::complete::tag,
-    character::complete::{char, digit1},
-    combinator::map,
-    multi::{separated_list0, separated_list1},
-    sequence::{delimited, separated_pair},
-    IResult,
+use utils::winnow::{
+    ascii::digit1,
+    combinator::{alt, delimited, separated, separated_pair},
+    PResult, Parser,
 };
 
 use crate::{Integer, Item, Packet, PacketPair};
 
-fn integer(input: &str) -> IResult<&str, Integer> {
-    map(digit1, |digs: &str| digs.parse().unwrap())(input)
+fn integer(input: &mut &str) -> PResult<Integer> {
+    digit1
+        .map(|digs: &str| digs.parse().unwrap())
+        .parse_next(input)
 }
 
-fn list(input: &str) -> IResult<&str, Vec<Item>> {
-    delimited(char('['), separated_list0(char(','), item), char(']'))(input)
+fn list(input: &mut &str) -> PResult<Vec<Item>> {
+    delimited('[', separated(.., item, ','), ']').parse_next(input)
 }
 
-fn item(input: &str) -> IResult<&str, Item> {
-    alt((map(integer, Item::Int), map(list, Item::List)))(input)
+fn item(input: &mut &str) -> PResult<Item> {
+    alt((integer.map(Item::Int), list.map(Item::List))).parse_next(input)
 }
 
-fn packet(input: &str) -> IResult<&str, Packet> {
+fn packet(input: &mut &str) -> PResult<Packet> {
     list(input)
 }
 
-fn packet_pair(input: &str) -> IResult<&str, PacketPair> {
-    map(separated_pair(packet, char('\n'), packet), |(a, b)| [a, b])(input)
+fn packet_pair(input: &mut &str) -> PResult<PacketPair> {
+    separated_pair(packet, '\n', packet)
+        .map(|(a, b)| [a, b])
+        .parse_next(input)
 }
 
-pub(crate) fn packets(input: &str) -> IResult<&str, Vec<PacketPair>> {
-    separated_list1(tag("\n\n"), packet_pair)(input)
+pub(crate) fn packets(input: &mut &str) -> PResult<Vec<PacketPair>> {
+    separated(1.., packet_pair, "\n\n").parse_next(input)
 }

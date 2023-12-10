@@ -22,8 +22,8 @@ fn contains_cmp(haystack: &Range<i64>, needle: i64) -> Ordering {
     }
 }
 
-pub fn non_beacons_at_y<const Y: i64>(input: &str) -> usize {
-    let (_, reports) = parse::reports(input).unwrap();
+pub fn non_beacons_at_y<const Y: i64>(mut input: &str) -> usize {
+    let reports = parse::reports(&mut input).unwrap();
 
     let mut beacons = Vec::new();
     let mut ranges = Vec::new();
@@ -258,8 +258,8 @@ impl Diamond {
     }
 }
 
-pub fn tuning_freq_in<const MAX_SEARCH_AREA: i64>(input: &str) -> usize {
-    let (_, reports) = parse::reports(input).unwrap();
+pub fn tuning_freq_in<const MAX_SEARCH_AREA: i64>(mut input: &str) -> usize {
+    let reports = parse::reports(&mut input).unwrap();
     let diamonds = reports.into_iter().map(Diamond::from).collect_vec();
     for diamond in diamonds.iter() {
         if let Some(distress_beacon) =

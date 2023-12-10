@@ -17,11 +17,11 @@ struct Monkey {
 }
 
 fn monkey_business(
-    input: &str,
+    mut input: &str,
     inspect: fn(item: Item, lcm: Item) -> Item,
     rounds: usize,
 ) -> usize {
-    let (_, mut monkeys) = parse::monkeys(input).unwrap();
+    let mut monkeys = parse::monkeys(&mut input).unwrap();
     let mut activity = vec![0; monkeys.len()];
 
     let lcm = monkeys

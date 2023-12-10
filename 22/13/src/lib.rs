@@ -31,8 +31,8 @@ impl Ord for Item {
 type Packet = Vec<Item>;
 type PacketPair = [Packet; 2];
 
-pub fn part1(input: &str) -> usize {
-    let (_, packet_pairs) = parse::packets(input).unwrap();
+pub fn part1(mut input: &str) -> usize {
+    let packet_pairs = parse::packets(&mut input).unwrap();
     packet_pairs
         .into_iter()
         .enumerate()
@@ -41,8 +41,8 @@ pub fn part1(input: &str) -> usize {
         .sum()
 }
 
-pub fn part2(input: &str) -> usize {
-    let (_, packet_pairs) = parse::packets(input).unwrap();
+pub fn part2(mut input: &str) -> usize {
+    let packet_pairs = parse::packets(&mut input).unwrap();
     let mut packets = packet_pairs.into_iter().flatten().collect_vec();
     let divider_packets = [
         vec![Item::List(vec![Item::Int(2)])],

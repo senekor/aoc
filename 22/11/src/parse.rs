@@ -1,112 +1,105 @@
 use std::collections::VecDeque;
 
-use utils::nom::{
-    branch::alt,
-    bytes::complete::tag,
-    character::complete::{char, digit1, multispace0, multispace1, space0},
-    combinator::map,
-    multi::{separated_list0, separated_list1},
-    sequence::{preceded, separated_pair, terminated, tuple},
-    IResult,
+use utils::winnow::{
+    ascii::{digit1, multispace0, multispace1, space0},
+    combinator::{alt, preceded, separated, separated_pair, terminated},
+    PResult, Parser,
 };
 
 use crate::{Item, Monkey, MonkeyID, Operation};
 
-fn item(input: &str) -> IResult<&str, Item> {
-    map(digit1, |digits: &str| digits.parse().unwrap())(input)
+fn item(input: &mut &str) -> PResult<Item> {
+    digit1
+        .map(|digits: &str| digits.parse().unwrap())
+        .parse_next(input)
 }
 
-fn items(input: &str) -> IResult<&str, VecDeque<Item>> {
-    let several_items = separated_list1(tag(", "), item);
-    map(
-        preceded(tag("Starting items: "), several_items),
-        VecDeque::from,
-    )(input)
+fn items(input: &mut &str) -> PResult<VecDeque<Item>> {
+    let several_items = separated(1.., item, ", ");
+    preceded("Starting items: ", several_items)
+        .parse_next(input)
+        .map(Vec::into)
 }
 
 #[test]
 fn test_items() {
     assert_eq!(
-        items("Starting items: 79, 98"),
-        Ok(("", vec![79, 98].into()))
+        items(&mut "Starting items: 79, 98"),
+        Ok(vec![79, 98].into())
     );
 }
 
 type Operator = fn(Item, Item) -> Item;
 
-fn operator(input: &str) -> IResult<&str, Operator> {
-    let plus = map(char('+'), |_| std::ops::Add::add as Operator);
-    let star = map(char('*'), |_| std::ops::Mul::mul as Operator);
-    alt((plus, star))(input)
+fn operator(input: &mut &str) -> PResult<Operator> {
+    let plus = '+'.map(|_| std::ops::Add::add as Operator);
+    let star = '*'.map(|_| std::ops::Mul::mul as Operator);
+    alt((plus, star)).parse_next(input)
 }
 
-fn operand(input: &str) -> IResult<&str, Option<Item>> {
-    let old = map(tag("old"), |_| None);
-    let num = map(digit1, |digits: &str| Some(digits.parse().unwrap()));
-    alt((old, num))(input)
+fn operand(input: &mut &str) -> PResult<Option<Item>> {
+    let old = "old".map(|_| None);
+    let num = digit1.map(|digits: &str| Some(digits.parse().unwrap()));
+    alt((old, num)).parse_next(input)
 }
 
-fn operation(input: &str) -> IResult<&str, Operation> {
+fn operation(input: &mut &str) -> PResult<Operation> {
     let expression = separated_pair(operand, space0, separated_pair(operator, space0, operand));
-    map(
-        preceded(tag("Operation: new = "), expression),
-        |(left, (f, right))| (f, left, right),
-    )(input)
+    preceded("Operation: new = ", expression)
+        .map(|(left, (f, right))| (f, left, right))
+        .parse_next(input)
 }
 
 #[test]
 fn test_operation() {
-    let (rest, op) = operation("Operation: new = old * 19").unwrap();
-    assert_eq!(rest, "");
+    let op = operation(&mut "Operation: new = old * 19").unwrap();
     assert_eq!(op, (std::ops::Mul::mul as Operator, None, Some(19)));
 }
 
-fn divisible(input: &str) -> IResult<&str, Item> {
-    preceded(tag("Test: divisible by "), item)(input)
+fn divisible(input: &mut &str) -> PResult<Item> {
+    preceded("Test: divisible by ", item).parse_next(input)
 }
 
 #[test]
 fn test_divisible() {
-    let (rest, divisible) = divisible("Test: divisible by 17").unwrap();
-    assert_eq!(rest, "");
+    let divisible = divisible(&mut "Test: divisible by 17").unwrap();
     assert_eq!(divisible, 17);
 }
 
-fn monkey_id(input: &str) -> IResult<&str, MonkeyID> {
-    map(digit1, |digits: &str| digits.parse::<MonkeyID>().unwrap())(input)
+fn monkey_id(input: &mut &str) -> PResult<MonkeyID> {
+    digit1
+        .map(|digits: &str| digits.parse::<MonkeyID>().unwrap())
+        .parse_next(input)
 }
 
-fn receiver_true(input: &str) -> IResult<&str, MonkeyID> {
-    preceded(tag("If true: throw to monkey "), monkey_id)(input)
+fn receiver_true(input: &mut &str) -> PResult<MonkeyID> {
+    preceded("If true: throw to monkey ", monkey_id).parse_next(input)
 }
 
-fn receiver_false(input: &str) -> IResult<&str, MonkeyID> {
-    preceded(tag("If false: throw to monkey "), monkey_id)(input)
+fn receiver_false(input: &mut &str) -> PResult<MonkeyID> {
+    preceded("If false: throw to monkey ", monkey_id).parse_next(input)
 }
 
-fn monkey(input: &str) -> IResult<&str, Monkey> {
-    let (input, _) = tuple((tag("Monkey "), digit1, char(':')))(input)?;
-    let (input, items) = preceded(multispace1, items)(input)?;
-    let (input, operation) = preceded(multispace1, operation)(input)?;
-    let (input, divisible) = preceded(multispace1, divisible)(input)?;
-    let (input, receiver_true) = preceded(multispace1, receiver_true)(input)?;
-    let (input, receiver_false) = preceded(multispace1, receiver_false)(input)?;
-    Ok((
-        input,
-        Monkey {
-            items,
-            operation,
-            divisible_by: divisible,
-            receiver_true,
-            receiver_false,
-        },
-    ))
+fn monkey(input: &mut &str) -> PResult<Monkey> {
+    ("Monkey ", digit1, ':').parse_next(input)?;
+    let items = preceded(multispace1, items).parse_next(input)?;
+    let operation = preceded(multispace1, operation).parse_next(input)?;
+    let divisible = preceded(multispace1, divisible).parse_next(input)?;
+    let receiver_true = preceded(multispace1, receiver_true).parse_next(input)?;
+    let receiver_false = preceded(multispace1, receiver_false).parse_next(input)?;
+    Ok(Monkey {
+        items,
+        operation,
+        divisible_by: divisible,
+        receiver_true,
+        receiver_false,
+    })
 }
 
 #[test]
 fn test_monkey() {
-    let (rest, monkey) = monkey(
-        "\
+    let monkey = monkey(
+        &mut "\
 Monkey 4:
   Starting items: 55, 52, 67, 70, 69, 94, 90
   Operation: new = old * old
@@ -115,7 +108,6 @@ Monkey 4:
     If false: throw to monkey 3",
     )
     .unwrap();
-    assert_eq!(rest, "");
     assert_eq!(monkey.items, vec![55, 52, 67, 70, 69, 94, 90]);
     assert_eq!(
         monkey.operation,
@@ -124,6 +116,6 @@ Monkey 4:
     assert_eq!(monkey.divisible_by, 17);
 }
 
-pub(crate) fn monkeys(input: &str) -> IResult<&str, Vec<Monkey>> {
-    terminated(separated_list0(multispace1, monkey), multispace0)(input)
+pub(crate) fn monkeys(input: &mut &str) -> PResult<Vec<Monkey>> {
+    terminated(separated(.., monkey, multispace1), multispace0).parse_next(input)
 }

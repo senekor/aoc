@@ -169,15 +169,15 @@ impl Cave {
     }
 }
 
-pub fn part1(input: &str) -> usize {
-    let (_, paths) = parse::paths(input).unwrap();
+pub fn part1(mut input: &str) -> usize {
+    let paths = parse::paths(&mut input).unwrap();
     let mut cave = Cave::from(paths);
     while cave.insert_sand_unit() { /* println!("{cave}"); */ }
     cave.count_sand_units()
 }
 
-pub fn part2(input: &str) -> usize {
-    let (_, mut paths) = parse::paths(input).unwrap();
+pub fn part2(mut input: &str) -> usize {
+    let mut paths = parse::paths(&mut input).unwrap();
     let PathBounds { max_depth, .. } = get_path_bounds(&paths);
     let floor_depth = max_depth + 2;
     let floor: Path = vec![

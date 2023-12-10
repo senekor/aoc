@@ -64,14 +64,14 @@ impl Iterator for DependencyTree {
     }
 }
 
-pub fn part1(input: &str) -> String {
-    let (_, instructions) = parse::instructions(input).unwrap();
+pub fn part1(mut input: &str) -> String {
+    let instructions = parse::instructions(&mut input).unwrap();
     let dep_tree = DependencyTree::from(instructions);
     dep_tree.collect()
 }
 
-pub fn part2_impl(input: &str, num_workers: usize, base_time: usize) -> usize {
-    let (_, instructions) = parse::instructions(input).unwrap();
+pub fn part2_impl(mut input: &str, num_workers: usize, base_time: usize) -> usize {
+    let instructions = parse::instructions(&mut input).unwrap();
     let mut dep_tree = DependencyTree::from(instructions);
 
     let mut t = 0;

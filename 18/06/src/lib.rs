@@ -99,8 +99,8 @@ impl std::fmt::Display for Displ<'_> {
     }
 }
 
-pub fn part1(input: &str) -> usize {
-    let (_, coordinates) = parse::coordinates(input).unwrap();
+pub fn part1(mut input: &str) -> usize {
+    let coordinates = parse::coordinates(&mut input).unwrap();
 
     let max = coordinates
         .iter()
@@ -164,8 +164,8 @@ pub fn part1(input: &str) -> usize {
     area_size.into_values().max().unwrap()
 }
 
-pub fn part2_impl(input: &str, max_dist: usize) -> usize {
-    let (_, coordinates) = parse::coordinates(input).unwrap();
+pub fn part2_impl(mut input: &str, max_dist: usize) -> usize {
+    let coordinates = parse::coordinates(&mut input).unwrap();
 
     let max = coordinates
         .iter()

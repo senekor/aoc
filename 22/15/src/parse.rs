@@ -1,26 +1,26 @@
-use utils::{
-    nom::{
-        bytes::complete::tag,
-        character::complete::{char, newline},
-        combinator::map,
-        multi::separated_list0,
-        sequence::{pair, preceded, separated_pair},
-        IResult,
-    },
-    parse::integer::i64,
+use utils::winnow::{
+    ascii::{digit1, newline},
+    combinator::{opt, preceded, separated, separated_pair},
+    PResult, Parser,
 };
 
 use crate::Point;
 
-fn coordinate(c: char) -> impl Fn(&str) -> IResult<&str, i64> {
-    move |input: &str| preceded(pair(char(c), char('=')), i64)(input)
+fn i64(input: &mut &str) -> PResult<i64> {
+    (opt('-'), digit1)
+        .recognize()
+        .map(|digs: &str| digs.parse().unwrap())
+        .parse_next(input)
 }
 
-fn point(input: &str) -> IResult<&str, Point> {
-    map(
-        separated_pair(coordinate('x'), tag(", "), coordinate('y')),
-        |(x, y)| Point::new(x, y),
-    )(input)
+fn coordinate(c: char) -> impl Fn(&mut &str) -> PResult<i64> {
+    move |input: &mut &str| preceded((c, '='), i64).parse_next(input)
+}
+
+fn point(input: &mut &str) -> PResult<Point> {
+    separated_pair(coordinate('x'), ", ", coordinate('y'))
+        .map(|(x, y)| Point::new(x, y))
+        .parse_next(input)
 }
 
 #[derive(Debug, PartialEq, Eq)]
@@ -29,27 +29,26 @@ pub(crate) struct SensorReport {
     pub beacon: Point,
 }
 
-fn sensor_report(input: &str) -> IResult<&str, SensorReport> {
-    map(
-        pair(
-            preceded(tag("Sensor at "), point),
-            preceded(tag(": closest beacon is at "), point),
-        ),
-        |(sensor, beacon)| SensorReport { sensor, beacon },
-    )(input)
+fn sensor_report(input: &mut &str) -> PResult<SensorReport> {
+    (
+        preceded("Sensor at ", point),
+        preceded(": closest beacon is at ", point),
+    )
+        .map(|(sensor, beacon)| SensorReport { sensor, beacon })
+        .parse_next(input)
 }
 
-pub(crate) fn reports(input: &str) -> IResult<&str, Vec<SensorReport>> {
-    separated_list0(newline, sensor_report)(input)
+pub(crate) fn reports(input: &mut &str) -> PResult<Vec<SensorReport>> {
+    separated(.., sensor_report, newline).parse_next(input)
 }
 
 #[test]
 fn test_reports() {
-    let input = "\
+    let mut input = "\
 Sensor at x=2, y=18: closest beacon is at x=-2, y=15
 Sensor at x=9, y=16: closest beacon is at x=10, y=16
 ";
-    let (_, reports) = reports(input).unwrap();
+    let reports = reports(&mut input).unwrap();
     let expected = vec![
         SensorReport {
             sensor: Point::new(2, 18),

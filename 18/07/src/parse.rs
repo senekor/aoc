@@ -1,26 +1,25 @@
-use utils::nom::{
-    branch::alt,
-    bytes::complete::tag,
-    character::complete::{anychar, newline},
-    multi::separated_list0,
-    IResult,
+use utils::winnow::{
+    ascii::newline,
+    combinator::{alt, separated},
+    token::any,
+    PResult, Parser,
 };
 
 use crate::Instruction;
 
-fn step(input: &str) -> IResult<&str, char> {
-    let (input, _) = alt((tag("Step "), tag("step ")))(input)?;
-    anychar(input)
+fn step(input: &mut &str) -> PResult<char> {
+    alt(("Step ", "step ")).parse_next(input)?;
+    any(input)
 }
 
-fn instruction(input: &str) -> IResult<&str, Instruction> {
-    let (input, dependency) = step(input)?;
-    let (input, _) = tag(" must be finished before ")(input)?;
-    let (input, target) = step(input)?;
-    let (input, _) = tag(" can begin.")(input)?;
-    Ok((input, Instruction { target, dependency }))
+fn instruction(input: &mut &str) -> PResult<Instruction> {
+    let dependency = step.parse_next(input)?;
+    let _ = " must be finished before ".parse_next(input)?;
+    let target = step.parse_next(input)?;
+    let _ = " can begin.".parse_next(input)?;
+    Ok(Instruction { target, dependency })
 }
 
-pub(crate) fn instructions(input: &str) -> IResult<&str, Vec<Instruction>> {
-    separated_list0(newline, instruction)(input)
+pub(crate) fn instructions(input: &mut &str) -> PResult<Vec<Instruction>> {
+    separated(.., instruction, newline).parse_next(input)
 }
