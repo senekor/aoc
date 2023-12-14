@@ -1,0 +1,7 @@
+[package]
+name = "aoc_23_01"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+utils.workspace = true

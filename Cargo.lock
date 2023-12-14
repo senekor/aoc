@@ -792,6 +792,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "aoc_23_01"
+version = "0.1.0"
+dependencies = [
+ "aoc_utils",
+]
+
+[[package]]
 name = "aoc_utils"
 version = "0.1.0"
 source = "git+https://github.com/senekor/aoc-utils#2714c990dc6084d9e536066ead54382824d2582a"
