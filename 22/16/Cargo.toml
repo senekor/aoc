@@ -1,0 +1,9 @@
+[package]
+name = "aoc_22_16"
+version.workspace = true
+edition.workspace = true
+
+default-run = "aoc_22_16"
+
+[dependencies]
+utils.workspace = true

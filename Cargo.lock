@@ -792,6 +792,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "aoc_22_16"
+version = "0.1.0"
+dependencies = [
+ "aoc_utils",
+]
+
+[[package]]
 name = "aoc_23_01"
 version = "0.1.0"
 dependencies = [
