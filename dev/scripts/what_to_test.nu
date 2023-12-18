@@ -6,6 +6,10 @@ def what_to_test [] {
         git fetch origin main | ignore
         git branch --track main origin/main | ignore
     }
+    if (git rev-parse main) == (git rev-parse HEAD) {
+        # testing on the master branch, always everything
+        return "--all"
+    }
     let lock_diffstat = (git diff --stat main -- Cargo.lock)
     let diffstat = (git diff --name-status main)
     let puzzles = (
