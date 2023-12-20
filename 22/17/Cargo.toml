@@ -1,0 +1,8 @@
+[package]
+name = "aoc_22_17"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+arrayvec = "0.7.4"
+utils.workspace = true
