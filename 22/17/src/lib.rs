@@ -15,10 +15,10 @@ fn _print_room(room: &[Row]) {
     println!("+-------+");
 }
 
-pub fn part1(input: &str) -> usize {
+fn f<const NUM_ROCKS: usize>(input: &str) -> usize {
     let mut jets = input.trim().chars().map(Jet::from).cycle();
     let mut room: Vec<Row> = vec![];
-    for mut rock in get_falling_rocks().take(2022) {
+    for mut rock in get_falling_rocks().take(NUM_ROCKS) {
         let mut offset = room.len() + 3;
         for jet in &mut jets {
             rock = match rock.apply(jet) {
@@ -39,6 +39,17 @@ pub fn part1(input: &str) -> usize {
     room.len()
 }
 
-pub fn part2(_input: &str) -> usize {
-    0
+#[test]
+fn vec_drain_shifts() {
+    let mut v = vec![1, 2, 3, 4];
+    v.drain(..2);
+    assert_eq!(v, [3, 4])
+}
+
+pub fn part1(input: &str) -> usize {
+    f::<2022>(input)
+}
+
+pub fn part2(input: &str) -> usize {
+    f::<1_000_000_000_000>(input)
 }
