@@ -30,9 +30,8 @@ fn sum(obj: &JsonValue) -> i64 {
         x => {
             dbg!(x);
             panic!("unexpected json val")
-        }
-        // Null => 0,
-        // Boolean(b) => 0,
+        } // Null => 0,
+          // Boolean(b) => 0,
     }
 }
 
@@ -71,14 +70,19 @@ fn sum2(obj: &JsonValue) -> i64 {
         Short(_s) => 0,
         String(_s) => 0,
         Number(n) => n.as_fixed_point_i64(0).unwrap(),
-        Object(o) => if has_red(o) { 0 } else { o.sum_all2() },
+        Object(o) => {
+            if has_red(o) {
+                0
+            } else {
+                o.sum_all2()
+            }
+        }
         Array(v) => v.sum_all2(),
         x => {
             dbg!(x);
             panic!("unexpected json val")
-        }
-        // Null => 0,
-        // Boolean(b) => 0,
+        } // Null => 0,
+          // Boolean(b) => 0,
     }
 }
 
