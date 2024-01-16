@@ -394,7 +394,7 @@
 
 > <a href="https://adventofcode.com/2022/day/16">▓▓</a
 
-> <a href="https://adventofcode.com/2022/day/17">▓▓</a
+>  <a href="https://adventofcode.com/2022/day/17">?</a
 
 >  <a href="https://adventofcode.com/2022/day/18">?</a
 
@@ -417,7 +417,7 @@
 
 > <a href="https://adventofcode.com/2023/day/2" >▓▓</a
 
->  <a href="https://adventofcode.com/2023/day/3" >?</a
+> <a href="https://adventofcode.com/2023/day/3" >▓▓</a
 
 >  <a href="https://adventofcode.com/2023/day/4" >?</a
 

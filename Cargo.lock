@@ -813,6 +813,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "aoc_23_03"
+version = "0.1.0"
+dependencies = [
+ "aoc_utils",
+ "arrayvec",
+]
+
+[[package]]
 name = "aoc_utils"
 version = "0.1.0"
 source = "git+https://github.com/senekor/aoc-utils#2714c990dc6084d9e536066ead54382824d2582a"
@@ -830,6 +838,12 @@ checksum = "cab112f0a86d568ea0e627cc1d6be74a1e9cd55214684db5561995f6dad897c6"
 dependencies = [
  "num-traits",
 ]
+
+[[package]]
+name = "arrayvec"
+version = "0.7.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "96d30a06541fbafbc7f82ed10c06164cfbd2c401138f6addd8404629c4b16711"
 
 [[package]]
 name = "autocfg"
