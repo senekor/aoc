@@ -846,6 +846,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "aoc_23_05"
+version = "0.1.0"
+dependencies = [
+ "aoc_utils",
+ "winnow",
+]
+
+[[package]]
 name = "aoc_utils"
 version = "0.1.0"
 
