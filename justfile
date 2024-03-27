@@ -10,9 +10,8 @@ new year day:
     #!/bin/bash
     set -euo pipefail
 
-    cargo generate aoc \
-        --git "https://github.com/senekor/cargo-templates" \
-        --branch main \
+    cargo generate \
+        --path dev/cargo-generate-template \
         --init \
         --name whatever \
         --define year={{year}} \
