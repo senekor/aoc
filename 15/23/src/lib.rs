@@ -1,13 +1,24 @@
-use std::ops::{Index, IndexMut};
+use std::{
+    ops::{Index, IndexMut},
+    str::FromStr,
+};
 
-use strum::EnumString;
-
-#[derive(Clone, Copy, EnumString)]
+#[derive(Clone, Copy)]
 enum Register {
-    #[strum(ascii_case_insensitive)]
     A,
-    #[strum(ascii_case_insensitive)]
     B,
+}
+
+impl FromStr for Register {
+    type Err = ();
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "a" => Ok(Self::A),
+            "b" => Ok(Self::B),
+            _ => panic!("unknown register: {s:?}"),
+        }
+    }
 }
 
 type Offset = i32;
