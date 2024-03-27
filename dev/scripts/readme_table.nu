@@ -1,10 +1,10 @@
 #!/usr/bin/env nu
 
-def day_completed [year: int, day: int] {
-    ($day | into string | fill -a r -c "0" -w 2) in (ls -s $"($year)" | get name)
+def day_completed [year: string, day: int] {
+    ($day | into string | fill -a r -c "0" -w 2) in (ls -s $year | get name)
 }
 
-def get_filler [year: int, day: int] {
+def get_filler [year: string, day: int] {
     if (day_completed $year $day) {
         "▓▓"
     } else { "?" }
