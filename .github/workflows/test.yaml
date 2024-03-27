@@ -6,7 +6,7 @@ jobs:
     name: check difficulty spec
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: cargo-bins/cargo-binstall@main
       - name: Install nushell
         run: cargo binstall -y nu
@@ -18,7 +18,7 @@ jobs:
     outputs:
       what: ${{ steps.what_to_test.outputs.what }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: cargo-bins/cargo-binstall@main
       - name: Install nushell
         run: cargo binstall -y nu
@@ -35,7 +35,7 @@ jobs:
       WHAT: ${{ needs.what_to_test.outputs.what }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: "true"
       - uses: dtolnay/rust-toolchain@stable
