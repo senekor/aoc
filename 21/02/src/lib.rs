@@ -1,5 +1,4 @@
 use std::{panic, str::FromStr};
-use utils::Itertools;
 
 #[derive(Clone, Debug)]
 enum Direction {
@@ -47,7 +46,7 @@ pub fn part1(input: &str) -> i32 {
         input
             .lines()
             .map(|line| line.parse().unwrap())
-            .collect_vec(),
+            .collect::<Vec<_>>(),
     );
 
     let mut depth = 0;
@@ -69,7 +68,7 @@ pub fn part2(input: &str) -> i32 {
         input
             .lines()
             .map(|line| line.parse().unwrap())
-            .collect_vec(),
+            .collect::<Vec<_>>(),
     );
 
     let mut depth = 0;

@@ -1,7 +1,5 @@
 use std::collections::{HashMap, HashSet};
 
-use utils::Itertools;
-
 type Line = (String, String);
 fn parse(line: &str) -> Line {
     {
@@ -44,7 +42,7 @@ fn traverse(
 }
 
 pub fn part1(input: &str) -> usize {
-    let input = input.lines().map(parse).collect_vec();
+    let input = input.lines().map(parse).collect::<Vec<_>>();
 
     let mut caves: HashMap<String, Cave> = HashMap::new();
     for (from, to) in input {
@@ -98,7 +96,7 @@ fn traverse_2(
 }
 
 pub fn part2(input: &str) -> usize {
-    let input = input.lines().map(parse).collect_vec();
+    let input = input.lines().map(parse).collect::<Vec<_>>();
 
     let mut caves: HashMap<String, Cave> = HashMap::new();
     for (from, to) in input {

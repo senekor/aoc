@@ -4,5 +4,7 @@ version.workspace = true
 edition.workspace = true
 
 [dependencies]
+itertools = "0.12.1"
 nalgebra = "0.32.2"
 utils.workspace = true
+winnow.workspace = true

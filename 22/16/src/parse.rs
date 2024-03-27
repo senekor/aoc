@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use utils::winnow::{
+use winnow::{
     ascii::{alpha1, digit1, newline},
     combinator::{alt, preceded, separated},
     PResult, Parser,

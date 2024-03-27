@@ -1,4 +1,4 @@
-use utils::Itertools;
+use itertools::Itertools;
 
 pub fn part1(input: &str) -> i32 {
     input

@@ -1,5 +1,3 @@
-use utils::Itertools;
-
 use std::{
     cell::RefCell,
     cmp::{Ordering, Reverse},
@@ -182,9 +180,9 @@ pub fn part1(input: &str) -> usize {
         .map(|line| {
             line.chars()
                 .map(|c| c.to_string().parse::<u8>().unwrap())
-                .collect_vec()
+                .collect::<Vec<_>>()
         })
-        .collect_vec();
+        .collect::<Vec<_>>();
 
     let end = [grid.len() as u16 - 1, grid[0].len() as u16 - 1];
     let graph = Graph::from_grid(&grid);
@@ -197,9 +195,9 @@ pub fn part2(input: &str) -> usize {
         .map(|line| {
             line.chars()
                 .map(|c| c.to_string().parse::<u8>().unwrap())
-                .collect_vec()
+                .collect::<Vec<_>>()
         })
-        .collect_vec();
+        .collect::<Vec<_>>();
 
     let num_new_cols = grid[0].len() * 4;
     for line in &mut grid {
@@ -211,7 +209,7 @@ pub fn part2(input: &str) -> usize {
 
     let num_new_lines = grid.len() * 4;
     for i in 0..num_new_lines {
-        grid.push(grid[i].iter().map(|&r| r % 9 + 1).collect_vec());
+        grid.push(grid[i].iter().map(|&r| r % 9 + 1).collect::<Vec<_>>());
     }
 
     let end = [grid.len() as u16 - 1, grid[0].len() as u16 - 1];

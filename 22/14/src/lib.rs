@@ -4,7 +4,7 @@ use std::{
 };
 
 use nalgebra::Point2;
-use utils::Itertools;
+use itertools::Itertools;
 
 mod parse;
 

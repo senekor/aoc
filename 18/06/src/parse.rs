@@ -1,4 +1,4 @@
-use utils::winnow::{
+use winnow::{
     ascii::{dec_uint, newline},
     combinator::{separated, separated_pair},
     PResult, Parser,

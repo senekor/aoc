@@ -5,4 +5,5 @@ edition.workspace = true
 
 [dependencies]
 hashbag = "0.1.10"
+itertools = "0.12.1"
 utils.workspace = true

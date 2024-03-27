@@ -1,5 +1,4 @@
 use pathfinding::prelude::*;
-use utils::Itertools;
 
 fn elevation(b: u8) -> u8 {
     match b {
@@ -44,7 +43,7 @@ fn right(grid: &[Vec<u8>], idx: (usize, usize)) -> Option<Idx> {
 }
 
 pub fn part1(input: &str) -> usize {
-    let grid = input.lines().map(|l| l.as_bytes().to_vec()).collect_vec();
+    let grid = input.lines().map(|l| l.as_bytes().to_vec()).collect::<Vec<_>>();
 
     let mut all_squares = grid
         .iter()
@@ -74,7 +73,7 @@ pub fn part1(input: &str) -> usize {
 }
 
 pub fn part2(input: &str) -> usize {
-    let grid = input.lines().map(|l| l.as_bytes().to_vec()).collect_vec();
+    let grid = input.lines().map(|l| l.as_bytes().to_vec()).collect::<Vec<_>>();
 
     let mut all_squares = grid
         .iter()

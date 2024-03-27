@@ -1,5 +1,3 @@
-use utils::Itertools;
-
 fn paper_dims(dots: &[(usize, usize)]) -> (usize, usize) {
     let (max_x, max_y) = dots.iter().fold((0, 0), |(max_x, max_y), (x, y)| match () {
         _ if *x > max_x && *y > max_y => (*x, *y),
@@ -20,7 +18,7 @@ fn fold(mut paper: Vec<Vec<char>>, axis: String, n: usize) -> Vec<Vec<char>> {
                 let mirror = n + (n - j);
                 row[j] = row[mirror];
             }
-            *row = row.clone().into_iter().take(n).collect_vec();
+            *row = row.clone().into_iter().take(n).collect::<Vec<_>>();
         }
     } else {
         for i in 0..n {
@@ -32,7 +30,7 @@ fn fold(mut paper: Vec<Vec<char>>, axis: String, n: usize) -> Vec<Vec<char>> {
                 paper[i][j] = paper[mirror][j];
             }
         }
-        paper = paper.into_iter().take(n).collect_vec();
+        paper = paper.into_iter().take(n).collect::<Vec<_>>();
     };
     paper
 }
@@ -53,7 +51,7 @@ fn get_dots_folds(input: &str) -> (Dots, Folds) {
                 iter.next().unwrap().parse::<usize>().unwrap(),
             )
         })
-        .collect_vec();
+        .collect::<Vec<_>>();
     let folds = input
         .split("\n\n")
         .nth(1)
@@ -67,7 +65,7 @@ fn get_dots_folds(input: &str) -> (Dots, Folds) {
                 iter.next().unwrap().parse::<usize>().unwrap(),
             )
         })
-        .collect_vec();
+        .collect::<Vec<_>>();
 
     (dots, folds)
 }

@@ -1,4 +1,4 @@
-use utils::Itertools;
+use itertools::Itertools;
 
 pub fn part1(input: &str) -> u32 {
     let entries = input.lines().map(|line| line.parse::<u32>().unwrap());

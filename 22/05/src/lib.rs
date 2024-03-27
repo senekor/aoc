@@ -1,12 +1,10 @@
-use utils::Itertools;
-
 struct Ship {
     crates: Vec<Vec<char>>,
 }
 
 impl From<&str> for Ship {
     fn from(value: &str) -> Self {
-        let mut lines = value.lines().collect_vec();
+        let mut lines = value.lines().collect::<Vec<_>>();
         lines.pop(); // drop line with numbers
         lines.reverse();
         let num_crates = lines[0].len() / 4 + 1;
@@ -35,7 +33,7 @@ impl From<&str> for Instruction {
         let nums = value
             .split_whitespace()
             .flat_map(|s| s.parse().ok())
-            .collect_vec();
+            .collect::<Vec<_>>();
         Self {
             num_moved: nums[0],
             from: nums[1] - 1,
@@ -48,7 +46,7 @@ fn parse_input(input: &str) -> (Ship, Vec<Instruction>) {
     let (ship, instructions) = input.split_once("\n\n").unwrap();
     (
         Ship::from(ship),
-        instructions.lines().map(Instruction::from).collect_vec(),
+        instructions.lines().map(Instruction::from).collect::<Vec<_>>(),
     )
 }
 

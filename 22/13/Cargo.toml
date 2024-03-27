@@ -5,3 +5,4 @@ edition.workspace = true
 
 [dependencies]
 utils.workspace = true
+winnow.workspace = true

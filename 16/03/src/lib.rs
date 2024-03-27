@@ -1,4 +1,4 @@
-use utils::{itertools::izip, Itertools};
+use itertools::izip;
 
 mod triangle;
 use triangle::Triangle;
@@ -15,7 +15,7 @@ pub fn part2(input: &str) -> usize {
     input
         .split_whitespace()
         .map(|s| s.parse::<u32>().unwrap())
-        .collect_vec()
+        .collect::<Vec<_>>()
         .chunks(9)
         .flat_map(|nine| {
             izip!(

@@ -1,5 +1,3 @@
-use utils::Itertools;
-
 fn parse_input(input: &str) -> Vec<Vec<i32>> {
     input
         .lines()
@@ -12,9 +10,9 @@ fn parse_input(input: &str) -> Vec<Vec<i32>> {
                         Some(c.parse::<i32>().unwrap())
                     }
                 })
-                .collect_vec()
+                .collect::<Vec<_>>()
         })
-        .collect_vec()
+        .collect::<Vec<_>>()
 }
 
 fn flash(input: &mut Vec<Vec<i32>>, i: usize, j: usize) {

@@ -1,6 +1,3 @@
-use std::cmp::max;
-use std::vec::Vec;
-
 struct Range {
     x1: usize,
     x2: usize,
@@ -75,7 +72,7 @@ pub fn part2(input: &str) -> i32 {
     for line in input.split('\n') {
         match parse_line(line) {
             Command::TurnOn(range) => do_for_range(&mut grid, range, |i| i + 1),
-            Command::TurnOff(range) => do_for_range(&mut grid, range, |i| max(0, i - 1)),
+            Command::TurnOff(range) => do_for_range(&mut grid, range, |i| 0.max(i - 1)),
             Command::Toggle(range) => do_for_range(&mut grid, range, |i| i + 2),
         }
     }

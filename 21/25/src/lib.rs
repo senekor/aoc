@@ -4,8 +4,6 @@ use std::{
     str::FromStr,
 };
 
-use utils::Itertools;
-
 #[derive(Debug, PartialEq, Eq, Clone)]
 struct Seafloor {
     grid: Vec<Vec<char>>,
@@ -17,8 +15,8 @@ impl FromStr for Seafloor {
         Ok(Seafloor {
             grid: s
                 .lines()
-                .map(|line| line.chars().collect_vec())
-                .collect_vec(),
+                .map(|line| line.chars().collect::<Vec<_>>())
+                .collect::<Vec<_>>(),
         })
     }
 }

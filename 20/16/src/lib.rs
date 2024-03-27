@@ -1,7 +1,5 @@
 use std::collections::HashSet;
 
-use utils::Itertools;
-
 struct Range {
     start: i64,
     end: i64,
@@ -33,7 +31,7 @@ fn parse_rule(rule: &str) -> Rule {
 
 fn prepare_input(input: &str) -> (Vec<Rule>, Vec<i64>, Vec<Vec<i64>>) {
     let mut iter = input.split("\n\n");
-    let rules = iter.next().unwrap().lines().map(parse_rule).collect_vec();
+    let rules = iter.next().unwrap().lines().map(parse_rule).collect::<Vec<_>>();
     let my_ticket = iter
         .next()
         .unwrap()
@@ -42,14 +40,14 @@ fn prepare_input(input: &str) -> (Vec<Rule>, Vec<i64>, Vec<Vec<i64>>) {
         .unwrap()
         .split(',')
         .map(|i| i.parse().unwrap())
-        .collect_vec();
+        .collect::<Vec<_>>();
     let tickets = iter
         .next()
         .unwrap()
         .lines()
         .skip(1)
-        .map(|l| l.split(',').map(|n| n.parse().unwrap()).collect_vec())
-        .collect_vec();
+        .map(|l| l.split(',').map(|n| n.parse().unwrap()).collect::<Vec<_>>())
+        .collect::<Vec<_>>();
     (rules, my_ticket, tickets)
 }
 

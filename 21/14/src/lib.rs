@@ -1,7 +1,5 @@
 use std::collections::{hash_map::Entry, HashMap};
 
-use utils::Itertools;
-
 type Line = (String, String);
 fn parse(line: &str) -> Line {
     {
@@ -17,7 +15,7 @@ fn parse_input(input: &str) -> (String, HashMap<String, String>) {
     let mut bruh = input.split("\n\n");
     let start = bruh.next().unwrap().to_string();
 
-    let instruction_list = bruh.next().unwrap().lines().map(parse).collect_vec();
+    let instruction_list = bruh.next().unwrap().lines().map(parse).collect::<Vec<_>>();
     let instructions = {
         let mut m = HashMap::new();
         for instr in instruction_list {

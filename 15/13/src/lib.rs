@@ -1,5 +1,6 @@
 use std::collections::HashMap;
-use utils::Itertools;
+
+use itertools::Itertools;
 
 fn parse_line(line: &str) -> (&str, i32, &str) {
     let line_no_period = &line[..line.len() - 1]; // drop period

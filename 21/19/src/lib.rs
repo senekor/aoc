@@ -1,7 +1,5 @@
 use std::{collections::HashSet, str::FromStr};
 
-use utils::Itertools;
-
 #[derive(Debug, PartialEq, Eq, Hash, Clone, Copy, Default)]
 struct Coordinates {
     x: i32,
@@ -241,7 +239,7 @@ impl Scanner {
         Rotation::all()
             .into_iter()
             .map(|rotation| self.clone().rotate(rotation))
-            .collect_vec()
+            .collect::<Vec<_>>()
     }
 }
 
@@ -258,7 +256,7 @@ impl FromStr for Scanner {
                 .unwrap()
                 .parse::<i32>()
                 .unwrap(),
-            beacons: lines.map(|line| line.parse().unwrap()).collect_vec(),
+            beacons: lines.map(|line| line.parse().unwrap()).collect::<Vec<_>>(),
         })
     }
 }
@@ -330,7 +328,7 @@ pub fn part1(input: &str) -> usize {
     let scanners: Vec<Scanner> = input
         .split("\n\n")
         .map(|block| block.parse().unwrap())
-        .collect_vec();
+        .collect::<Vec<_>>();
 
     let located_scanners = locate_all_scanners(scanners);
 
@@ -349,7 +347,7 @@ pub fn part2(input: &str) -> usize {
     let scanners: Vec<Scanner> = input
         .split("\n\n")
         .map(|block| block.parse().unwrap())
-        .collect_vec();
+        .collect::<Vec<_>>();
 
     let located_scanners = &locate_all_scanners(scanners);
 

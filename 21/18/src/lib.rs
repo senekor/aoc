@@ -1,5 +1,3 @@
-use utils::Itertools;
-
 #[derive(Debug, Clone)]
 enum Snail {
     Pair(Box<Snail>, Box<Snail>),
@@ -116,7 +114,7 @@ pub fn part1(input: &str) -> i32 {
     let snails = input
         .lines()
         .map(|line| parse_snail(&mut line.chars()))
-        .collect_vec();
+        .collect::<Vec<_>>();
 
     let result = snails.into_iter().reduce(snail_sum).unwrap();
     calc_magnitude(&result)
@@ -126,7 +124,7 @@ pub fn part2(input: &str) -> i32 {
     let snails = input
         .lines()
         .map(|line| parse_snail(&mut line.chars()))
-        .collect_vec();
+        .collect::<Vec<_>>();
 
     let mut max = i32::MIN;
 

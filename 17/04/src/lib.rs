@@ -1,7 +1,7 @@
 use std::collections::HashSet;
 
 use hashbag::HashBag;
-use utils::Itertools;
+use itertools::Itertools;
 
 #[cfg(test)]
 mod test_is_valid_passphrase {

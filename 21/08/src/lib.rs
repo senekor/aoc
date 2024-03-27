@@ -1,7 +1,7 @@
-use utils::Itertools;
+use itertools::Itertools;
 
 pub fn part1(input: &str) -> usize {
-    let input = input.lines().map(str::to_string).collect_vec();
+    let input = input.lines().map(str::to_string).collect::<Vec<_>>();
 
     let mut count = 0;
 
@@ -30,7 +30,7 @@ fn overlap(s1: &str, s2: &str) -> usize {
 }
 
 pub fn part2(input: &str) -> i32 {
-    let input = input.lines().map(str::to_string).collect_vec();
+    let input = input.lines().map(str::to_string).collect::<Vec<_>>();
 
     let mut count = 0;
 
@@ -38,7 +38,7 @@ pub fn part2(input: &str) -> i32 {
         // let os = line.split(" | ").nth(1).unwrap();
         let mut bruh = line.split(" | ");
         let yeet = bruh.join(" ");
-        let vec = yeet.split(' ').collect_vec();
+        let vec = yeet.split(' ').collect::<Vec<_>>();
 
         // let mut one = "".to_string();
         let mut four = "".to_string();

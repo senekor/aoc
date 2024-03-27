@@ -1,5 +1,3 @@
-use utils::Itertools;
-
 struct ParsedInput(Vec<i32>);
 
 fn parse_input(input: &str) -> ParsedInput {
@@ -7,7 +5,7 @@ fn parse_input(input: &str) -> ParsedInput {
         input
             .lines()
             .map(|line| line.parse::<i32>().unwrap())
-            .collect_vec(),
+            .collect::<Vec<_>>(),
     )
 }
 

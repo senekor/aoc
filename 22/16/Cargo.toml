@@ -7,3 +7,4 @@ default-run = "aoc_22_16"
 
 [dependencies]
 utils.workspace = true
+winnow.workspace = true

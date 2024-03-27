@@ -1,7 +1,5 @@
 use std::{collections::HashMap, hash::Hash};
 
-use utils::Itertools;
-
 type Line = (String, i32);
 fn parse_line(line: &str) -> Line {
     {
@@ -14,7 +12,7 @@ fn parse_line(line: &str) -> Line {
 }
 
 fn parse_input(input: &str) -> Vec<(String, i32)> {
-    input.lines().map(parse_line).collect_vec()
+    input.lines().map(parse_line).collect::<Vec<_>>()
 }
 
 struct Die {

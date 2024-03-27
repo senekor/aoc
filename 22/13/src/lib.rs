@@ -1,5 +1,3 @@
-use utils::Itertools;
-
 mod parse;
 
 type Integer = i32;
@@ -43,7 +41,7 @@ pub fn part1(mut input: &str) -> usize {
 
 pub fn part2(mut input: &str) -> usize {
     let packet_pairs = parse::packets(&mut input).unwrap();
-    let mut packets = packet_pairs.into_iter().flatten().collect_vec();
+    let mut packets = packet_pairs.into_iter().flatten().collect::<Vec<_>>();
     let divider_packets = [
         vec![Item::List(vec![Item::Int(2)])],
         vec![Item::List(vec![Item::Int(6)])],

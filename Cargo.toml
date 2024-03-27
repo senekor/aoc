@@ -7,4 +7,6 @@ version = "0.1.0"
 edition = "2021"
 
 [workspace.dependencies]
+itertools = "0.12.1"
 utils = { path = "utils", package = "aoc_utils" }
+winnow = "0.6.5"

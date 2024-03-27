@@ -1,7 +1,5 @@
 use std::collections::HashMap;
 
-use utils::Itertools;
-
 struct Program {
     name: String,
     weight: u32,
@@ -22,7 +20,7 @@ impl From<&str> for Program {
 }
 
 pub fn part1(input: &str) -> String {
-    let programs = input.lines().map(Program::from).collect_vec();
+    let programs = input.lines().map(Program::from).collect::<Vec<_>>();
     programs
         .iter()
         .map(|p| &p.name)

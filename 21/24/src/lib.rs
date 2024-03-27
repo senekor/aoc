@@ -1,8 +1,6 @@
 use std::cmp::{max, min};
 use std::str::FromStr;
 
-use utils::Itertools;
-
 #[derive(Debug, Clone, PartialEq, Eq)]
 struct Block {
     is_26: bool,
@@ -49,7 +47,7 @@ fn parse_prog(input: &str) -> Vec<Block> {
         .split("inp w\n")
         .skip(1)
         .map(|block| block.parse().unwrap())
-        .collect_vec()
+        .collect::<Vec<_>>()
 }
 
 pub fn part1(input: &str) -> String {

@@ -3,8 +3,6 @@ use std::{
     ops::{Index, IndexMut, RangeInclusive},
 };
 
-use utils::Itertools;
-
 type Line = (String, i32, i32, i32, i32, i32, i32);
 fn parse(line: &str) -> Line {
     {
@@ -193,7 +191,7 @@ pub fn part1(input: &str) -> usize {
         .lines()
         .map(parse)
         .map(Cuboid::from_line)
-        .collect_vec();
+        .collect::<Vec<_>>();
 
     let mut reactor = Reactor::new();
 
@@ -247,7 +245,7 @@ pub fn part2(input: &str) -> usize {
         .lines()
         .map(parse)
         .map(Cuboid::from_line)
-        .collect_vec();
+        .collect::<Vec<_>>();
 
     let mut reactor = Reactor2::new();
 

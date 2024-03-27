@@ -4,7 +4,6 @@ use std::{cmp::Ordering, ops::Range};
 
 use nalgebra::Point2;
 use parse::SensorReport;
-use utils::Itertools;
 
 mod parse;
 
@@ -210,8 +209,8 @@ fn test_iter_perimeter() {
     ]
     .into_iter()
     .map(|(x, y)| Point2::new(x, y))
-    .collect_vec();
-    let actual = diamond.iter_perimeter().collect_vec();
+    .collect::<Vec<_>>();
+    let actual = diamond.iter_perimeter().collect::<Vec<_>>();
     assert_eq!(actual, expected);
 }
 
@@ -260,7 +259,7 @@ impl Diamond {
 
 pub fn tuning_freq_in<const MAX_SEARCH_AREA: i64>(mut input: &str) -> usize {
     let reports = parse::reports(&mut input).unwrap();
-    let diamonds = reports.into_iter().map(Diamond::from).collect_vec();
+    let diamonds = reports.into_iter().map(Diamond::from).collect::<Vec<_>>();
     for diamond in diamonds.iter() {
         if let Some(distress_beacon) =
             diamond.find_distress_beacon_at_perimeter::<MAX_SEARCH_AREA>(&diamonds)

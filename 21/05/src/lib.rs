@@ -1,5 +1,3 @@
-use utils::Itertools;
-
 #[derive(Clone, Debug)]
 struct Line {
     x1: usize,
@@ -24,7 +22,7 @@ fn str_to_line(s: &str) -> Line {
 struct Lines(Vec<Line>);
 
 fn str_to_lines(s: &str) -> Lines {
-    Lines(s.lines().map(str_to_line).collect_vec())
+    Lines(s.lines().map(str_to_line).collect::<Vec<_>>())
 }
 
 fn calc_max_coords(lines: &Lines) -> (usize, usize) {

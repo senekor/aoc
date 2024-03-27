@@ -1,5 +1,3 @@
-use utils::Itertools;
-
 pub fn part1(input: &str) -> usize {
     let l = input.lines().next().unwrap().len();
     let n = input.lines().count();
@@ -43,7 +41,7 @@ fn apply_bit_criteria(diagnostic_report: &[&str], flipped: bool) -> usize {
         candidates = candidates
             .into_iter()
             .filter(|line| line.chars().nth(i).unwrap() == req_char)
-            .collect_vec();
+            .collect::<Vec<_>>();
         if candidates.len() == 1 {
             break;
         }
@@ -52,7 +50,7 @@ fn apply_bit_criteria(diagnostic_report: &[&str], flipped: bool) -> usize {
 }
 
 pub fn part2(input: &str) -> usize {
-    let diagnostic_report = input.lines().collect_vec();
+    let diagnostic_report = input.lines().collect::<Vec<_>>();
     let oxygen = apply_bit_criteria(&diagnostic_report, false);
     let co2 = apply_bit_criteria(&diagnostic_report, true);
 

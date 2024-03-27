@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use utils::Itertools;
+use itertools::Itertools;
 
 pub fn part1(input: &str) -> u32 {
     let mut doubles = 0;

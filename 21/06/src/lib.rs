@@ -1,5 +1,3 @@
-use utils::Itertools;
-
 struct Input(Vec<usize>);
 
 pub fn part1(input: &str) -> i32 {
@@ -7,7 +5,7 @@ pub fn part1(input: &str) -> i32 {
         input
             .split(',')
             .map(|line| line.parse().unwrap())
-            .collect_vec(),
+            .collect::<Vec<_>>(),
     );
 
     let mut fish = vec![0; 9];
@@ -31,7 +29,7 @@ pub fn part2(input: &str) -> usize {
         input
             .split(',')
             .map(|line| line.parse().unwrap())
-            .collect_vec(),
+            .collect::<Vec<_>>(),
     );
 
     let mut fish: Vec<usize> = vec![0; 9];

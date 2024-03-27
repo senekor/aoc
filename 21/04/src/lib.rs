@@ -1,5 +1,3 @@
-use utils::Itertools;
-
 type Board = [[(i32, bool); 5]; 5];
 
 fn calc_score(board: &mut Board, last_num: i32) -> i32 {
@@ -48,7 +46,7 @@ pub fn part1(input: &str) -> i32 {
         .unwrap()
         .split(',')
         .map(|n| n.parse().unwrap())
-        .collect_vec();
+        .collect::<Vec<_>>();
 
     let mut boards: Vec<Board> = Vec::new();
 
@@ -88,7 +86,7 @@ pub fn part2(input: &str) -> i32 {
         .unwrap()
         .split(',')
         .map(|n| n.parse().unwrap())
-        .collect_vec();
+        .collect::<Vec<_>>();
 
     let mut boards: Vec<(Board, bool)> = Vec::new();
 

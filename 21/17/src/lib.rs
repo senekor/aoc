@@ -1,7 +1,5 @@
 use std::cmp::{max, min};
 
-use utils::Itertools;
-
 use crate::projectile::Projectile;
 
 #[derive(Debug)]
@@ -19,7 +17,7 @@ impl Target {
             .split(", y=")
             .flat_map(|x| x.split(".."))
             .map(|s| s.parse::<i32>().unwrap())
-            .collect_vec();
+            .collect::<Vec<_>>();
         Target {
             left: nums[0],
             right: nums[1],

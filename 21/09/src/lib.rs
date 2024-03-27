@@ -1,7 +1,5 @@
 use std::collections::HashSet;
 
-use utils::Itertools;
-
 fn is_low_point(input: &[Vec<i32>], i: usize, j: usize) -> bool {
     let max_i = input.len() - 1;
     let max_j = input[0].len() - 1;
@@ -29,9 +27,9 @@ pub fn part1(input: &str) -> i32 {
         .map(|line| {
             line.chars()
                 .map(|n| n.to_string().parse::<i32>().unwrap())
-                .collect_vec()
+                .collect::<Vec<_>>()
         })
-        .collect_vec();
+        .collect::<Vec<_>>();
 
     let mut sum = 0;
     for i in 0..input.len() {
@@ -86,9 +84,9 @@ pub fn part2(input: &str) -> usize {
         .map(|line| {
             line.chars()
                 .map(|n| n.to_string().parse::<i32>().unwrap())
-                .collect_vec()
+                .collect::<Vec<_>>()
         })
-        .collect_vec();
+        .collect::<Vec<_>>();
 
     let mut basins = Vec::new();
     for i in 0..input.len() {

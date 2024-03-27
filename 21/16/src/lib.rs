@@ -1,5 +1,3 @@
-use utils::Itertools;
-
 fn hex_to_bits(hex_str: &str) -> Vec<u8> {
     hex_str
         .chars()
@@ -13,7 +11,7 @@ fn hex_to_bits(hex_str: &str) -> Vec<u8> {
             ]
             .into_iter()
         })
-        .collect_vec()
+        .collect::<Vec<_>>()
 }
 
 fn parse_header(bits: &[u8]) -> (u8, u8, &[u8]) {

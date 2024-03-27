@@ -1,6 +1,5 @@
 use std::cmp;
 use std::fs;
-use std::string::String;
 use std::time::Instant;
 
 fn count_both(input: &str) -> (usize, usize, usize) {

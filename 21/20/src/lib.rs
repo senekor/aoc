@@ -1,5 +1,3 @@
-use utils::Itertools;
-
 fn pixel_square_to_index(mut pixel_square: Vec<char>) -> usize {
     let mut result = 0;
     pixel_square.reverse();
@@ -78,8 +76,8 @@ fn get_algo_image(input: &str) -> (&str, Image) {
         .next()
         .unwrap()
         .lines()
-        .map(|line| line.chars().collect_vec())
-        .collect_vec();
+        .map(|line| line.chars().collect::<Vec<_>>())
+        .collect::<Vec<_>>();
 
     let image = Image {
         pixels,

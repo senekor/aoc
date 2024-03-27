@@ -6,3 +6,4 @@ edition.workspace = true
 [dependencies]
 nalgebra = "0.32.2"
 utils.workspace = true
+winnow.workspace = true
