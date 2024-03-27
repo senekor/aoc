@@ -1,5 +1,5 @@
 [workspace]
-members = ["??/??"]
+members = ["??/??", "utils"]
 resolver = "2"
 
 [workspace.package]
@@ -7,5 +7,4 @@ version = "0.1.0"
 edition = "2021"
 
 [workspace.dependencies]
-# utils = { path = "../aoc-utils", package = "aoc_utils" }
-utils = { git = "https://github.com/senekor/aoc-utils", package = "aoc_utils" }
+utils = { path = "utils", package = "aoc_utils" }
