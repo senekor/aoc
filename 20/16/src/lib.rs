@@ -31,7 +31,12 @@ fn parse_rule(rule: &str) -> Rule {
 
 fn prepare_input(input: &str) -> (Vec<Rule>, Vec<i64>, Vec<Vec<i64>>) {
     let mut iter = input.split("\n\n");
-    let rules = iter.next().unwrap().lines().map(parse_rule).collect::<Vec<_>>();
+    let rules = iter
+        .next()
+        .unwrap()
+        .lines()
+        .map(parse_rule)
+        .collect::<Vec<_>>();
     let my_ticket = iter
         .next()
         .unwrap()

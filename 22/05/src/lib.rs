@@ -46,7 +46,10 @@ fn parse_input(input: &str) -> (Ship, Vec<Instruction>) {
     let (ship, instructions) = input.split_once("\n\n").unwrap();
     (
         Ship::from(ship),
-        instructions.lines().map(Instruction::from).collect::<Vec<_>>(),
+        instructions
+            .lines()
+            .map(Instruction::from)
+            .collect::<Vec<_>>(),
     )
 }
 

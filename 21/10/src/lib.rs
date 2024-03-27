@@ -23,7 +23,10 @@ fn close_to_open(c: char) -> char {
 }
 
 pub fn part1(input: &str) -> usize {
-    let input = input.lines().map(|line| line.to_owned()).collect::<Vec<_>>();
+    let input = input
+        .lines()
+        .map(|line| line.to_owned())
+        .collect::<Vec<_>>();
 
     let mut score = 0;
     for line in input {
@@ -56,7 +59,10 @@ fn open_to_score_2(c: char) -> usize {
 }
 
 pub fn part2(input: &str) -> usize {
-    let input = input.lines().map(|line| line.to_owned()).collect::<Vec<_>>();
+    let input = input
+        .lines()
+        .map(|line| line.to_owned())
+        .collect::<Vec<_>>();
 
     let mut scores = Vec::new();
     for line in input {

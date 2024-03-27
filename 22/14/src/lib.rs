@@ -3,8 +3,8 @@ use std::{
     ops::{Index, IndexMut},
 };
 
-use nalgebra::Point2;
 use itertools::Itertools;
+use nalgebra::Point2;
 
 mod parse;
 
