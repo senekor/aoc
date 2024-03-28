@@ -1,4 +1,4 @@
-use std::str::FromStr;
+use winnow::{combinator::preceded, Parser};
 
 mod parse;
 mod std_trait_impls;
@@ -10,7 +10,7 @@ trait Category: std::fmt::Debug {
 macro_rules! categories {
     ( $( $category: ident )+ ) => { $(
         #[derive(Debug)]
-         enum $category {}
+        enum $category {}
         impl Category for $category {
             const NAME: &'static str = stringify!($category);
         }
@@ -65,33 +65,99 @@ impl<T: Category> std::ops::Sub for Number<T> {
     }
 }
 
-impl<Src: Category> Number<Src> {
-    fn map<Dest: Category>(self, map: &Map<Src, Dest>) -> Number<Dest> {
-        let range =
-            map.ranges.iter().copied().find(|r| {
-                r.source_range_start <= self && self < r.source_range_start + r.range_length
-            });
-        match range {
-            Some(r) => r.destination_range_start + (self - r.source_range_start),
-            None => Number::from(self.inner),
+impl<T: Category> Number<T> {
+    fn to_dest<Dest: Category>(self) -> Number<Dest> {
+        Number {
+            inner: self.inner,
+            _t: std::marker::PhantomData,
+        }
+    }
+    fn to_single_range(self) -> Range<T> {
+        Range {
+            start: self,
+            length: 1,
         }
     }
 }
 
 #[derive(Debug)]
-struct Range<Src: Category, Dest: Category> {
-    destination_range_start: Number<Dest>,
-    source_range_start: Number<Src>,
-    range_length: Int,
+struct Range<T: Category> {
+    start: Number<T>,
+    length: Int,
+}
+
+impl<T: Category> Range<T> {
+    /// cannot work with exclusive end because of overflow
+    fn end_incl(&self) -> Number<T> {
+        self.start + (self.length - 1)
+    }
+    fn to_dest<Dest: Category>(self) -> Range<Dest> {
+        Range {
+            start: self.start.to_dest(),
+            length: self.length,
+        }
+    }
+}
+
+#[derive(Debug)]
+struct MapRange<Src: Category, Dest: Category> {
+    src: Range<Src>,
+    dest: Range<Dest>,
+}
+
+impl<T: Category> Range<T> {
+    // one source range may map to several destination ranges,
+    // depending on overlaps with `map.ranges`.
+    fn map<Dest: Category>(mut self, map: &Map<T, Dest>) -> Vec<Range<Dest>> {
+        let mut res = Vec::new();
+        for map_range in map.ranges.iter() {
+            let src = map_range.src;
+            if src.end_incl() < self.start {
+                continue;
+            } else if self.end_incl() < src.start {
+                break;
+            }
+            // range overlap detected
+            if self.start < src.start {
+                if self.length <= (src.start - self.start) {
+                    res.push(self.to_dest());
+                    return res;
+                }
+                let start = self.start.to_dest();
+                let length = src.start - self.start;
+                res.push(Range { start, length });
+
+                self.start = src.start;
+                self.length -= length;
+            }
+            if self.start <= src.end_incl() {
+                let to_mapped = |length| Range {
+                    start: map_range.dest.start + (self.start - src.start),
+                    length,
+                };
+                let length = src.end_incl() - self.start + 1;
+                if self.length <= length {
+                    res.push(to_mapped(self.length));
+                    return res;
+                }
+                res.push(to_mapped(length));
+
+                self.start = src.end_incl() + 1;
+                self.length -= length;
+            }
+        }
+        res.push(self.to_dest());
+        res
+    }
 }
 
 #[derive(Debug)]
 struct Map<Src: Category, Dest: Category> {
-    ranges: Vec<Range<Src, Dest>>,
+    // sorted by start of range
+    ranges: Vec<MapRange<Src, Dest>>,
 }
 
 struct Almanac {
-    seeds: Vec<Number<Seed>>,
     seed_to_soil: Map<Seed, Soil>,
     soil_to_fertilizer: Map<Soil, Fertilizer>,
     fertilizer_to_water: Map<Fertilizer, Water>,
@@ -101,38 +167,44 @@ struct Almanac {
     humidity_to_location: Map<Humidity, Location>,
 }
 
-impl FromStr for Almanac {
-    type Err = ();
-
-    fn from_str(mut s: &str) -> Result<Self, Self::Err> {
-        parse::almanac(&mut s).map_err(|_| ())
-    }
-}
-
 impl Almanac {
-    fn fully_map(&self, num: Number<Seed>) -> Number<Location> {
-        num.map(&self.seed_to_soil)
-            .map(&self.soil_to_fertilizer)
-            .map(&self.fertilizer_to_water)
-            .map(&self.water_to_light)
-            .map(&self.light_to_temperature)
-            .map(&self.temperature_to_humidity)
-            .map(&self.humidity_to_location)
+    fn fully_map(&self, num: Vec<Range<Seed>>) -> Vec<Range<Location>> {
+        num.into_iter()
+            .flat_map(|r| r.map(&self.seed_to_soil))
+            .flat_map(|r| r.map(&self.soil_to_fertilizer))
+            .flat_map(|r| r.map(&self.fertilizer_to_water))
+            .flat_map(|r| r.map(&self.water_to_light))
+            .flat_map(|r| r.map(&self.light_to_temperature))
+            .flat_map(|r| r.map(&self.temperature_to_humidity))
+            .flat_map(|r| r.map(&self.humidity_to_location))
+            .collect()
     }
 
-    fn closest_location(&self) -> Number<Location> {
-        self.seeds
-            .iter()
-            .map(|&s| self.fully_map(s))
-            .min_by_key(|loc| loc.inner)
+    fn closest_location(&self, seeds: Vec<Range<Seed>>) -> Number<Location> {
+        self.fully_map(seeds)
+            .into_iter()
+            .min_by_key(|loc| loc.start)
+            .map(|r| r.start)
             .unwrap()
     }
 }
 
-pub fn part1(input: &str) -> u32 {
-    input.parse::<Almanac>().unwrap().closest_location().into()
+pub fn part1(mut input: &str) -> u32 {
+    let input = &mut input;
+    let seeds = parse::seed_numbers(input).unwrap();
+    preceded("\n\n", parse::almanac)
+        .parse_next(input)
+        .unwrap()
+        .closest_location(seeds)
+        .into()
 }
 
-pub fn part2(input: &str) -> usize {
-    0
+pub fn part2(mut input: &str) -> u32 {
+    let input = &mut input;
+    let seeds = parse::seed_ranges(input).unwrap();
+    preceded("\n\n", parse::almanac)
+        .parse_next(input)
+        .unwrap()
+        .closest_location(seeds)
+        .into()
 }

@@ -12,11 +12,11 @@ fn test_part1_sample() {
 
 #[test]
 fn test_part2_sample() {
-    assert_eq!(part2(SAMPLE), Fail);
+    assert_eq!(part2(SAMPLE), 46);
 }
 
 utils::solution!(
     aoc_23_05;
     265018614;
-    TODO;
+    63179500;
 );

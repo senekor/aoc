@@ -11,39 +11,76 @@ fn number<T: Category>(input: &mut &str) -> PResult<Number<T>> {
     Ok(Number::from(number))
 }
 
-fn seed_numbers(input: &mut &str) -> PResult<Vec<Number<Seed>>> {
+pub fn seed_numbers(input: &mut &str) -> PResult<Vec<Range<Seed>>> {
     "seeds: ".parse_next(input)?;
-    separated(1.., number, ' ').parse_next(input)
+    separated(1.., number.map(Number::to_single_range), ' ').parse_next(input)
 }
 
 #[test]
 fn can_parse_seed_numbers() {
     let nums = seed_numbers(&mut "seeds: 79 14 55 13").unwrap();
-    let expected: Vec<Number<Seed>> = [79, 14, 55, 13].into_iter().map(Number::from).collect();
+    let expected: Vec<Range<Seed>> = [79, 14, 55, 13]
+        .into_iter()
+        .map(Number::from)
+        .map(Number::to_single_range)
+        .collect();
     assert_eq!(nums, expected);
 }
 
-fn range<Src: Category, Dest: Category>(input: &mut &str) -> PResult<Range<Src, Dest>> {
+pub fn seed_ranges(input: &mut &str) -> PResult<Vec<Range<Seed>>> {
+    "seeds: ".parse_next(input)?;
+    separated(
+        1..,
+        (dec_uint::<_, Int, _>.map(Number::from), ' ', dec_uint)
+            .map(|(start, _, length)| Range { start, length }),
+        ' ',
+    )
+    .parse_next(input)
+}
+
+#[test]
+fn can_parse_seed_ranges() {
+    let nums = seed_ranges(&mut "seeds: 79 14 55 13").unwrap();
+    let expected: Vec<Range<Seed>> = [(79, 14), (55, 13)]
+        .into_iter()
+        .map(|(start, length)| Range {
+            start: Number::from(start),
+            length,
+        })
+        .collect();
+    assert_eq!(nums, expected);
+}
+
+fn map_range<Src: Category, Dest: Category>(input: &mut &str) -> PResult<MapRange<Src, Dest>> {
     let destination_range_start = number(input)?;
     ' '.parse_next(input)?;
     let source_range_start = number(input)?;
     ' '.parse_next(input)?;
-    let range_length = dec_uint(input)?;
+    let length = dec_uint(input)?;
 
-    Ok(Range {
-        destination_range_start,
-        source_range_start,
-        range_length,
-    })
+    let dest = Range {
+        start: destination_range_start,
+        length,
+    };
+    let src = Range {
+        start: source_range_start,
+        length,
+    };
+    Ok(MapRange { src, dest })
 }
 
 #[test]
-fn can_parse_range() {
-    let range = range(&mut "50 98 2").unwrap();
-    let expected = Range::<Seed, Soil> {
-        destination_range_start: 50.into(),
-        source_range_start: 98.into(),
-        range_length: 2,
+fn can_parse_map_range() {
+    let range = map_range(&mut "50 98 2").unwrap();
+    let expected = MapRange::<Seed, Soil> {
+        src: Range {
+            start: 98.into(),
+            length: 2,
+        },
+        dest: Range {
+            start: 50.into(),
+            length: 2,
+        },
     };
     assert_eq!(range, expected);
 }
@@ -78,10 +115,13 @@ fn can_recognize_map_header() {
 fn map<Src: Category, Dest: Category>(input: &mut &str) -> PResult<Map<Src, Dest>> {
     (
         recognize_map_header::<Src, Dest>,
-        separated(1.., range, newline),
+        separated(1.., map_range, newline),
     )
         .parse_next(input)
-        .map(|(_, ranges)| Map { ranges })
+        .map(|(_, mut ranges): (_, Vec<_>)| {
+            ranges.sort();
+            Map { ranges }
+        })
 }
 
 #[test]
@@ -89,15 +129,25 @@ fn can_parse_map() {
     let map = map(&mut "seed-to-soil map:\n50 98 2\n52 50 48").unwrap();
     let expected = Map::<Seed, Soil> {
         ranges: vec![
-            Range {
-                destination_range_start: 50.into(),
-                source_range_start: 98.into(),
-                range_length: 2,
+            MapRange {
+                src: Range {
+                    start: 50.into(),
+                    length: 48,
+                },
+                dest: Range {
+                    start: 52.into(),
+                    length: 48,
+                },
             },
-            Range {
-                destination_range_start: 52.into(),
-                source_range_start: 50.into(),
-                range_length: 48,
+            MapRange {
+                src: Range {
+                    start: 98.into(),
+                    length: 2,
+                },
+                dest: Range {
+                    start: 50.into(),
+                    length: 2,
+                },
             },
         ],
     };
@@ -111,8 +161,7 @@ pub fn almanac(input: &mut &str) -> PResult<Almanac> {
         preceded("\n\n", map).parse_next(input)
     }
     Ok(Almanac {
-        seeds: seed_numbers(input)?,
-        seed_to_soil: newline_prefixed_map(input)?,
+        seed_to_soil: map(input)?,
         soil_to_fertilizer: newline_prefixed_map(input)?,
         fertilizer_to_water: newline_prefixed_map(input)?,
         water_to_light: newline_prefixed_map(input)?,
@@ -124,6 +173,7 @@ pub fn almanac(input: &mut &str) -> PResult<Almanac> {
 
 #[test]
 fn can_recognize_almanac() {
-    let mut sample = include_str!("../input/sample.txt");
-    almanac(&mut sample).unwrap();
+    let sample = include_str!("../input/sample.txt");
+    let mut input = sample.split_once("\n\n").unwrap().1;
+    almanac(&mut input).unwrap();
 }

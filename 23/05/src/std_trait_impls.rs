@@ -37,20 +37,53 @@ impl<T: Category> Ord for Number<T> {
 
 // Range
 
-impl<Src: Category, Dest: Category> Clone for Range<Src, Dest> {
+impl<T: Category> Clone for Range<T> {
     fn clone(&self) -> Self {
         *self
     }
 }
-impl<Src: Category, Dest: Category> Copy for Range<Src, Dest> {}
-impl<Src: Category, Dest: Category> PartialEq for Range<Src, Dest> {
+impl<T: Category> Copy for Range<T> {}
+impl<T: Category> PartialEq for Range<T> {
     fn eq(&self, other: &Self) -> bool {
-        self.destination_range_start == other.destination_range_start
-            && self.source_range_start == other.source_range_start
-            && self.range_length == other.range_length
+        (self.start, self.length) == (other.start, other.length)
     }
 }
-impl<Src: Category, Dest: Category> Eq for Range<Src, Dest> {}
+impl<T: Category> Eq for Range<T> {}
+impl<T: Category> PartialOrd for Range<T> {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+impl<T: Category> Ord for Range<T> {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        (self.start, self.length).cmp(&(other.start, other.length))
+    }
+}
+
+// MapRange
+
+impl<Src: Category, Dest: Category> Clone for MapRange<Src, Dest> {
+    fn clone(&self) -> Self {
+        *self
+    }
+}
+impl<Src: Category, Dest: Category> Copy for MapRange<Src, Dest> {}
+impl<Src: Category, Dest: Category> PartialEq for MapRange<Src, Dest> {
+    fn eq(&self, other: &Self) -> bool {
+        (self.src, self.dest) == (other.src, other.dest)
+    }
+}
+impl<Src: Category, Dest: Category> Eq for MapRange<Src, Dest> {}
+impl<Src: Category, Dest: Category> PartialOrd for MapRange<Src, Dest> {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+impl<Src: Category, Dest: Category> Ord for MapRange<Src, Dest> {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        self.src.cmp(&other.src)
+    }
+}
 
 // Map
 
