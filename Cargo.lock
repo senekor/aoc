@@ -352,6 +352,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "aoc_18_08"
+version = "0.1.0"
+dependencies = [
+ "aoc_utils",
+ "winnow",
+]
+
+[[package]]
 name = "aoc_19_01"
 version = "0.1.0"
 dependencies = [
