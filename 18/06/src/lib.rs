@@ -85,6 +85,7 @@ fn info_from_neighbors(grid: &[Vec<Info>], y: usize, x: usize) -> Info {
 }
 
 // for debugging purposes
+#[allow(unused)]
 struct Displ<'a>(&'a [Vec<Info>]);
 
 impl std::fmt::Display for Displ<'_> {
