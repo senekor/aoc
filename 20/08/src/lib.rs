@@ -67,7 +67,7 @@ impl<'a> Executor<'a> {
     }
 
     fn find_infinite_loop(&mut self) -> i32 {
-        while self.visited.get(&self.instr_ptr).is_none() {
+        while !self.visited.contains(&self.instr_ptr) {
             self.visited.insert(self.instr_ptr);
             self.execute_once();
         }
@@ -75,7 +75,7 @@ impl<'a> Executor<'a> {
     }
 
     fn boot_code_is_fixed(&mut self) -> Option<i32> {
-        while self.visited.get(&self.instr_ptr).is_none() {
+        while !self.visited.contains(&self.instr_ptr) {
             self.visited.insert(self.instr_ptr);
             self.execute_once();
             if self.instr_ptr == self.boot_code.0.len() {

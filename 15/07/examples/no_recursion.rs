@@ -117,7 +117,7 @@ fn sort_guide(guide: &mut [Instr]) {
             let instr = guide[k];
             let mut all_deps_present = true;
             for dep in get_deps(&instr) {
-                if known_deps.get(dep).is_none() {
+                if !known_deps.contains(dep) {
                     all_deps_present = false
                 }
             }

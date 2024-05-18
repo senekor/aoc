@@ -18,10 +18,10 @@ fn constr_graph(input: &str) -> Graph {
     let mut graph: Graph = HashMap::new();
     for line in input.split('\n') {
         let (from, to, dist) = parse_line(line);
-        if graph.get(from).is_none() {
+        if !graph.contains_key(from) {
             graph.insert(from, HashMap::new());
         }
-        if graph.get(to).is_none() {
+        if !graph.contains_key(to) {
             graph.insert(to, HashMap::new());
         }
         graph.get_mut(from).unwrap().insert(to, dist);

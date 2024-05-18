@@ -48,8 +48,8 @@ pub fn part2(input: &str) -> i32 {
         for &o in vec.iter() {
             match o.len() {
                 // 2 => one = o.to_owned(),
-                3 => seven = o.to_owned(),
-                4 => four = o.to_owned(),
+                3 => o.clone_into(&mut seven),
+                4 => o.clone_into(&mut four),
                 // 7 => eight = o.to_owned(),
                 _ => {}
             }
@@ -64,9 +64,9 @@ pub fn part2(input: &str) -> i32 {
         for &o in vec.iter() {
             if o.len() == 5 {
                 if overlap(o, &four) == 2 {
-                    two = o.to_owned();
+                    o.clone_into(&mut two);
                 } else if overlap(o, &seven) == 3 {
-                    three = o.to_owned();
+                    o.clone_into(&mut three);
                 }
                 // } else {
                 //     five = o.to_owned();
@@ -74,11 +74,11 @@ pub fn part2(input: &str) -> i32 {
             }
             if o.len() == 6 {
                 if overlap(o, &seven) == 2 {
-                    six = o.to_owned();
+                    o.clone_into(&mut six);
                 } else if overlap(o, &four) == 4 {
                     // nine = o.to_owned();
                 } else {
-                    zero = o.to_owned();
+                    o.clone_into(&mut zero);
                 }
             }
         }
