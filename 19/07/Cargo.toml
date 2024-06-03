@@ -1,0 +1,9 @@
+[package]
+name = "aoc_19_07"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+aoc_19_05 = { version = "0.1.0", path = "../05" }
+itertools.workspace = true
+utils.workspace = true

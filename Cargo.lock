@@ -416,6 +416,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "aoc_19_07"
+version = "0.1.0"
+dependencies = [
+ "aoc_19_05",
+ "aoc_utils",
+ "itertools",
+]
+
+[[package]]
 name = "aoc_20_01"
 version = "0.1.0"
 dependencies = [

@@ -1,3 +1,8 @@
+//! Note that 19-07 builds on this, some of the functionality here is only
+//! needed there.
+
+use std::collections::VecDeque;
+
 enum Mode {
     Position,
     Immediate,
@@ -45,9 +50,11 @@ enum Instruction {
     Stop,
 }
 
-struct Program {
+#[derive(Debug, Clone)]
+pub struct Program {
     instr_ptr: usize,
     data: Vec<i32>,
+    inputs: VecDeque<i32>,
 }
 
 impl std::str::FromStr for Program {
@@ -56,6 +63,7 @@ impl std::str::FromStr for Program {
         Ok(Program {
             instr_ptr: 0,
             data: s.split(',').map(|x| x.parse().unwrap()).collect(),
+            inputs: VecDeque::new(),
         })
     }
 }
@@ -68,6 +76,12 @@ impl std::fmt::Display for Program {
         }
         Ok(())
     }
+}
+
+pub enum InstrOutput {
+    Nothing,
+    Something(i32),
+    Stop,
 }
 
 impl Program {
@@ -119,58 +133,78 @@ impl Program {
         }
     }
 
-    fn execute(&mut self, input: i32) -> Vec<i32> {
-        let mut output = vec![];
+    /// returns the output in case of an output instruction
+    pub fn execute_one_instr(&mut self) -> InstrOutput {
+        match self.get_instr() {
+            Instruction::Add { src_1, src_2, dest } => {
+                self.data[dest] = self.get_val(src_1) + self.get_val(src_2);
+                self.instr_ptr += 4;
+            }
+            Instruction::Mult { src_1, src_2, dest } => {
+                self.data[dest] = self.get_val(src_1) * self.get_val(src_2);
+                self.instr_ptr += 4;
+            }
+            Instruction::Read(dest) => {
+                self.data[dest] = self.inputs.pop_front().unwrap();
+                self.instr_ptr += 2;
+            }
+            Instruction::Write(src) => {
+                let val = self.get_val(src);
+                self.instr_ptr += 2;
+                return InstrOutput::Something(val);
+            }
+            Instruction::JumpTrue(src_1, src_2) => {
+                if self.get_val(src_1) != 0 {
+                    self.instr_ptr = self.get_val(src_2) as usize
+                } else {
+                    self.instr_ptr += 3
+                }
+            }
+            Instruction::JumpFalse(src_1, src_2) => {
+                if self.get_val(src_1) == 0 {
+                    self.instr_ptr = self.get_val(src_2) as usize
+                } else {
+                    self.instr_ptr += 3
+                }
+            }
+            Instruction::LessThan { src_1, src_2, dest } => {
+                self.data[dest] = i32::from(self.get_val(src_1) < self.get_val(src_2));
+                self.instr_ptr += 4;
+            }
+            Instruction::Equals { src_1, src_2, dest } => {
+                self.data[dest] = i32::from(self.get_val(src_1) == self.get_val(src_2));
+                self.instr_ptr += 4;
+            }
+            Instruction::Stop => return InstrOutput::Stop,
+        }
+        InstrOutput::Nothing
+    }
+
+    fn execute(&mut self) -> Vec<i32> {
+        let mut output = Vec::new();
         loop {
-            match self.get_instr() {
-                Instruction::Add { src_1, src_2, dest } => {
-                    self.data[dest] = self.get_val(src_1) + self.get_val(src_2);
-                    self.instr_ptr += 4;
-                }
-                Instruction::Mult { src_1, src_2, dest } => {
-                    self.data[dest] = self.get_val(src_1) * self.get_val(src_2);
-                    self.instr_ptr += 4;
-                }
-                Instruction::Read(dest) => {
-                    self.data[dest] = input;
-                    self.instr_ptr += 2;
-                }
-                Instruction::Write(src) => {
-                    let val = self.get_val(src);
-                    output.push(val);
-                    self.instr_ptr += 2;
-                }
-                Instruction::JumpTrue(src_1, src_2) => {
-                    if self.get_val(src_1) != 0 {
-                        self.instr_ptr = self.get_val(src_2) as usize
-                    } else {
-                        self.instr_ptr += 3
-                    }
-                }
-                Instruction::JumpFalse(src_1, src_2) => {
-                    if self.get_val(src_1) == 0 {
-                        self.instr_ptr = self.get_val(src_2) as usize
-                    } else {
-                        self.instr_ptr += 3
-                    }
-                }
-                Instruction::LessThan { src_1, src_2, dest } => {
-                    self.data[dest] = i32::from(self.get_val(src_1) < self.get_val(src_2));
-                    self.instr_ptr += 4;
-                }
-                Instruction::Equals { src_1, src_2, dest } => {
-                    self.data[dest] = i32::from(self.get_val(src_1) == self.get_val(src_2));
-                    self.instr_ptr += 4;
-                }
-                Instruction::Stop => return output,
+            match self.execute_one_instr() {
+                InstrOutput::Nothing => {}
+                InstrOutput::Something(val) => output.push(val),
+                InstrOutput::Stop => return output,
             }
         }
+    }
+
+    pub fn reset(&mut self) {
+        self.instr_ptr = 0;
+        self.inputs.clear();
+    }
+
+    pub fn add_input(&mut self, n: i32) {
+        self.inputs.push_back(n)
     }
 }
 
 fn test(input: &str, n: i32) -> i32 {
     let mut prog: Program = input.parse().unwrap();
-    let output = prog.execute(n);
+    prog.add_input(n);
+    let output = prog.execute();
     assert!(
         output[..output.len() - 1].iter().all(|&x| x == 0),
         "all output except the last must be zero"
