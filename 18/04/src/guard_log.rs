@@ -5,7 +5,7 @@ use time::Date;
 use crate::date_log::{DateLog, SleepSession};
 
 pub struct GuardShift {
-    pub date: Date,
+    pub _date: Date,
     pub sleep_sessions: Vec<SleepSession>,
 }
 
@@ -22,7 +22,7 @@ impl From<DateLog> for GuardLog {
             let guard_id = date_entry.guard_id;
             let sleep_sessions = date_entry.sleep_sessions;
             hm.entry(guard_id).or_default().0.push(GuardShift {
-                date,
+                _date: date,
                 sleep_sessions,
             });
         }
