@@ -4,6 +4,6 @@ version.workspace = true
 edition.workspace = true
 
 [dependencies]
-aoc_19_05 = { version = "0.1.0", path = "../05" }
+intcode-computer = { version = "0.1.0", path = "../intcode-computer" }
 itertools.workspace = true
 utils.workspace = true

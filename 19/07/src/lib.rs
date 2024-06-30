@@ -1,7 +1,7 @@
-use aoc_19_05::{InstrOutput, Program};
+use intcode_computer::{InstrOutput, IntcodeComputer};
 use itertools::Itertools as _;
 
-fn execute_until_first_output(prog: &mut Program) -> Option<i32> {
+fn execute_until_first_output(prog: &mut IntcodeComputer) -> Option<i64> {
     loop {
         match prog.execute_one_instr() {
             InstrOutput::Nothing => {}
@@ -11,8 +11,8 @@ fn execute_until_first_output(prog: &mut Program) -> Option<i32> {
     }
 }
 
-pub fn part1(input: &str) -> i32 {
-    let mut prog: Program = input.parse().unwrap();
+pub fn part1(input: &str) -> i64 {
+    let mut prog: IntcodeComputer = input.parse().unwrap();
     (0..5)
         .permutations(5)
         .map(|phase_setting_sequence| {
@@ -30,9 +30,9 @@ pub fn part1(input: &str) -> i32 {
         .unwrap()
 }
 
-pub fn part2(input: &str) -> i32 {
+pub fn part2(input: &str) -> i64 {
     let mut progs = {
-        let prog: Program = input.parse().unwrap();
+        let prog: IntcodeComputer = input.parse().unwrap();
         [prog.clone(), prog.clone(), prog.clone(), prog.clone(), prog]
     };
 

@@ -1,5 +1,5 @@
 [workspace]
-members = ["??/??", "utils"]
+members = [ "19/intcode-computer","??/??", "utils"]
 resolver = "2"
 
 [workspace.package]

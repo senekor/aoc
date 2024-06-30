@@ -1,0 +1,6 @@
+[package]
+name = "intcode-computer"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]

@@ -406,6 +406,7 @@ name = "aoc_19_05"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
+ "intcode-computer",
 ]
 
 [[package]]
@@ -419,8 +420,8 @@ dependencies = [
 name = "aoc_19_07"
 version = "0.1.0"
 dependencies = [
- "aoc_19_05",
  "aoc_utils",
+ "intcode-computer",
  "itertools",
 ]
 
@@ -429,6 +430,14 @@ name = "aoc_19_08"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
+]
+
+[[package]]
+name = "aoc_19_09"
+version = "0.1.0"
+dependencies = [
+ "aoc_utils",
+ "intcode-computer",
 ]
 
 [[package]]
@@ -989,6 +998,10 @@ dependencies = [
  "equivalent",
  "hashbrown",
 ]
+
+[[package]]
+name = "intcode-computer"
+version = "0.1.0"
 
 [[package]]
 name = "integer-sqrt"
