@@ -476,4 +476,8 @@
     <td><a href="./22/10/src/lib.rs">22.10</a></td>
     <td>object-oriented observer pattern</td>
   </tr>
+  <tr>
+    <td>19: 2,5,7,9</td>
+    <td><a href="./19/intcode-computer/src/lib.rs">intcode computer</a></td>
+  </tr>
 </table>
