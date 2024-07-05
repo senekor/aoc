@@ -4,4 +4,5 @@ version.workspace = true
 edition.workspace = true
 
 [dependencies]
+intcode-computer = { version = "0.1.0", path = "../intcode-computer" }
 utils.workspace = true

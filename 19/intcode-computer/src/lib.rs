@@ -215,4 +215,11 @@ impl IntcodeComputer {
     pub fn add_input(&mut self, n: i64) {
         self.inputs.push_back(n)
     }
+
+    /// # Safety
+    ///
+    /// This is not really unsafe, but it's fun to pretend.
+    pub unsafe fn get_raw_memory(&mut self) -> &mut [i64] {
+        self.memory.as_mut_slice()
+    }
 }

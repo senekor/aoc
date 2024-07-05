@@ -30,4 +30,8 @@ impl Memory {
     pub fn iter(&self) -> std::slice::Iter<i64> {
         self.0.iter()
     }
+
+    pub unsafe fn as_mut_slice(&mut self) -> &mut [i64] {
+        &mut self.0
+    }
 }
