@@ -1,0 +1,8 @@
+[package]
+name = "aoc_19_10"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+num = "0.4.3"
+utils.workspace = true
