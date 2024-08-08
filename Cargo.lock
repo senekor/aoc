@@ -911,6 +911,8 @@ dependencies = [
 [[package]]
 name = "aoc_utils"
 version = "0.1.0"
+source = "sparse+https://git.buenzli.dev/api/packages/senekor/cargo/"
+checksum = "7b31c8d10d583154129a86914f0b38a7eacec993cda1ad37803e400172f30e21"
 
 [[package]]
 name = "approx"

@@ -1,5 +1,5 @@
 [workspace]
-members = [ "19/intcode-computer","??/??", "utils"]
+members = [ "19/intcode-computer","??/??"]
 resolver = "2"
 
 [workspace.package]
@@ -8,5 +8,5 @@ edition = "2021"
 
 [workspace.dependencies]
 itertools = "0.12.1"
-utils = { path = "utils", package = "aoc_utils" }
+utils = { version = "0.1.0", registry = "forgejo", package = "aoc_utils" }
 winnow = "0.6.5"
