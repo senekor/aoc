@@ -1,2 +1,2 @@
-[registries.forgejo]
+[registries.buenzli-dev]
 index = "sparse+https://git.buenzli.dev/api/packages/senekor/cargo/"

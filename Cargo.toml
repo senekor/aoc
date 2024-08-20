@@ -8,5 +8,5 @@ edition = "2021"
 
 [workspace.dependencies]
 itertools = "0.12.1"
-utils = { version = "0.1.0", registry = "forgejo", package = "aoc_utils" }
+utils = { version = "0.1.0", registry = "buenzli-dev", package = "aoc_utils" }
 winnow = "0.6.5"
