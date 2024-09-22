@@ -1,9 +1,5 @@
 _default:
-    @just --list
-
-# initialize git hooks
-setup:
-    ln -sf "$(pwd)/dev/scripts/pre-push.nu" .git/hooks/pre-push
+    @just --list --unsorted
 
 # scaffold a new puzzle
 new year day:
