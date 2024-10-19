@@ -93,8 +93,8 @@ mod tests {
 
     #[test]
     fn test_is_three_straight() {
-        assert!(is_three_straight(&[b'a', b'b', b'c']));
-        assert!(!is_three_straight(&[b'a', b'b', b'b']));
+        assert!(is_three_straight(b"abc"));
+        assert!(!is_three_straight(b"abb"));
     }
 
     #[test]
