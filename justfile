@@ -7,20 +7,20 @@ new year day:
     set -euo pipefail
 
     cargo generate \
-        --path dev/cargo-generate-template \
+        --path devel/cargo-generate-template \
         --init \
         --name whatever \
         --define year={{year}} \
         --define day={{day}}
 
-    ./dev/scripts/readme_table.nu
+    ./devel/scripts/readme_table.nu
 
-    if [ -f dev/session_id ] ; then
-        curl --header "Cookie: session=$(cat dev/session_id)" \
+    if [ -f devel/session_id ] ; then
+        curl --header "Cookie: session=$(cat devel/session_id)" \
             "https://adventofcode.com/20{{year}}/day/$(echo {{day}} | sd '^0' '')/input" \
             > {{year}}/{{day}}/input/input.txt
     else
-        echo "No session ID found. Add it to a file 'dev/session_id' to automatically fetch inputs."
+        echo "No session ID found. Add it to a file 'devel/session_id' to automatically fetch inputs."
     fi
 
 # run puzzle solution - specify input: 'just run sample_2'
@@ -43,4 +43,4 @@ set positional-arguments
 # run tests
 [no-cd]
 test *args='':
-    @cargo nextest --config-file "$(git rev-parse --show-toplevel)/dev/nextest.toml" run --final-status-level slow $@
+    @cargo nextest --config-file "$(git rev-parse --show-toplevel)/devel/nextest.toml" run --final-status-level slow $@

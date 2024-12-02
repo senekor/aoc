@@ -12,4 +12,4 @@ target
 .DS_Store
 
 # advent of code session cookie for fetching input data
-/dev/session_id
+/devel/session_id

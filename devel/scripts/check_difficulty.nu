@@ -8,8 +8,8 @@ def day_completed [year: string, day: int] {
     ($day | into string | fill -a r -c "0" -w 2) in (ls -s $year | get name)
 }
 
-# let difficulty = (http get https://raw.githubusercontent.com/senekor/aoc/main/dev/difficulty.toml)
-let difficulty = (open ./dev/difficulty.toml)
+# let difficulty = (http get https://raw.githubusercontent.com/senekor/aoc/main/devel/difficulty.toml)
+let difficulty = (open ./devel/difficulty.toml)
 
 def check_difficulty [] {
     exit (get_years | any { |year|

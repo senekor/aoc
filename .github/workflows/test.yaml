@@ -11,7 +11,7 @@ jobs:
       - name: Install nushell
         run: cargo binstall -y nu
       - name: check difficulty spec
-        run: ./dev/scripts/check_difficulty.nu
+        run: ./devel/scripts/check_difficulty.nu
   what_to_test:
     name: figure out what to test
     runs-on: ubuntu-latest
@@ -24,7 +24,7 @@ jobs:
         run: cargo binstall -y nu
       - id: what_to_test
         name: figure out what to test
-        run: echo "what=$(./dev/scripts/what_to_test.nu)" >> "$GITHUB_OUTPUT"
+        run: echo "what=$(./devel/scripts/what_to_test.nu)" >> "$GITHUB_OUTPUT"
   test:
     name: test
     needs:
