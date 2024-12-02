@@ -14,7 +14,7 @@ struct Layer<'a> {
     rows: [Row<'a>; HEIGHT],
 }
 
-impl<'a> Layer<'a> {
+impl Layer<'_> {
     fn count_digits(&self, digit: u8) -> usize {
         self.rows
             .iter()

@@ -46,7 +46,7 @@ impl<'a> Executor<'a> {
     }
 }
 
-impl<'a> Executor<'a> {
+impl Executor<'_> {
     fn add_to_instr_ptr(&mut self, i: i32) {
         if i.is_negative() {
             self.instr_ptr -= (-i) as usize;

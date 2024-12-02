@@ -39,7 +39,7 @@ impl Iterator for Tokenizer<'_> {
     }
 }
 
-impl<'a> Tokenizer<'a> {
+impl Tokenizer<'_> {
     fn peek(&mut self) -> Option<<Self as Iterator>::Item> {
         self.0.peek().map(|&s| Token::from(s))
     }
