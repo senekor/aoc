@@ -1,0 +1,8 @@
+[package]
+name = "aoc_24_01"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+hashbag = "0.1.12"
+utils.workspace = true

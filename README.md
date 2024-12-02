@@ -462,7 +462,58 @@
 >  <a href="https://adventofcode.com/2023/day/24">?</a
 
 >  <a href="https://adventofcode.com/2023/day/25">?</a
-> │  246 ⭐
+> │
+2024 │<span></span
+> <a href="https://adventofcode.com/2024/day/1" >▓▓</a
+
+>  <a href="https://adventofcode.com/2024/day/2" >?</a
+
+>  <a href="https://adventofcode.com/2024/day/3" >?</a
+
+>  <a href="https://adventofcode.com/2024/day/4" >?</a
+
+>  <a href="https://adventofcode.com/2024/day/5" >?</a
+
+>  <a href="https://adventofcode.com/2024/day/6" >?</a
+
+>  <a href="https://adventofcode.com/2024/day/7" >?</a
+
+>  <a href="https://adventofcode.com/2024/day/8" >?</a
+
+>  <a href="https://adventofcode.com/2024/day/9" >?</a
+
+>  <a href="https://adventofcode.com/2024/day/10">?</a
+
+>  <a href="https://adventofcode.com/2024/day/11">?</a
+
+>  <a href="https://adventofcode.com/2024/day/12">?</a
+
+>  <a href="https://adventofcode.com/2024/day/13">?</a
+
+>  <a href="https://adventofcode.com/2024/day/14">?</a
+
+>  <a href="https://adventofcode.com/2024/day/15">?</a
+
+>  <a href="https://adventofcode.com/2024/day/16">?</a
+
+>  <a href="https://adventofcode.com/2024/day/17">?</a
+
+>  <a href="https://adventofcode.com/2024/day/18">?</a
+
+>  <a href="https://adventofcode.com/2024/day/19">?</a
+
+>  <a href="https://adventofcode.com/2024/day/20">?</a
+
+>  <a href="https://adventofcode.com/2024/day/21">?</a
+
+>  <a href="https://adventofcode.com/2024/day/22">?</a
+
+>  <a href="https://adventofcode.com/2024/day/23">?</a
+
+>  <a href="https://adventofcode.com/2024/day/24">?</a
+
+>  <a href="https://adventofcode.com/2024/day/25">?</a
+> │  248 ⭐
      └────────────────────────────────────────────────────────────────────────────┘
 </pre>
 <!-- generate_readme_table_marker -->
