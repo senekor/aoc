@@ -470,7 +470,7 @@
 
 > <a href="https://adventofcode.com/2024/day/3" >▓▓</a
 
->  <a href="https://adventofcode.com/2024/day/4" >?</a
+> <a href="https://adventofcode.com/2024/day/4" >▓▓</a
 
 >  <a href="https://adventofcode.com/2024/day/5" >?</a
 
@@ -513,7 +513,7 @@
 >  <a href="https://adventofcode.com/2024/day/24">?</a
 
 >  <a href="https://adventofcode.com/2024/day/25">?</a
-> │  252 ⭐
+> │  254 ⭐
      └────────────────────────────────────────────────────────────────────────────┘
 </pre>
 <!-- generate_readme_table_marker -->

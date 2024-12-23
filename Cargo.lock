@@ -940,6 +940,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "aoc_24_04"
+version = "0.1.0"
+dependencies = [
+ "aoc_utils",
+ "itertools",
+]
+
+[[package]]
 name = "aoc_utils"
 version = "0.1.0"
 source = "sparse+https://git.buenzli.dev/api/packages/senekor/cargo/"

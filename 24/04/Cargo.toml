@@ -1,0 +1,8 @@
+[package]
+name = "aoc_24_04"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+itertools.workspace = true
+utils.workspace = true
