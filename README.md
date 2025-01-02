@@ -1,3 +1,6 @@
+> [!warning]
+> This repository has been migrated to https://git.buenzli.dev/remo/aoc.
+
 # [Advent of Code](https://adventofcode.com)
 
 <!-- generate_readme_table_marker -->
